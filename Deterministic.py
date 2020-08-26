@@ -59,8 +59,31 @@ def determ_SIRV(beta: float, gamma: float, vrate: float, S0: int, I0: int, R0: i
     plt.show()
     plt.savefig(fname)
 
-def sis(beta: float, gamma:float, S0: float, I0: float, time: int, dt: float):
-    pass
+def determ_sis(beta: float, gamma: float, S0: float, I0: float, time: int, dt: float, x_label="Days", title="SIS model",
+               fname="SISModelPng"):
+    n = S0 + I0
+    S, I, t = np.zeros(int(time / dt) + 1), np.zeros(int(time / dt + 1)), np.zeros(int(time / dt) + 1)
+    S[0], I[0] = S0, I0
+
+    def f(beta, gamma, S, I, n):
+        x = beta * S * I / n
+        y = gamma * I
+        return y - x, x - y
+
+    for i in range(1, int(time / dt + 1)):
+        t[i] = i
+        r = f(beta, gamma, S[i-1], I[i-1], n)
+        S[i] = S[i - 1] + dt * r[0]
+        I[i] = I[i - 1] + dt * r[1]
+    plt.plot(t, S, label="Susceptibles")
+    plt.plot(t, I, label="Infected")
+    plt.xlabel(x_label)
+    plt.ylabel("Number of People")
+    plt.title(title)
+    plt.legend()
+    plt.savefig(fname)
+    plt.show()
+    return S, I
 
 beta1 = 1/50
 gamma1 = 1/100
@@ -73,5 +96,3 @@ time = 6000
 dt = .1
 xlabel = "Days"
 
-#determ_sir(beta=beta1, gamma=gamma1, S0=S0, I0=I0, R0=R0, time=time, dt=dt, x_label=xlabel)
-determ_SIRV(beta=beta1, gamma=gamma1, vrate=vrate1, S0=S0, I0=I0, R0=R0, V0=V0, time=time, dt=dt, x_label=xlabel)
