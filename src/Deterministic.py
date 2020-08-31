@@ -61,6 +61,9 @@ def determ_SIRV(beta: float, gamma: float, vrate: float, S0: int, I0: int, R0: i
 
 def determ_sis(beta: float, gamma: float, S0: float, I0: float, time: int, dt: float, x_label="Days", title="SIS model",
                fname="SISModelPng"):
+    """
+    Describes how to model SIS. 
+    """
     n = S0 + I0
     S, I, t = np.zeros(int(time / dt) + 1), np.zeros(int(time / dt + 1)), np.zeros(int(time / dt) + 1)
     S[0], I[0] = S0, I0
