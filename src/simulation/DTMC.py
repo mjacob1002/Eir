@@ -63,7 +63,7 @@ def __initSIRV__(S0: int, I0: int, R0: int, V0: int, t: int):
 # tested
 def dtmc_sirv(t: int, beta: float, mu_ir: float, mu_sv: float, S0: int, I0: int, R0: int, V0 = 0.0, x_label = "Days"):
     """
-
+    Susceptible, Infected, Removed, Vaccinated compartmental model
     :param beta: effective transmission rate
     :param mu_ir: probability of transitioning from compartment Infected to Removed
     :param mu_sv: Probability of transitioning from Compartment Susceptible to Vaccinated
@@ -105,14 +105,14 @@ def dtmc_sirv(t: int, beta: float, mu_ir: float, mu_sv: float, S0: int, I0: int,
 # tested
 def dtmc_sis(beta: float, mu_is: float, S0: int, I0: int, t: int, x_label: str):
     """
-    
-    :param beta:
-    :param mu_is:
-    :param S0:
-    :param I0:
-    :param t:
-    :param x_label:
-    :return:
+    Susceptible Infected Susceptible Compartmental Model
+    :param beta: effective transmission rate per unit time t
+    :param mu_is: probability of going from infected to susceptible
+    :param S0: initial Susceptible indviduals
+    :param I0: initial infected individuals
+    :param t: the amount of time simulation is running for
+    :param x_label: the label for the unit of time
+    :return: Susceptible array, Infected array, and the time vector
     """
     def __initSI__(S0: int, I0: int, t: int):
         Susc = np.zeros(t + 1)
@@ -190,6 +190,13 @@ def seir(beta: float, mu_ei: float, mu_ir: float, S0: int, E0: int, I0: int, R0:
     return S, E, I, R, t_vec
 
 
+def sirs(beta: float, mu_ir: float, mu_rs: float, S0: int, I0: int, R0: int, time:int, xlabel = "Hours"):
+    n = S0 + I0 + R0
+    num_of_entries = time + 1
+    S, I, R = np.zeros(num_of_entries), np.zeros(num_of_entries), np.zeros(num_of_entries)
+    S[0], I[0], R[0] = S0, I0, R0
+    
+    
 # test:
 
 beta1 = 2 / 24
