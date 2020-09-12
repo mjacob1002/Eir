@@ -217,7 +217,7 @@ def sirs(beta: float, mu_ir: float, mu_rs: float, S0: int, I0: int, R0: int, tim
         plt.plot(t, S, "Susceptibles")
         plt.plot(t, I, "Infected")
         plt.plot(t, R, "Removed")
-        plt.xlabel = x_label
+        plt.xlabel = xlabel
         plt.ylabel = "Number of People"
         plt.legend()
         plt.show()
