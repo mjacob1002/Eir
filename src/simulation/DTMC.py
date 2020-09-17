@@ -222,19 +222,4 @@ def sirs(beta: float, mu_ir: float, mu_rs: float, S0: int, I0: int, R0: int, tim
         plt.legend()
         plt.show()
     return S, I, R, t
-# test:
 
-beta1 = 2 / 24
-ei = 1 / 24
-ir = .8 / 24
-S0 = 999
-E0 = 0
-I0 = 1
-R0 = 0
-time = 30 * 24
-xlabel = "Hours"
-#seir(beta=beta1, mu_ei=ei, mu_ir=ir, S0=S0, E0=E0, I0=I0, R0=R0, time=time, x_label=xlabel)
-#dtmc_sir(beta=beta1, mu_ir=ir, S0=S0, I0=I0, R0=R0, time=time, xlabel="Hours")
-
-a = np.random.binomial(100, 0.05, 1000).mean()
-print(a)
