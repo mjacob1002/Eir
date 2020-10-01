@@ -1,6 +1,7 @@
 #include <iostream>
 #include<math.h>
 #include<set>
+#include<vector>
 #include<stdlib.h>
 #include<time.h>
 #include "HubModel2.h"
@@ -74,6 +75,10 @@ double gamm = 0.2;
 double density = 0.1;
 int alpha = 4;
 double rstart = 40;
+//keeps track of the total number of people per compartment each day/hour
+vector<int> num_s;
+vector<int> num_i;
+vector<int> num_r;
 
 int temp = 0;
 GenRand gr = GenRand();
