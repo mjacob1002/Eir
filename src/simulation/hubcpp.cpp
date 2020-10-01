@@ -1,6 +1,6 @@
 #include <iostream>
-#include<set>
 #include<math.h>
+#include<set>
 #include<stdlib.h>
 #include<time.h>
 #include "HubModel2.h"
@@ -9,11 +9,10 @@
 
 using namespace std;
 // class to generate random numbers and events
-class GenRand {
+struct GenRand {
 public:
-
 	GenRand() {
-		srand(time(NULL));
+		srand((unsigned int)time(NULL));
 	}
 
 	double rando() {
@@ -146,7 +145,7 @@ void simulate() {
 	cout << "S, I, R: " << susceptibles.size() << " " << infected.size() << " " << removed.size() << endl;
 }
 
-void init(int nin, double r0in, int numSimsIn, double gammIn, double density, double alphaIn, double rStartIn) {
+void init(int nin, double r0in, int numSimsIn, double gammIn, double density, int alphaIn, double rStartIn) {
 	N = nin;
 	r0 = r0in;
 	numSims = numSimsIn;
@@ -156,7 +155,7 @@ void init(int nin, double r0in, int numSimsIn, double gammIn, double density, do
 	rstart = rStartIn;
 }
 
-void hub(int nin, double r0in, int numSimsIn, double gammIn, double density, double alphaIn, double rStartIn, double L) {
+void hub(int nin, double r0in, int numSimsIn, double gammIn, double density, int alphaIn, double rStartIn, double L) {
 	init(nin, r0in, numSimsIn, gammIn, density, alphaIn, rStartIn);
 	int pss = gr.generate_event(density);
 	if (pss == 1) {
