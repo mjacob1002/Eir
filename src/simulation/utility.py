@@ -18,12 +18,17 @@ def randEvent(p: float) -> bool:
 
 
 # Person object that holds whether they are a super spreader or not
-# used in Spatial models
+# used in Spatial models Strong Infectious and Hub
 class Person:
-    def __init__(self, x, y, ss):
+    def __init__(self, x, y, ss, isIncluded = False):
+        # x coordinate
         self.x = x
+        # y coordinate
         self.y = y
+        # super spreader boolean
         self.ss = ss
+        # special boolean for the data structure in the Hub/Strong Infectious classes
+        self.isIncluded = isIncluded
 
 
 # computes the distance between two different Person objects
