@@ -34,10 +34,13 @@ class HubSIRS(HubSIR):
             transferIr = self._ItoR()
             transferRS = self._RS()
             # go after and change the indices in the collection data structure thing
+            # S to I
             for index in transferSI:
                 self.Icollect[index].isIncluded = True
+            # I to R
             for index in transferIr:
                 self.Rcollect[index].isIncluded = True
+            # R to S
             for index in transferRS:
                 self.Scollect[index].isIncluded = True
             # change the number of people in each state on the day i by adjusting the previous day's count
