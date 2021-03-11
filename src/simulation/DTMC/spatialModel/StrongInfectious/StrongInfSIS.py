@@ -1,6 +1,6 @@
-from DTMC.spatialModel.Hub.HubSIS import HubSIS
-from utility import Person
-from utility import dist
+from ..Hub.HubSIS import HubSIS
+from Eir.src.simulation.utility import Person
+from Eir.src.simulation.utility import dist
 
 
 class StrongInfSIS(HubSIS):

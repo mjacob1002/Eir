@@ -1,6 +1,6 @@
-from DTMC.spatialModel.Hub.HubSIR import HubSIR
+from .HubSIR import HubSIR
 import numpy as np
-import utility as u
+import Eir.src.simulation.utility as u
 
 
 class HubSIRS(HubSIR):

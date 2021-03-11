@@ -1,9 +1,9 @@
-from DTMC.spatialModel.Hub.HubSIS import HubSIS
+from .HubSIS import HubSIS
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
-from utility import Person
-import utility as u
+from Eir.src.simulation.utility import Person
+import Eir.src.simulation.utility as u
 from multipledispatch import dispatch
 
 

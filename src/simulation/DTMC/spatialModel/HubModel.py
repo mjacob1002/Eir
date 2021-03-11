@@ -1,7 +1,6 @@
-from DTMC.spatialModel.spatial import Spatial
-from utility import Person
-import utility as u
-
+from .spatial import Spatial
+from Eir.src.simulation.utility import Person
+import Eir.src.simulation.utility as u
 
 # class that operates under the hub model assumptions
 class Hub(Spatial):

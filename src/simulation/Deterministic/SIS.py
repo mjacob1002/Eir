@@ -1,4 +1,4 @@
-from Deterministic.CompartmentalModel import CompartmentalModel
+from .CompartmentalModel import CompartmentalModel
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt

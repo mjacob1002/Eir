@@ -1,4 +1,4 @@
-from Deterministic.SIR import SIR
+from .SIR import SIR
 import numpy as np
 from matplotlib import pyplot as plt
 from multipledispatch import dispatch

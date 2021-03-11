@@ -1,4 +1,4 @@
-from utility import randEvent
+from Eir.src.simulation.utility import randEvent
 import multiprocessing as mp
 from multipledispatch import dispatch
 import numpy as np

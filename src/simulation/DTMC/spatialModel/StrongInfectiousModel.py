@@ -1,6 +1,6 @@
-from DTMC.spatialModel.spatial import Spatial
-from utility import Person
-from utility import dist
+from .spatial import Spatial
+from Eir.src.simulation.utility import Person
+from Eir.src.simulation.utility import dist
 
 
 class StrongInfect(Spatial):
