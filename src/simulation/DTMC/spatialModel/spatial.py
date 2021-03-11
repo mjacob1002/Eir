@@ -1,8 +1,8 @@
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
-from Eir.src.simulation.utility import Person
-import Eir.src.simulation.utility as u
+from src.simulation.utility import Person
+import src.simulation.utility as u
 import multiprocessing as mp
 
 

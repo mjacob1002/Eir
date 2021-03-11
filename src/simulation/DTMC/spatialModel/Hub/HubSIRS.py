@@ -1,6 +1,6 @@
 from .HubSIR import HubSIR
 import numpy as np
-import Eir.src.simulation.utility as u
+import src.simulation.utility as u
 
 
 class HubSIRS(HubSIR):

@@ -1,6 +1,6 @@
 from .spatial import Spatial
-from Eir.src.simulation.utility import Person
-from Eir.src.simulation.utility import dist
+from src.simulation.utility import Person
+from src.simulation.utility import dist
 
 
 class StrongInfect(Spatial):

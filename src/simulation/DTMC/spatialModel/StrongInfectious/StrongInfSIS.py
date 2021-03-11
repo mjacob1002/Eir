@@ -1,6 +1,6 @@
 from ..Hub.HubSIS import HubSIS
-from Eir.src.simulation.utility import Person
-from Eir.src.simulation.utility import dist
+from src.simulation.utility import Person
+from src.simulation.utility import dist
 
 
 class StrongInfSIS(HubSIS):

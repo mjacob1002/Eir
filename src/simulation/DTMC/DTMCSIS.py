@@ -1,5 +1,5 @@
 from .dtmc import DTMC
-from Eir.src.simulation.utility import randEvent
+from src.simulation.utility import randEvent
 from multipledispatch import dispatch
 import matplotlib.pyplot as plt
 import pandas as pd

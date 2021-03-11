@@ -1,6 +1,6 @@
 from .spatial import Spatial
-from Eir.src.simulation.utility import Person
-import Eir.src.simulation.utility as u
+from src.simulation.utility import Person
+import src.simulation.utility as u
 
 # class that operates under the hub model assumptions
 class Hub(Spatial):

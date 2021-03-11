@@ -2,8 +2,8 @@ from ..HubModel import Hub
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
-from Eir.src.simulation.utility import Person
-import Eir.src.simulation.utility as u
+from src.simulation.utility import Person
+import src.simulation.utility as u
 from multipledispatch import dispatch
 
 
@@ -112,16 +112,16 @@ class HubSIS(Hub):
 
 # brief test: will delete later
 
-popsize = 1000
-pss = 0.2
-rstart = 4
-alpha = 2
-side = 50
-S0 = 999
-I0 = 1
-days = 31
-gamma = .2
-test = HubSIS(popsize=popsize, pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, days=days, gamma=gamma)
-test.run()
-df = test.toDataFrame()
-print(df)
+#popsize = 1000
+#pss = 0.2
+#rstart = 4
+#alpha = 2
+#side = 50
+#S0 = 999
+#I0 = 1
+#days = 31
+#gamma = .2
+#test = HubSIS(popsize=popsize, pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, days=days, gamma=gamma)
+#test.run()
+#df = test.toDataFrame()
+#print(df)

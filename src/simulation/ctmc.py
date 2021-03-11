@@ -1,1 +1,1 @@
-from utility import randEvent
+from src.simulation.utility import randEvent
