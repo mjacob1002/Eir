@@ -4,6 +4,8 @@ import pandas as pd
 
 class Simul_Details():
     def __init__(self, days: int, popsize : int):
+        # popsize is the size of the population
+        self.popsize = popsize
         # number of days the simulation goes for
         self.days = days
         # dictionary that stores the day as key and the transmission chain 
@@ -60,7 +62,7 @@ class Simul_Details():
     def addTransmission(self, day: int, inf: int, sus: int):
         # create a tuple containing the infectious number in [0], susceptible turned infectious in [1]
         transmission = (inf, sus)
-        self.transmissions[day] = self.transmissions.append(transmission)
+        self.transmissions[day] = self.transmissions[day].append(transmission)
     
     # return the transmission dictionary, with days as the key
     def getTransmissionHistory(self):
@@ -79,6 +81,46 @@ class Simul_Details():
                     # append the susceptible person that was infected, and the day that it happened
                     history.append((transmits[1], i))
         return history
+    
+    # return the transmission history on a specific day
+    def transmissionHistoryOnDay(self, day: int):
+        return self.transmissions[day]
+    
+    # return a sort list of tuples from greatest to smallest, with first element being person "n"
+    # with m transmissions
+    def sortedTransmissions(self):
+        sortedTrans = []
+        # creates the array of population size that stores number of tranmissions of each person
+        transmits = np.zeros(self.popsize)
+        # calculate the transmissions
+
+        # for each day
+        for i in range(1, self.days+1):
+            # get the tranmissions history
+            numTrans = self.transmissions[i]
+            # for each tuple in the list, add one to the infectious person represented in the tuple
+            for j in numTrans:
+                transmits[j[0]] += 1
+        
+        transDict = {}
+        # map the number of tranmissions with the people who transmitted
+        for i, val in enumerate(transmits):
+            if not transDict.get(val):
+                transDict[val] = [i]
+                continue
+            transDict[val] = transDict[val].append(i)
+        
+        transmits.sort()
+        # create a final list to return, containing tuples
+        # tuples of format (# of transmissions, list of people who had that many transmissions)
+        for val in transmits:
+            tup = (val, transDict[val])
+            sortedTrans.append(tup)
+        return sortedTrans
+    
+
+
+
         
 
     
