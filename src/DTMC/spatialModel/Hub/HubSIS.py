@@ -1,5 +1,6 @@
 from ..HubModel import Hub
 from matplotlib import pyplot as plt
+from src.DTMC.spatialModel.simul_details import Simul_Details
 import numpy as np
 import pandas as pd
 from src.utility import Person
@@ -11,6 +12,9 @@ class HubSIS(Hub):
     def __init__(self, popsize: int, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, days: int,
                  gamma: float, w0=1.0,
                  hubConstant=6 ** 0.5):
+        # initialize the Simul_Details object
+        self.details = Simul_Details(days=days, popsize=popsize)
+
         self.gamma = gamma
         # call the super constructor
         super(HubSIS, self).__init__(popsize, pss, rstart, alpha, side, S0, I0, days=days, w0=w0,
@@ -21,26 +25,35 @@ class HubSIS(Hub):
             # create the two person objects, with everything identical except the isIncluded boolean
             p1 = Person(self.locx[i], self.locy[i], u.randEvent(pss), isIncluded=True)
             p2 = Person(self.locx[i], self.locy[i], u.randEvent(pss))
+            # put the locations in the Simul_Details object
+            self.details.addLocation(0, (self.locx[i], self.locy[i]))
+            # put the starting states in Simul_Details
+            self.details.addStateChange(i, "S", 0)
             # push them to the data structure/ array structure
             self.Scollect.append(p1)
             self.Icollect.append(p2)
         # this loop will make the isIncluded = True for all the infecteds
         for i in range(S0, S0 + I0):
+            # put the locations in the Simul_Details object
+            self.details.addLocation(0, (self.locx[i], self.locy[i]))
+            # put the starting states in Simul_Details
+            self.details.addStateChange(i, "I", 0)
             # create the two person objects, with everything identical except the isIncluded boolean
             p1 = Person(self.locx[i], self.locy[i], u.randEvent(pss))
             p2 = Person(self.locx[i], self.locy[i], u.randEvent(pss), isIncluded=True)
             # push them to the data structure/ array structure
             self.Scollect.append(p1)
             self.Icollect.append(p2)
+        
 
     # run state changes from S to I
-    def _StoI(self):
+    def _StoI(self, day: int):
         # set that keeps track of the indices of people that changed states
         transfers = set()
         for count, inf in enumerate(self.Icollect):
             if not inf.isIncluded:
                 continue
-            for sus in self.Scollect:
+            for count2, sus in enumerate(self.Scollect):
                 if not sus.isIncluded:
                     continue
                 # generate the probability of infection
@@ -51,9 +64,10 @@ class HubSIS(Hub):
                 if not event:
                     continue
                 # remove the person from the susceptible state
-                self.Scollect[count].isIncluded = False
+                self.Scollect[count2].isIncluded = False
+                self.details.addTransmission(day, count, count2)
                 # put the person in the transfer set to be made an infectious person
-                transfers.add(count)
+                transfers.add(count2)
         return transfers
 
     # run state changes from I to S
@@ -71,19 +85,24 @@ class HubSIS(Hub):
         return transfers
 
     # run the simulation using
-    def run(self):
+    def run(self, getDetails=True):
         for i in range(1, self.days + 1):
+            print("Day: ", i)
             # run the transfers from different compartments
-            transferSI = self._StoI()
+            transferSI = self._StoI(i)
             transferIS = self.__ItoS()
             # go after and change the indices in the collection data structure thing
             for index in transferSI:
                 self.Icollect[index].isIncluded = True
+                self.details.addStateChange(index, "I", i)
             for index in transferIS:
                 self.Scollect[index].isIncluded = True
+                self.details.addStateChange(index, "S", i)
             # change the number of people in each state on the day i by adjusting the previous day's count
             self.S[i] = self.S[i - 1] - len(transferSI) + len(transferIS)
             self.I[i] = self.I[i - 1] + len(transferSI) - len(transferIS)
+        if getDetails:
+            return self.details
 
     # maybe add picking what to plot later
     def plot(self):
@@ -109,7 +128,7 @@ class HubSIS(Hub):
         df = pd.DataFrame(arr, columns=["Days", "Susceptible", "Infected"])
         return df
 
-
+    
 # brief test: will delete later
 
 #popsize = 1000
