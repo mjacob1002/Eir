@@ -115,7 +115,7 @@ class Simul_Details():
     # helper function for personHistory
     def _getMovementHistoryHelp(self, u:int):
         movementHistory = []
-        for day in self.locations:
+        for day, loc in enumerate(self.locations):
             movementHistory.append(self.locations[day][u])
         return movementHistory
 

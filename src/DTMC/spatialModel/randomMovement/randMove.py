@@ -26,7 +26,7 @@ class RandMove():
         # get the distance between two points
         r = u.dist(inf, sus)
         # if the distance between two people is greater than the infected person's spreading radius
-        if r > inf.R:
+        if r > inf.r0:
             return False
         # compute the probability given that r is within range
         w = self.w0 * (1.0 - (r/inf.r0)**self.alpha)
