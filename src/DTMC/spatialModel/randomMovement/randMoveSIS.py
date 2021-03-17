@@ -11,6 +11,85 @@ from .randMove import RandMove
 
 
 class RandMoveSIS(RandMove):
+    """
+    An SIS model that follows the Random Movement Model. When the individuals in the simulation move, 
+    they move according to a randomly generated angle and a randomly generated radius.
+
+    Parameters:
+    ----------
+
+    S0: int
+        The starting number of susceptible individuals in the simulation.
+    
+    I0: int
+        The starting number of infectious individuals in the simulation. 
+
+    gamma: float
+        The recovery probability of an individual going from I -> S
+    
+    planeSize : float
+        The length of each side of the square plane in which the individuals are confined to. For example,
+        if planeSize=50, then the region which people in the simulation are confined to is the square with
+        vertices (0,0), (50,0), (50,50), and (0,50).
+    
+    move_r: float
+        The mean of the movement radius of each person in the simulation. Will be used as mean along with 
+        sigma_R as the standard deviation to pull from a normal distribution movement radii each time 
+        _move(day) function is called.
+    
+    sigma_R: float
+        The standard deviation of the movement radius of each person in the simulation. Will be used along with 
+        move_R as the mean to pull from a normal distribution movement radii each time _move(day) function is 
+        called.
+
+    spread_r: float
+        The mean of the spreading radius of each person in the simulation. Will be used along with sigma_r 
+        as the standard deviation to pull from an normal distribution spreading radii for each individaul person
+        when the RandMoveSIS object is initialized. 
+    
+    sigma_r: float
+        The standard deviation of the spreading radius of each person in the simulation. 
+        Will be used along with spread_r as the mean to pull from an normal distribution spreading radii 
+        for each individaul person when the RandMoveSIS object is initialized. 
+    
+    days: int
+        The number of days that was simulated.
+    
+    W0: float optional
+        The probability of infection if the distance between an infectious person and susceptible person is 0.
+    
+    alpha: float optional
+        A constant used in the _infect() method. The greater the constant, the greater the infection probability.
+
+    Attributes
+    ----------
+
+    S: ndarray
+        A numpy array that stores the number of people in the susceptible state on each given day of the simulation.
+    
+    I: ndarray
+        A numpy array that stores the number of people in the susceptible state on each given day of the simulation.
+    
+    popsize: int
+        The total size of the population in the simulation. Given by S0 + I0
+        
+    Scollect: list
+        Used to keep track of the states each Person object is in. If the copy of a Person object has 
+        isIncluded == True, then the person is susceptible. Has a total of popsize Person objects,
+        with numbers [0, popsize). 
+    
+    Icollect: list
+         Used to keep track of the states each Person object is in. If the copy of a Person object has 
+        isIncluded == True, then the person is INFECTED. Has a total of popsize Person objects,
+        with numbers [0, popsize).
+
+
+    details: Simul_Details 
+        An object that can be returned to give a more in-depth look into the simulation. With this object,
+        one can see transmission chains, state changes, the movement history of each individaul, the state
+        history of each person, and more.
+    
+     """
 
     def __init__(self, S0:int, I0:int, gamma:float, planeSize:float, move_r:float, sigma_R:float, spread_r:float, sigma_r: float,
     days:int, w0=1.0, alpha=2.0):
@@ -60,6 +139,16 @@ class RandMoveSIS(RandMove):
     
     # move people within the planSize x planeSize plane
     def _move(self, day: int):
+        """
+        Method that moves each person at the end of each state chage.
+
+        Parameters
+        ----------
+
+        days: int
+            The day that the movement is for. Used to log information in the details class variable. 
+
+        """
         # generate the correct number of movement radii
         movement_r = np.random.normal(self.move_r, self.sigma_R, self.popsize)
         # generate the random thetas
@@ -79,6 +168,16 @@ class RandMoveSIS(RandMove):
     
     # deal with transfers from S to I compartments
     def _StoI(self, day: int):
+        """
+        Takes care of running state changes from S compartment to I compartment
+
+        Parameters
+        ----------
+
+        day: int
+            The day that the state chagne is for. Used to log information in the details class variable
+        """
+
         # set containing the indices for transfers
         transfers = set()
         for count, inf in enumerate(self.Icollect):
@@ -101,7 +200,9 @@ class RandMoveSIS(RandMove):
         return transfers
     
     def _ItoS(self):
+        """Takes care of running state changes from I compartment to S compartment """
         # set that contains the indices for transfering from I to S
+        
         transfers = set()
         for index, person in enumerate(self.Icollect):
             # if the person isn't an infectious person at the moment
@@ -117,6 +218,24 @@ class RandMoveSIS(RandMove):
     
     # run the simulation
     def run(self, getDetails=True):
+        """
+        Run the actual simulation. 
+
+        Parameters
+        ----------
+
+        getDetails: bool optional
+            If getDetails=True, then run will return a Simul_Details object which will allow the user to 
+            examine details of the simulation that aren't immediately obvious.
+        
+        Returns
+        -------
+
+        Simul_Details:
+            Allows the user to take a deeper look into the dynamics of the simulation by examining transmission
+            chains. User can also examine transmission history and state changes of individuals in the object
+            by utilizing the Simul_Details object. 
+        """
         # for all the days in the simulation
         for i in range(1, self.days+1):
             print("Day ", i)
@@ -142,6 +261,19 @@ class RandMoveSIS(RandMove):
 
     # switch everything to a dataframe
     def toDataFrame(self):
+        """
+        Gives user access to pandas dataframe with amount of people in each state on each day.
+
+        Parameters
+        ----------
+
+        Returns
+        -------
+
+        pd.DataFrame
+            DataFrame object containing the number of susceptibles and number of infecteds on each day. 
+
+        """
         # create the linspaced numpy array
         t = np.linspace(0, self.days, self.days + 1)
         # create a 2D array with the days and susceptible and infected arrays
@@ -152,6 +284,9 @@ class RandMoveSIS(RandMove):
     
     # maybe add picking what to plot later
     def plot(self):
+        
+        "Plots the number of susceptible and infected individuals on the y-axis and the number of days on the x-axis."
+
         t = np.linspace(0, self.days, self.days + 1)
         fig, (ax1, ax2) = plt.subplots(nrows=2, sharex='all')
         ax1.plot(t, self.S, label="Susceptible", color='r')

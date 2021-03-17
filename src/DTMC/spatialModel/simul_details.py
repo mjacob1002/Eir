@@ -11,15 +11,18 @@ class Simul_Details():
     This class returns details about the simulation from the spatial model object. 
     It can give information about transmission chains, locations of individual people
     at any given time, and the state change history of each person in the simulation. 
-  
-    Attributes
+    
+    Parameters
     ----------
+    
     days: int
         the number of days the simulation will go for. Found in the spatial model object
         
     popsize: int
         the number of people in the simulation.
-
+    
+    Attributes
+    ----------
     transmissions: dictionary
         holds a list with a key "days" and values of tuples in the form of (infectious person, susceptible), 
         where infectious person and susceptible are numbers representing the people in the simulation. 
@@ -36,7 +39,43 @@ class Simul_Details():
         the first element being the number day the state change occured, and the second element being a string
         representing the state which the person went to. For example, a state change tuple as (16,"S") would 
         mean that on day 16, a person transferred to state "S". 
-        
+    
+    Methods
+    -------
+
+    personHistory(u: int, movement=False)
+        Returns the state history of person u in the simulation. If movement=True, returns a tuple with
+        the first element being a list containing the state history of person history and second element
+        being a list containing the (x,y) coordinates of person u each day during the simulation. 
+    
+    getHistory()
+        Returns a dictionary containing the entire transmission history each day. The key of the dictionary 
+        is a day from [1,days] and the value is a list of all the transmissions for that day. 
+
+    personTransmissionHistory(u: int)
+        Returns a list of tuples containing two integers that represents the transmission history of person u. 
+        The first integer represents the person that person u infected, and the second integer represents the day
+        which the infection occured. 
+
+    transmissionHistoryonDay(day: int)
+        Get the transmission history on a particular day. Returns a list that contains tuples with two integers.
+        The first integer represents the person who was infectious. The second integer represents the susceptible
+        person who got infected. 
+    
+    sortedTransmisisons()
+        Returns a list containing a tuple of an integer and a list. In the tuple, the integer represents 
+        the number of transmissions, while the list contains integers representing the people who have made that many 
+        transmissions. For example, for a tuple (6, [1,6,32]), this would mean that persons 1, 6, and 32 each delivered
+        6 transmissions throughout the simulation. The list returned by sortedTransmissions() is sorted from highest
+        to lowest. 
+    
+    plotTransmissions(bins=None)
+        Returns a Figure object and displays a histogram with number of transmissions on the x-axis and
+        the number of people who made that many transmissions on the y-axis. If bins=None, then the 
+        method will automatically generate a histogram with 10 bins. If bins is an integer, then the method
+        will automatically generate a histogram with that many bins. If a list of integers is passed in,
+        then the method will use those integers as the bins for the histogram. 
+
     """
 
     def __init__(self, days: int, popsize : int):
