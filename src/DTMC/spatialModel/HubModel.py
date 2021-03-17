@@ -4,13 +4,60 @@ import src.utility as u
 
 # class that operates under the hub model assumptions
 class Hub(Spatial):
+    """
+    Hub Model Abstract Class. Implements the _infect function according to the Hub Model presumptions of 
+    Fujie & Odagaki.
 
+    Parameters
+    ---------
+
+    popsize: int
+
+    pss: float
+
+    rstart: float
+
+    alpha : int
+
+    side: float
+
+    S0: int
+
+    I0: int
+
+    days: int
+
+    w0: float optional
+
+    hubConstant: float optional
+        The constant used when expanding the spreading radius of a super spreader. 
+
+    """
     def __init__(self, popsize: int, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, days: int, w0=1.0,
                  hubConstant=6 ** 0.5):
         super(Hub, self).__init__(popsize, pss, rstart, alpha, side, S0=S0, I0=I0, days=days, w0=w0)
         self.hubConstant = hubConstant
 
     def _infect(self, inf: Person, sus: Person):
+        """
+        Method that generates the infection probability given an infectious person inf and a susceptible person sus.
+
+        Parameters
+        ----------
+
+        inf: Person
+            The infectious person of the two.
+
+        sus: Person
+            The susceptible person of the two. 
+
+        Returns
+        -------
+
+        float
+            Represents the probability that inf will infect sus given the distance between the two and 
+            inf's spreading radius. 
+        """
         # compute the distance between two Person objects
         r = u.dist(inf, sus)
         # make variable that can potentially be changed if someone is a super spreader
