@@ -97,8 +97,13 @@ class Spatial:
         sus: Person
             represents the susceptible person.
 
+        Returns
+        -------
+
+        float: 
+            represents the probability of infectious person infecting the susceptible person.
         """
-        pass
+        return 0.0
 
     def _statechange(self):
         pass

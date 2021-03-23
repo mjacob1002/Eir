@@ -44,7 +44,7 @@ class HubSIS(Hub):
             # push them to the data structure/ array structure
             self.Scollect.append(p1)
             self.Icollect.append(p2)
-        
+        print("Length of Scollect: ", len(self.Scollect))
 
     # run state changes from S to I
     def _StoI(self, day: int):
@@ -54,6 +54,7 @@ class HubSIS(Hub):
             if not inf.isIncluded:
                 continue
             for count2, sus in enumerate(self.Scollect):
+                #print("Susceptible Person ", count2)
                 if not sus.isIncluded:
                     continue
                 # generate the probability of infection

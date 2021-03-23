@@ -2,16 +2,93 @@
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
+from multipledispatch import dispatch
 
 from .HubSIS import HubSIS
 from src.utility import Person
 import src.utility as u
-from multipledispatch import dispatch
 from src.DTMC.spatialModel.simul_details import Simul_Details
 
 
 
 class HubSIR(HubSIS):
+    """
+    Hub Model with compartments S, I, R
+
+    Parameters
+    ----------
+
+    popsize: int
+        size of the population.
+    
+    pss: float
+        probability someone is considered a super spreader.
+    
+    rstart: float
+        the spreading radius of every normal spreader.
+    
+    alpha: int
+        constant used in the P(infection) formula.
+    
+    side: float
+        size of one side of the square plane.
+    
+    S0: int
+        The initial amount of susceptibles at the start of the simulation.
+    
+    I0: int
+        The initial amount of infectious individuals at the start of the simulation.
+    
+    R0: int
+        The inital amount of removed individuals at the start of the simulation.
+    
+    days: int
+        The number of days that are simulated.
+    
+    gamma: float
+        The probability of someone from I going to R.
+    
+    w0: float (optional)
+        The probability of infection if an infectious and susceptible individual are in the same location.
+    
+    hubConstant: float (optional)
+        The factor k multliplied to the rstart if the person is a super spreader.
+
+    
+    Attributes
+    ----------
+    details: Simul_Details
+        an object that can be returned using run(getDetails=True) that provides more insight about simulation
+        by showing transmissions chains, personal history with states, and more. 
+    S : ndarray
+        stores the number of people S compartmet on each day.
+    
+    I : ndarray
+        stores the number of people I compartmet on each day.
+    
+    R : ndarray
+        stores the number of people R compartmet on each day.
+    
+    Scollect: list
+        contains the Person objects of everyone in simulation. If an element in Scollect has isIncluded=True,
+        that means person is currently in susceptible compartment.
+    
+    Icollect: list
+        contains the Person objects of everyone in simulation. If an element in Icollect has isIncluded=True,
+        that means person is currently in infected compartment.
+    
+    Rcollect: list
+        contains the Person objects of everyone in simulation. If an element in Rcollect has isIncluded=True,
+        that means person is currently in removed compartment.
+    
+    locx: ndarray
+        stores the x coordinate of each person in the simulation.
+    
+    locy: ndarray
+        stores the y coordinate of each person in the simulation.
+    
+
+    """
     def __init__(self, popsize: int, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, R0: int,
                  days: int,
                  gamma: float, w0=1.0,

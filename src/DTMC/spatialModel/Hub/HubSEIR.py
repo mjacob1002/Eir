@@ -8,6 +8,16 @@ from src.utility import Person, dist, randEvent
 
 
 class HubSEIR(Hub):
+    """
+    Object that represents the Hub Model with compartments S, E, I, and R. In this model, E is assumed to not be
+    able to spread the virus.
+
+    Parameters
+    ----------
+
+    rho: float
+        Rho is the probability of someone moving from E to I compartment. Rho is in [0, 1]. 
+    """
     def __init__(self, S0: int, I0: int, R0: int, pss: float, rho: float, 
     gamma: float, side: float, rstart:float, alpha: int, days: int, w0=1.0, hubConstant=6**0.5):
         super(HubSEIR, self).__init__(popsize=S0+I0+R0, pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0,
@@ -58,6 +68,22 @@ class HubSEIR(Hub):
     
     # run state changes from S to E
     def _StoE(self, day: int):
+        """
+        Deals with the transfers from S compartment to E compartment.
+
+        Parameters
+        ----------
+
+        day: int
+            feed in the current day the state transfer is taking place on.
+        
+        Return
+        ------
+
+        set:
+            returns the set contianing the indices of those that whose self.Ecollect[index].isIncluded must be set to True
+
+        """
         # set that keeps track of the indices of people that changed states
         transfers = set()
         for count, inf in enumerate(self.Icollect):
@@ -82,6 +108,15 @@ class HubSEIR(Hub):
         return transfers
     # run state changes from E to I
     def _EtoI(self):
+        """
+        Deals with transferring those from E compartment to I compartment.
+
+        Return
+        ------
+
+        set:
+            the indices of people who will be transferred from E compartment to I compartment
+        """
         # set that keeps track of the indices of people that changed states
         transfers = set()
         for count, per in enumerate(self.Ecollect):
@@ -96,6 +131,15 @@ class HubSEIR(Hub):
     
     def _ItoR(self):
         # set that keeps track of the indices of people that changed states
+        """
+        Deals with transferring those from E compartment to I compartment.
+
+        Return
+        ------
+
+        set:
+            the indices of people who will be transferred from I compartment to R compartment
+        """
         transfers = set()
         for count, inf in enumerate(self.Icollect):
             if not inf.isIncluded:
@@ -136,6 +180,15 @@ class HubSEIR(Hub):
             return self.details
 
     def plot(self):
+        """
+        Plots all variables on subplots
+
+        Return
+        -------
+
+        pyplot.Figure:
+            return a fig object that will contian the graphs
+        """
         t = np.linspace(0, self.days, self.days + 1)
         fig, (ax1, ax2, ax3, ax4) = plt.subplots(nrows=4, sharex='all')
         ax1.plot(t, self.S, label="Susceptible", color='r')
@@ -153,9 +206,19 @@ class HubSEIR(Hub):
         ax3.legend()
         ax4.legend()
         plt.show()
+        return fig
     
     # convert the arrays to dataframe
     def toDataFrame(self):
+        """
+        Converts the arrays to a pandas DataFrame.
+
+        Return
+        ------
+
+        pd.DataFrame:
+            a dataframe containing the people in S, E, I, and R compartments per day.
+        """
         # create the linspaced numpy array
         t = np.linspace(0, self.days, self.days + 1)
         # create a 2D array with the days and susceptible and infected arrays
