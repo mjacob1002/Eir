@@ -233,6 +233,15 @@ class HubSIR(HubSIS):
 
     # convert the arrays to dataframe
     def toDataFrame(self):
+        """
+        Converts the arrays to a pandas DataFrame.
+
+        Returns
+        -------
+
+        pd.DataFrame:
+            a dataframe containing the number of people in S, I, and R compartments per day.
+        """
         # create the linspaced numpy array
         t = np.linspace(0, self.days, self.days + 1)
         # create a 2D array with the days and susceptible and infected arrays
