@@ -1,14 +1,82 @@
-from ..HubModel import Hub
 from matplotlib import pyplot as plt
-from src.DTMC.spatialModel.simul_details import Simul_Details
+from multipledispatch import dispatch
 import numpy as np
 import pandas as pd
+
 from src.utility import Person
+from ..HubModel import Hub
+from src.DTMC.spatialModel.simul_details import Simul_Details
 import src.utility as u
-from multipledispatch import dispatch
+
 
 
 class HubSIS(Hub):
+    """
+    Hub model with compartments S and I. 
+
+    Parameters
+    ----------
+
+    
+    popsize: int
+        size of the population.
+    
+    pss: float
+        probability someone is considered a super spreader.
+    
+    rstart: float
+        the spreading radius of every normal spreader.
+    
+    alpha: int
+        constant used in the P(infection) formula.
+    
+    side: float
+        size of one side of the square plane.
+    
+    S0: int
+        The initial amount of susceptibles at the start of the simulation.
+    
+    I0: int
+        The initial amount of infectious individuals at the start of the simulation.
+        
+    days: int
+        The number of days that are simulated.
+    
+    gamma: float
+        The probability of someone from I going to S.
+    
+    w0: float (optional)
+        The probability of infection if an infectious and susceptible individual are in the same location.
+    
+    hubConstant: float (optional)
+        The factor k multliplied to the rstart if the person is a super spreader.
+
+    
+    Attributes
+    ----------
+    details: Simul_Details
+        an object that can be returned using run(getDetails=True) that provides more insight about simulation
+        by showing transmissions chains, personal history with states, and more. 
+    S : ndarray
+        stores the number of people S compartmet on each day.
+    
+    I : ndarray
+        stores the number of people I compartmet on each day.
+    
+    Scollect: list
+        contains the Person objects of everyone in simulation. If an element in Scollect has isIncluded=True,
+        that means person is currently in susceptible compartment.
+    
+    Icollect: list
+        contains the Person objects of everyone in simulation. If an element in Icollect has isIncluded=True,
+        that means person is currently in infected compartment.
+
+    locx: ndarray
+        stores the x coordinate of each person in the simulation.
+    locy: ndarray
+        stores the y coordinate of each person in the simulation. 
+
+    """
     def __init__(self, popsize: int, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, days: int,
                  gamma: float, w0=1.0,
                  hubConstant=6 ** 0.5):
@@ -48,6 +116,23 @@ class HubSIS(Hub):
 
     # run state changes from S to I
     def _StoI(self, day: int):
+        """
+        Takes care of state changes from S compartment to I compartmet. This uses the _infect function.
+
+        Parameters
+        ----------
+
+        day: int
+            The day that the state change is occuring. Used mainly to add to transmission chain in Simul_Details
+            object. 
+        
+        Returns
+        -------
+
+        set
+            Includes the people that will be transferred from S to I. For example, if set inclues the number 3
+            then self.Icollect[3].isIncluded = True.
+        """
         # set that keeps track of the indices of people that changed states
         transfers = set()
         for count, inf in enumerate(self.Icollect):
@@ -73,6 +158,9 @@ class HubSIS(Hub):
 
     # run state changes from I to S
     def __ItoS(self):
+        """
+        Takes care of state changes from I to S. Operates independent of location.
+        """
         # set that keeps track of the indices of people that changed states
         transfers = set()
         for count, inf in enumerate(self.Icollect):
@@ -87,6 +175,23 @@ class HubSIS(Hub):
 
     # run the simulation using
     def run(self, getDetails=True):
+        """
+        This method runs the simulation of the HubSIS object. 
+
+        Parameters
+        ----------
+
+        getDetails : bool, optional
+            Default is True. If True, returns a Simul_Details() object that will allow user to look more closely
+            into the details of the simulation, including transmission chains, state history of particular people,
+            and more. 
+
+        Return
+        ------
+        Simul_Details():
+            This is returned if getDetails=True. It allows the user to more closely examine the particular simulation.
+            This includes, transmission chains, state history of particular people, and more. 
+        """
         for i in range(1, self.days + 1):
             print("Day: ", i)
             # run the transfers from different compartments
@@ -107,6 +212,9 @@ class HubSIS(Hub):
 
     # maybe add picking what to plot later
     def plot(self):
+        """
+        Plots the variables S and I against the number of days. 
+        """
         t = np.linspace(0, self.days, self.days + 1)
         fig, (ax1, ax2) = plt.subplots(nrows=2, sharex='all')
         ax1.plot(t, self.S, label="Susceptible", color='r')
@@ -121,6 +229,15 @@ class HubSIS(Hub):
 
     # convert the arrays to dataframe
     def toDataFrame(self):
+        """
+        Converts the arrays of S and I to a pandas dataframe.
+
+        Returns
+        -------
+
+        pd.DataFrame
+            Contains the number of susceptibles and infecteds on each day in the simulation.
+        """
         # create the linspaced numpy array
         t = np.linspace(0, self.days, self.days + 1)
         # create a 2D array with the days and susceptible and infected arrays
