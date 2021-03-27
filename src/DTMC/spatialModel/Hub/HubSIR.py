@@ -146,6 +146,18 @@ class HubSIR(HubSIS):
         print("Initial S0: ", self.S[0], " Initial I0: ", self.I[0], " Initial R0: ", self.R[0])
     # run state changes from I to R
     def _ItoR(self):
+        """
+        Takes care of state changes from I to R. Events are generated independent of location and variables
+        except kappa.
+
+        Returns
+        -------
+
+        set
+            Contains indices of those who will be transferred from I to R. For example, if set contains 3, then
+            the self.Rollect[3].isIncluded=True and self.Icollect.isIncluded should be set to false within the
+            _ItoR() function.
+        """
         # set that keeps track of the indices of people that changed states
         transfers = set()
         for count, inf in enumerate(self.Icollect):
@@ -161,6 +173,23 @@ class HubSIR(HubSIS):
 
     # run the simulation using
     def run(self, getDetails=True):
+        """
+        This method runs the simulation of the HubSIS object. 
+
+        Parameters
+        ----------
+
+        getDetails : bool, optional
+            Default is True. If True, returns a Simul_Details() object that will allow user to look more closely
+            into the details of the simulation, including transmission chains, state history of particular people,
+            and more. 
+
+        Return
+        ------
+        Simul_Details():
+            This is returned if getDetails=True. It allows the user to more closely examine the particular simulation.
+            This includes, transmission chains, state history of particular people, and more. 
+        """
         for i in range(1, self.days + 1):
             print("Day ",i)
             # run the transfers from different compartments
@@ -184,6 +213,9 @@ class HubSIR(HubSIS):
 
     # maybe add picking what to plot later
     def plot(self):
+        """
+        Plots the variables S, I, and R against the number of days. 
+        """
         t = np.linspace(0, self.days, self.days + 1)
         fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, sharex='all')
         ax1.plot(t, self.S, label="Susceptible", color='r')
