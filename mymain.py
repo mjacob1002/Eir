@@ -39,7 +39,7 @@ def testRandMoveSIS():
 
 
 def getHubSIRS():
-    test = HubSIRS(popsize=1000, pss=.2, rstart=3, alpha=2, side=50, S0=999, I0=1, R0=0, days=31, gamma=.4, kappa= .2, w0=.7)
+    test = HubSIRS(popsize=1000, pss=.2, rstart=3, alpha=2, side=25, S0=999, I0=1, R0=0, days=31, gamma=.4, kappa= .2, w0=.7)
     d = test.run()
     print(d.personHistory(652))
     test.plot()
@@ -60,7 +60,15 @@ def getHubSEIR():
     df = test.run()
     print(df.sortedTransmissions())
     print(test.toDataFrame())
+
+def getHubSIR():
+    test = HubSIR(popsize=1000, pss=.2, rstart=3, alpha=2, side=45, S0=999, I0=1, R0=0, days=31, gamma=.4, w0=.7)
+    d = test.run()
+    print(d.personHistory(652))
+    test.plot()
+    df = test.toDataFrame()
+    print(df)
     
 if  __name__ == '__main__':
-    getHubSEIR()
+    getHubSIR()
 
