@@ -128,7 +128,7 @@ class RandMoveSIS(RandMove):
             if i < S0:
                 p1.isIncluded = True
                 self.details.addStateChange(i, "S", 0)
-            else:
+            elif S0 < i < S0+I0:
                 p2.isIncluded = True
                 self.details.addStateChange(i, "I", 0)
             # append them to the data structure
@@ -138,7 +138,7 @@ class RandMoveSIS(RandMove):
     # helps _move method with boundary checks
     
     # move people within the planSize x planeSize plane
-    def _move(self, day: int):
+    def _move(self, day: int, collects: list):
         """
         Method that moves each person at the end of each state chage.
 
@@ -148,6 +148,8 @@ class RandMoveSIS(RandMove):
         days: int
             The day that the movement is for. Used to log information in the details class variable. 
 
+        collects: list
+            A list of the different collection data structures in the model. 
         """
         # generate the correct number of movement radii
         movement_r = np.random.normal(self.move_r, self.sigma_R, self.popsize)
@@ -155,7 +157,7 @@ class RandMoveSIS(RandMove):
         thetas = np.random.uniform(low=0, high=2*math.pi, size=self.popsize)
         # looping through everyone and moving them; same person coordinates in Scollect and Icoolect,
         # so which array is looped through doesn't matter
-        for index, person in enumerate(self.Scollect):
+        for index, person in enumerate(collects[0]):
             # adjust the x,y coordinate using polar coordinates
             # conduct the boundary check at the same time
             x = self._boundaryCheck(person.x + movement_r[index] * math.cos(thetas[index]))
@@ -163,8 +165,11 @@ class RandMoveSIS(RandMove):
             # add the new location to the Simul_Details object
             self.details.addLocation(day, (x,y))
             # change the x, y coordinates
-            self.Scollect[index].x, self.Icollect[index].x = x, x
-            self.Scollect[index].y, self.Icollect[index].y = y, y
+            for j, collect in enumerate(collects):
+                collects[j][index].x = x
+                collects[j][index].y = y
+            #self.Scollect[index].x, self.Icollect[index].x = x, x
+            #self.Scollect[index].y, self.Icollect[index].y = y, y
     
     # deal with transfers from S to I compartments
     def _StoI(self, day: int):
@@ -239,6 +244,7 @@ class RandMoveSIS(RandMove):
         # for all the days in the simulation
         for i in range(1, self.days+1):
             print("Day ", i)
+            print("Location: (", self.Scollect[0].x, ",", self.Scollect[0].y, ").")
             # run the state changes
             StoI = self._StoI(i)
             ItoS = self._ItoS()
@@ -252,7 +258,7 @@ class RandMoveSIS(RandMove):
                 # add state change for each person
                 self.details.addStateChange(index, "S", i)
             # make everyone move randomly
-            self._move(i)
+            self._move(i, [self.Scollect, self.Icollect])
             # change the values in the arrays
             self.S[i] = self.S[i-1] - len(StoI) + len(ItoS)
             self.I[i] = self.I[i-1] + len(StoI) - len(ItoS)
