@@ -11,7 +11,7 @@ from src.DTMC.spatialModel.randomMovement.randMoveSIS import RandMoveSIS
 
 class RandMoveSIR(RandMoveSIS):
     """
-    An SIS model that follows the Random Movement Model. When the individuals in the simulation move, 
+    An SIR model that follows the Random Movement Model. When the individuals in the simulation move, 
     they move according to a randomly generated angle and a randomly generated radius.
 
     Parameters:
@@ -70,7 +70,10 @@ class RandMoveSIR(RandMoveSIS):
         A numpy array that stores the number of people in the susceptible state on each given day of the simulation.
     
     I: ndarray
-        A numpy array that stores the number of people in the susceptible state on each given day of the simulation.
+        A numpy array that stores the number of people in the infected state on each given day of the simulation.
+    
+    R: ndarray
+        A numpy array that stores the number of people in the recovered state on each given day of the simulation.
     
     popsize: int
         The total size of the population in the simulation. Given by S0 + I0
