@@ -195,14 +195,9 @@ class RandMoveSIR(RandMoveSIS):
             StoI = self._StoI(i)
             ItoR = self._ItoR()
             # change the indices of the transfers
-            for index in StoI:
-                self.Icollect[index].isIncluded = True
-                # add state change for each person
-                self.details.addStateChange(index, "I", i)
-            for index in ItoR:
-                self.Rcollect[index].isIncluded = True
-                # add state change for each person
-                self.details.addStateChange(index, "R", i)
+            self._stateChanger(StoI, self.Icollect, "I", i)
+            self._stateChanger(ItoR, self.Rcollect, "R", i)
+            
             # make everyone move randomly
             self._move(i, [self.Scollect, self.Icollect, self.Rcollect])
             # change the values in the arrays

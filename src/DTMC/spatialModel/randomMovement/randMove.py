@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import math
 import src.utility as u
+from src.DTMC.spatialModel.simul_details import Simul_Details
 
 # not to be confused with the person object that is used in the Hub/Strong Infectious Model
 from src.utility import Person1 as Person
@@ -42,6 +43,8 @@ class RandMove():
         self.alpha = alpha
         # pop size. This will typically be intialized for the subclasses, but make it a number for now
         self.popsize = 100
+        # Simul_Details object
+        self.details = Simul_Details(0, self.popsize)
 
     # determine whether an infection event has occured
     def _infect(self, inf: Person, sus: Person):
@@ -117,3 +120,27 @@ class RandMove():
         elif coordinate > self.planeSize:
             coordinate = self.planeSize
         return coordinate
+    
+    # used to run the state changes
+    def _stateChanger(self, values: set, collect: list, symbol: str, day:int):
+        """
+        Takes care of the state changes to a particular state. 
+
+        Parameters
+        ----------
+
+        values: set
+            values contains all of the indices of the people who need to be set to isIncluded=True in the collect list
+        
+        collect: list
+            The particular list of Person objects that are going to be modified.
+        
+        symbol: str 
+            The string representing the particular state that is going to. Used for details.
+        
+        day: int
+            The day on which the transfer happened. Used for details.
+        """
+        for index in values:
+            collect[index].isIncluded = True
+            self.details.addStateChange(index, symbol, day)
