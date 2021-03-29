@@ -142,5 +142,6 @@ class RandMove():
             The day on which the transfer happened. Used for details.
         """
         for index in values:
+            #print("Index: ", index)
             collect[index].isIncluded = True
             self.details.addStateChange(index, symbol, day)
