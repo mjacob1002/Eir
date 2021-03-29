@@ -236,8 +236,9 @@ class Simul_Details():
             for j in transmits:
             # if the infectious person is person number u
                 if j[0] == u:
+                    #print("Pair:", j)
                     # append the susceptible person that was infected, and the day that it happened
-                    history.append((transmits[1], i))
+                    history.append((j[1], i))
         return history
     
     # return the transmission history on a specific day
