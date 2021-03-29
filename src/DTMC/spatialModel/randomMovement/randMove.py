@@ -7,6 +7,28 @@ import src.utility as u
 from src.utility import Person1 as Person
 
 class RandMove():
+    """
+    Abstract class that isn't meant to be instantiated. Base class for all concrete randMove objects.
+
+    Parameters
+    ----------
+
+    planeSize: float
+        This is the size of the plane which the people are confined to.
+    
+    move_r: float
+        The mean of the normal distribution from which the random distance is pulled from each time step.
+    
+    spread_r: float
+        The mean of the normal distribution from which the random spreading radius for each person is pulled from.
+    
+    w0: float
+        The starting probability if an infected and susceptible person are on the same (x,y) coordinate. Used in the _infect method.
+    
+    alpha: float, optional
+        Constant used in the _infect method. Default value is 2.0. 
+
+    """
     def __init__(self, planeSize, move_r, spread_r, w0, alpha=2.0):
         # size of the plane
         self.planeSize = planeSize
@@ -23,6 +45,24 @@ class RandMove():
 
     # determine whether an infection event has occured
     def _infect(self, inf: Person, sus: Person):
+        """
+        Both calculates the probability of infection and generates an infection event.
+
+        Parameters
+        ----------
+
+        inf: Person
+            The infectious Person object that may or may not infect sus.
+
+        sus: Person
+            The susceptible Person object that may or may not become infected by sus.
+        
+        Return
+        ------
+
+        bool:
+            If True, then sus became infected. Otherwise, sus didn't become infected.
+        """
         # get the distance between two points
         r = u.dist(inf, sus)
         # if the distance between two people is greater than the infected person's spreading radius
@@ -36,7 +76,18 @@ class RandMove():
         return inf_event
 
     # eventually do it for every person in each collection array; will be implemented in the sublcasses
-    def _move(self):
+    def _move(self, day: int, collect: list):
+        """
+        Responsible for moving the locations of each Person in the simulation. Does it in place.
+
+        Parameters
+        ----------
+        day: int
+            The current day that the move is taking place on. Is important for the Simul_Details() object in order to keep track of the movement patterns each day.
+        
+        collect: list
+            Contains all of the collection data structures that will be cycled through for the moves. This allows for easy object-oriented design.
+        """
         # generate the correct number of movement radii
         movement_r = np.random.normal(self.move_R, self.sigma_R, self.popsize)
         # generate the random thetas
@@ -44,6 +95,21 @@ class RandMove():
 
     # apply this check to every x and y coordinate to make sure they're always within the plane
     def _boundaryCheck(self, coordinate):
+        """
+        Makes sure that after each movement, the x and y coordinates stay within the plane.
+
+        Parameters
+        ----------
+
+        coordiante: float
+            The coordinate that is being checked to make sure that it is within range [0,planeSize].
+        
+        Returns
+        -------
+        float:
+            The coordinate that is within bounds of the plane. If coordinate was >planeSize, this method returns planeSize. If the coordinate was <planeSize, this method returns 0.
+            Otherwise, it returns the original coordinate value.
+        """
         # if the coordinate is too low( below/ to the left of the square plane)
         if coordinate < 0:
             coordinate = 0
