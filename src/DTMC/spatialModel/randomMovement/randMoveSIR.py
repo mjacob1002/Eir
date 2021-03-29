@@ -143,7 +143,15 @@ class RandMoveSIR(RandMoveSIS):
     
 
     def _ItoR(self):
-        """Takes care of running state changes from I compartment to S compartment """
+        """
+        Takes care of running state changes from I compartment to S compartment 
+        
+        Return
+        ------
+
+        set:
+            contains the indices of people who should get transferred from I to R compartment.
+        """
         # set that contains the indices for transfering from I to S
         
         transfers = set()
