@@ -188,6 +188,7 @@ class RandMoveSEIR(RandMoveSIR):
             self.E[i] = self.E[i-1] + len(StoE) - len(EtoI)
             self.I[i] = self.I[i-1] + len(EtoI) - len(ItoR)
             self.R[i] = self.R[i-1] + len(ItoR)
+            
 
         if getDetails:
             return self.details
