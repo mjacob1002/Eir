@@ -94,7 +94,7 @@ class RandMoveSIRDV(RandMoveSIRD):
             self._stateChanger(StoV, self.Vcollect, "V", i)
             
             # make everyone move randomly, don't move dead people
-            self._move(i, [self.Scollect, self.Icollect, self.Rcollect])
+            self._move(i, [self.Scollect, self.Icollect, self.Rcollect, self.Vcollect])
             # change the values in the arrays
             self.S[i] = self.S[i-1] - len(StoI) - len(StoV)
             self.I[i] = self.I[i-1] + len(StoI) - len(ItoR) - len(ItoD)
