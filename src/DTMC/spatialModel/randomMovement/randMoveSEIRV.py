@@ -27,6 +27,9 @@ class RandMoveSEIRV(RandMoveSEIR):
     R0: int
         The starting number of recovered individuals in the simulation.
     
+    V0: int
+        The starting number of vaccinated individuals in the simulation.
+    
     rho: float
         The probability of someone going from the E compartment to the I compartment.
 
