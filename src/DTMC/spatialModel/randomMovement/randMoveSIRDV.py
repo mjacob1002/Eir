@@ -5,11 +5,11 @@ import pandas as pd
 from src.DTMC.spatialModel.randomMovement.randMoveSIRD import RandMoveSIRD
 from src.utility import Person1 as Person
 
-class RandMoveSIRSDV(RandMoveSIRD):
+class RandMoveSIRDV(RandMoveSIRD):
 
     def __init__(self, S0, I0, R0, V0, gamma, mu, eta, planeSize, move_r:float, sigma_R:float, spread_r:float, sigma_r: float, days:int, w0=1.0, alpha=2.0, timeDelay=-4):
         self.timeDelay = timeDelay
-        super(RandMoveSIRSDV, self).__init__(S0=S0, I0=I0, R0=0, gamma=gamma, mu=mu, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+        super(RandMoveSIRDV, self).__init__(S0=S0, I0=I0, R0=0, gamma=gamma, mu=mu, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
         days=days)
         self.eta = eta
         self.Dcollect = []
