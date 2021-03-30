@@ -192,3 +192,45 @@ class RandMoveSEIRV(RandMoveSEIR):
 
         if getDetails:
             return self.details
+    
+    def toDataFrame(self):
+        """
+        Gives user access to pandas dataframe with amount of people in each state on each day.
+
+        Returns
+        -------
+
+        pd.DataFrame
+            DataFrame object containing the number of susceptibles and number of infecteds on each day. 
+
+        """
+        # create the linspaced numpy array
+        t = np.linspace(0, self.days, self.days + 1)
+        # create a 2D array with the days and susceptible and infected arrays
+        # do it over axis one so that it creates columns days, susceptible, infected
+        arr = np.stack([t, self.S, self.E, self.I, self.R, self.V], axis=1)
+        df = pd.DataFrame(arr, columns=["Days", "Susceptible", "Exposed", "Infected", "Removed", "Vaccinated"])
+        return df
+    
+    def plot(self):
+        "Plots the number of susceptible, exposed, infected, and recovered individuals on the y-axis and the number of days on the x-axis."
+        t = np.linspace(0, self.days, self.days + 1)
+        fig, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(nrows=5, sharex='all')
+        ax1.plot(t, self.S, label="Susceptible", color='r')
+        ax1.set_ylabel("# Susceptibles")
+        ax1.set_title("Random Movement SEIR Simulation")
+        ax2.plot(t, self.E, label="Exposed", color='g')
+        ax2.set_ylabel("# Exposed")
+        ax3.plot(t, self.I, label="Active Cases", color='b')
+        ax3.set_ylabel("# Active Infections")
+        ax5.set_xlabel("Days")
+        ax4.set_ylabel("# Recovered")
+        ax4.plot(t, self.R, label="Removed")
+        ax5.plot(t, self.V, label="Vaccinated", color='c')
+        ax5.set_ylabel("# Vaccinated")
+        ax1.legend()
+        ax2.legend()
+        ax3.legend()
+        ax4.legend()
+        ax5.legend()
+        plt.show()
