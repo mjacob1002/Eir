@@ -66,6 +66,9 @@ class RandMoveSIRV(RandMoveSIR):
     
     alpha: float optional
         A constant used in the _infect() method. The greater the constant, the greater the infection probability.
+    
+    timeDelay: int optional
+        The time delay before the vaccine rollout. Default value is 0. If the day is greater than the time delay, then vaccine rollout will begin.
 
     Attributes
     ----------
@@ -113,13 +116,16 @@ class RandMoveSIRV(RandMoveSIR):
     """
     
     def __init__(self, S0, I0, R0, V0, eta, gamma, planeSize, move_r:float, sigma_R:float, spread_r:float, sigma_r: float,
-    days:int, w0=1.0, alpha=2.0):
+    days:int, w0=1.0, alpha=2.0, timeDelay=-1):
 
         super(RandMoveSIRV, self).__init__(S0=S0, I0=I0, R0=R0, gamma=gamma, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days, w0=w0, alpha=alpha)
         # P(S->V|not S->E)
         self.eta = eta
         self.V0 = V0
         self.V = np.zeros(days+1)
+        # represents the time delay for vaccine distribution
+        self.timeDelay = timeDelay
+
         self.popsize = S0 + I0 + R0 + V0
         # reinitialize the details Simul_Details object
         self.details = Simul_Details(days=days, popsize=self.popsize)
@@ -172,7 +178,9 @@ class RandMoveSIRV(RandMoveSIR):
     def run(self, getDetails=True):
         for i in range(1, self.days+1):
             StoI = self._StoI(i)
-            StoV = self._StoV()
+            StoV = set()
+            if i > self.timeDelay:
+                StoV = self._StoV()
             ItoR = self._ItoR()
             self._stateChanger(StoI, self.Icollect, "I", i)
             self._stateChanger(StoV, self.Vcollect, "V", i)
