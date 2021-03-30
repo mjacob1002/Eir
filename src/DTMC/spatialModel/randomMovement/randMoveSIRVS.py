@@ -128,19 +128,7 @@ class RandMoveSIRVS(RandMoveSIRV):
         set:
             Contains the indices of people who are supposed to go from R to S
         """
-        transfers = set()
-        for i, person in enumerate(self.Rcollect):
-            if not person.isIncluded:
-                continue
-            # generate a resusceptible event
-            event = randEvent(self.kappa)
-            # if the event doesn't happen, test next Rcollect
-            if not event:
-                continue
-            # modify the isIncluded and add the index to the transfer set
-            self.Rcollect[i].isIncluded=False
-            transfers.add(i)
-        return transfers
+        return self._changeHelp(self.Rcollect, self.kappa)
     
     def run(self, getDetails=True):
         for i in range(1, self.days+1):
