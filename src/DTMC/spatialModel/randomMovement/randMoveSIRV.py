@@ -17,14 +17,15 @@ class RandMoveSIRV(RandMoveSIR):
     S0: int
         The starting number of susceptible individuals in the simulation.
     
-    E0: int
-        The starting number of exposed individuals in the simulation.
-    
     I0: int
         The starting number of infectious individuals in the simulation. 
     
     R0: int
         The starting number of recovered individuals in the simulation.
+    
+    V0: int
+        The starting number of vaccinated individuals in the simulation.
+    
 
     gamma: float
         The recovery probability of an individual going from I -> R.
