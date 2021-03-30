@@ -7,9 +7,6 @@ class RandMoveSEIRS(RandMoveSEIR):
     """
     Class that simulates the random movement model with an SEIR model. People in the Exposed compartment are presumed to not be able to propogate infection.
 
-    Parameters
-    ----------
-
     Parameters:
     ----------
 
