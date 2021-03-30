@@ -155,3 +155,23 @@ class RandMoveSIRVS(RandMoveSIRV):
     
 
     
+    def plot(self):
+        "Plots the number of susceptible, exposed, infected, and recovered individuals on the y-axis and the number of days on the x-axis."
+
+        t = np.linspace(0, self.days, self.days + 1)
+        fig, (ax1, ax2, ax3, ax4) = plt.subplots(nrows=4, sharex='all')
+        ax1.plot(t, self.S, label="Susceptible", color='r')
+        ax1.set_ylabel("# Susceptibles")
+        ax1.set_title("Random Movement SIRVS Simulation")
+        ax3.plot(t, self.V, label="Vaccinated", color='g')
+        ax3.set_ylabel("# Vaccinated")
+        ax2.plot(t, self.I, label="Active Cases", color='b')
+        ax2.set_ylabel("# Active Infections")
+        ax4.set_xlabel("Days")
+        ax4.set_ylabel("# Recovered")
+        ax4.plot(t, self.R, label="Removed")
+        ax1.legend()
+        ax2.legend()
+        ax3.legend()
+        ax4.legend()
+        plt.show()

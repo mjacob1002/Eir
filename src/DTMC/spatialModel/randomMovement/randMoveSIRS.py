@@ -138,6 +138,26 @@ class RandMoveSIRS(RandMoveSIR):
         if getDetails:
             return self.details
     
+    # maybe add picking what to plot later
+    def plot(self):
+        
+        "Plots the number of susceptible and infected individuals on the y-axis and the number of days on the x-axis."
+
+        t = np.linspace(0, self.days, self.days + 1)
+        fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, sharex='all')
+        ax1.plot(t, self.S, label="Susceptible", color='r')
+        ax1.set_ylabel("# Susceptibles")
+        ax1.set_title("Random Movement SIRS Simulation")
+        ax2.plot(t, self.I, label="Active Cases", color='b')
+        ax2.set_ylabel("# Active Infections")
+        ax3.set_xlabel("Days")
+        ax3.set_ylabel("# Recovered")
+        ax3.plot(t, self.R, label="Removed")
+        ax1.legend()
+        ax2.legend()
+        ax3.legend()
+        plt.show()
+    
     
 
 

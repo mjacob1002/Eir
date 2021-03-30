@@ -248,8 +248,9 @@ def testRandSIRVS():
 if  __name__ == '__main__':
     testRandSIRVS()
     #testRandSEIRV()
-    #testRandSEIR()
-    #testRandSIRV()
-    #testRandSEIRS()
-    #testRandMoveSIS()
-
+    testRandSEIR()
+    testRandSIRV()
+    testRandSEIRS()
+    testRandMoveSIS()
+    testRandSIRS()
+    testRandSIR()

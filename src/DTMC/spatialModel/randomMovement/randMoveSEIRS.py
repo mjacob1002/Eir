@@ -1,4 +1,5 @@
 import numpy as np
+from matplotlib import pyplot as plt
 
 from src.utility import randEvent
 from .randMoveSEIR import RandMoveSEIR
@@ -147,4 +148,25 @@ class RandMoveSEIRS(RandMoveSEIR):
             self.R[i] = self.R[i-1] + len(ItoR) - len(RtoS)
         if getDetails:
             return self.details
+    
+    def plot(self):
+        "Plots the number of susceptible, exposed, infected, and recovered individuals on the y-axis and the number of days on the x-axis."
+
+        t = np.linspace(0, self.days, self.days + 1)
+        fig, (ax1, ax2, ax3, ax4) = plt.subplots(nrows=4, sharex='all')
+        ax1.plot(t, self.S, label="Susceptible", color='r')
+        ax1.set_ylabel("# Susceptibles")
+        ax1.set_title("Random Movement SEIRS Simulation")
+        ax2.plot(t, self.E, label="Exposed", color='g')
+        ax2.set_ylabel("# Exposed")
+        ax3.plot(t, self.I, label="Active Cases", color='b')
+        ax3.set_ylabel("# Active Infections")
+        ax4.set_xlabel("Days")
+        ax4.set_ylabel("# Recovered")
+        ax4.plot(t, self.R, label="Removed")
+        ax1.legend()
+        ax2.legend()
+        ax3.legend()
+        ax4.legend()
+        plt.show()
         
