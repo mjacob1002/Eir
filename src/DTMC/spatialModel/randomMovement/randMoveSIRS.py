@@ -115,17 +115,7 @@ class RandMoveSIRS(RandMoveSIR):
         set:
             set contains the indices of person object who should go from R -> S. Eventually will loop through set to change the isIncluded attributes of Scollect.
         """
-        transfer = set()
-        for i, person in enumerate(self.Rcollect):
-            if self.Rcollect[i].isIncluded == False:
-                continue
-            event = u.randEvent(self.kappa)
-        # if not resusceptible, continue
-            if not event:
-                continue
-            self.Rcollect[i].isIncluded=False
-            transfer.add(i)
-        return transfer
+        return self._changeHelp(self.Rcollect, self.kappa)
     
     def run(self, getDetails=True):
         for i in range(1, self.days+1):

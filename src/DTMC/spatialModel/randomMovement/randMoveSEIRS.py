@@ -123,16 +123,7 @@ class RandMoveSEIRS(RandMoveSEIR):
         set:
             set of all indices that represent the people going from R to S.
         """
-        transfers = set()
-        for i, person in enumerate(self.Rcollect):
-            if not person.isIncluded:
-                continue
-            event = randEvent(self.kappa)
-            if not event:
-                continue
-            self.Rcollect[i].isIncluded=False
-            transfers.add(i)
-        return transfers
+        return self._changeHelp(self.Rcollect, self.kappa)
     
     def run(self, getDetails=True):
         # run the simulation for the number of days

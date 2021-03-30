@@ -161,16 +161,7 @@ class RandMoveSEIR(RandMoveSIR):
     
     # runs state changes from E to I
     def _EtoI(self):
-        transfers = set()
-        for i, person in enumerate(self.Ecollect):
-            if not person.isIncluded:
-                continue
-            event = randEvent(self.rho)
-            if not event:
-                continue
-            self.Ecollect[i].isIncluded = False
-            transfers.add(i)
-        return transfers
+        return self._changeHelp(self.Ecollect, self.rho)
     
     def run(self, getDetails=True):
         for i in range(1, self.days+1):

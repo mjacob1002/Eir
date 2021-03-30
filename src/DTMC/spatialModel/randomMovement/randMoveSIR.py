@@ -153,19 +153,7 @@ class RandMoveSIR(RandMoveSIS):
             contains the indices of people who should get transferred from I to R compartment.
         """
         # set that contains the indices for transfering from I to S
-        
-        transfers = set()
-        for index, person in enumerate(self.Icollect):
-            # if the person isn't an infectious person at the moment
-            if person.isIncluded == False:
-                continue
-            event = u.randEvent(self.gamma)
-            # if the person is recovered
-            if event:
-                # add to transfer set
-                transfers.add(index)
-                self.Icollect[index].isIncluded = False
-        return transfers
+        return self._changeHelp(self.Icollect, self.gamma)
 
     def run(self, getDetails=True):
         """

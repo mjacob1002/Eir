@@ -4,9 +4,42 @@ import pandas as pd
 # file purely used for testing code by running this file in the terminal
 from src.DTMC.spatialModel.Hub.HubSIRS import HubSIRS
 from src.DTMC.spatialModel.randomMovement.randMoveSIS import RandMoveSIS
+from src.DTMC.spatialModel.randomMovement.randMoveSIR import RandMoveSIR
+from src.DTMC.spatialModel.randomMovement.randMoveSIRS import RandMoveSIRS
 from src.DTMC.spatialModel.Hub.HubSIR import HubSIR
 from src.DTMC.spatialModel.Hub.HubSEIR import HubSEIR
 from src.DTMC.spatialModel.StrongInfectious.StrongInfSIR import StrongInfSIR
+from src.DTMC.spatialModel.randomMovement.randMoveSEIR import RandMoveSEIR
+from src.DTMC.spatialModel.randomMovement.randMoveSEIRS import RandMoveSEIRS
+from src.DTMC.spatialModel.randomMovement.randMoveSIRV import RandMoveSIRV
+from src.DTMC.spatialModel.randomMovement.randMoveSIRVS import RandMoveSIRVS
+from src.DTMC.spatialModel.randomMovement.randMoveSEIRV import RandMoveSEIRV
+
+def testRandSEIRV():
+    S0 = 999
+    E0=0
+    V0 = 0
+    I0 = 1
+    rho = .3
+    eta = .03
+    gamma = 0.4
+    #kappa = .2
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = RandMoveSEIRV(S0=S0, E0=E0, I0=I0, R0=0, V0=V0, gamma=gamma, rho=rho, eta=eta, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days, timeDelay=4)
+    details = test.run()
+    #df = test.toDataFrame()
+    #print(df)
+    #print("###########################")
+    #print(details.sortedTransmissions())
+    #print("#######################")
+    #print(details.personHistory(686))
+    #test.plot()
+
 def main():
     test = HubSIS(1000, .17, 4, 2, 25, 999, 1, 31, .3)
     details = test.run()
@@ -24,8 +57,8 @@ def testHistogram():
 def testRandMoveSIS():
     S0 = 999
     I0 = 1
-    gamma = 0.6
-    plane = 10
+    gamma = 0.4
+    plane = 25
     move_R = 5
     sigma_R = 2
     spread_r = 1
@@ -34,8 +67,14 @@ def testRandMoveSIS():
     test = RandMoveSIS(S0=S0, I0=I0, gamma=gamma, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
     days=days)
     details = test.run()
-    dic = details.sortedTransmissions()
-    print(dic)
+    df = test.toDataFrame()
+    #print(df)
+    #print(details.personHistory(4))
+    #print(details.transmissions)
+    print("#####################################")
+    print(details.personTransmissionHistory(7))
+    #dic = details.sortedTransmissions()
+    #print(dic)
 
 
 def getHubSIRS():
@@ -68,7 +107,149 @@ def getHubSIR():
     test.plot()
     df = test.toDataFrame()
     print(df)
-    
+
+def testRandSIR():
+    S0 = 999
+    I0 = 1
+    gamma = 0.4
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = RandMoveSIR(S0=S0, I0=I0, R0=0, gamma=gamma, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
+    print(details.sortedTransmissions())
+    print("#######################")
+    print(details.personHistory(686))
+    test.plot()
+
+
+def testRandSIRS():
+    S0 = 999
+    I0 = 1
+    gamma = 0.4
+    kappa = .2
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = RandMoveSIRS(S0=S0, I0=I0, R0=0, gamma=gamma, kappa=kappa, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
+    print(details.sortedTransmissions())
+    print("#######################")
+    print(details.personHistory(686))
+    test.plot()
+
+def testRandSEIR():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    rho = .2
+    gamma = 0.4
+    kappa = .2
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = RandMoveSEIR(S0=S0, E0=E0, I0=I0, R0=0, rho=rho, gamma=gamma, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
+    print(details.sortedTransmissions())
+    print("#######################")
+    print(details.personHistory(686))
+    test.plot()
+
+def testRandSEIRS():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    rho = .2
+    gamma = 0.4
+    kappa = .2
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = RandMoveSEIRS(S0=S0, E0=E0, I0=I0, R0=0, rho=rho, gamma=gamma, kappa=kappa, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
+    print(details.sortedTransmissions())
+    print("#######################")
+    print(details.personHistory(686))
+    test.plot()
+
+def testRandSIRV():
+    S0 = 999
+    V0 = 0
+    I0 = 1
+    eta = .03
+    gamma = 0.4
+    #kappa = .2
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = RandMoveSIRV(S0=S0, I0=I0, R0=0, V0=V0, gamma=gamma, eta=eta, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days, timeDelay=4)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
+    print(details.sortedTransmissions())
+    print("#######################")
+    print(details.personHistory(686))
+    test.plot()
+
+def testRandSIRVS():
+    S0 = 999
+    V0 = 0
+    I0 = 1
+    eta = .03
+    gamma = 0.4
+    kappa = .2
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = RandMoveSIRVS(S0=S0, I0=I0, R0=0, V0=V0, gamma=gamma, eta=eta, kappa=kappa, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days, timeDelay=4)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
+    print(details.sortedTransmissions())
+    print("#######################")
+    print(details.personHistory(686))
+    test.plot()
+
 if  __name__ == '__main__':
-    getHubSIR()
+    testRandSIRVS()
+    #testRandSEIRV()
+    #testRandSEIR()
+    #testRandSIRV()
+    #testRandSEIRS()
+    #testRandMoveSIS()
 
