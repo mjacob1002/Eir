@@ -185,6 +185,7 @@ class RandMoveSEIRV(RandMoveSEIR):
             self._stateChanger(StoE, self.Ecollect, "E", i)
             self._stateChanger(EtoI, self.Icollect, "I", i)
             self._stateChanger(ItoR, self.Rcollect, "R", i)
+            self._stateChanger(StoV, self.Vcollect, "V", i)
             self._move(i, [self.Scollect, self.Ecollect, self.Icollect, self.Rcollect, self.Vcollect])
             self.S[i] = self.S[i-1] - len(StoE) - len(StoV)
             self.E[i] = self.E[i-1] + len(StoE) - len(EtoI)

@@ -14,7 +14,7 @@ from src.DTMC.spatialModel.randomMovement.randMoveSEIRS import RandMoveSEIRS
 from src.DTMC.spatialModel.randomMovement.randMoveSIRV import RandMoveSIRV
 from src.DTMC.spatialModel.randomMovement.randMoveSIRVS import RandMoveSIRVS
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRV import RandMoveSEIRV
-
+from src.DTMC.spatialModel.randomMovement.randMoveSEIRVS import RandMoveSEIRVS
 def testRandSEIRV():
     S0 = 999
     E0=0
@@ -32,13 +32,43 @@ def testRandSEIRV():
     days = 31
     test = RandMoveSEIRV(S0=S0, E0=E0, I0=I0, R0=0, V0=V0, gamma=gamma, rho=rho, eta=eta, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days, timeDelay=4)
     details = test.run()
-    #df = test.toDataFrame()
-    #print(df)
-    #print("###########################")
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
     #print(details.sortedTransmissions())
     #print("#######################")
-    #print(details.personHistory(686))
-    #test.plot()
+    for i in range(1000):
+        print(details.personHistory(i))
+    
+    test.plot()
+def testRandSEIRVS():
+    S0 = 999
+    E0=0
+    V0 = 0
+    I0 = 1
+    rho = .3
+    eta = .03
+    gamma = 0.4
+    kappa = .2
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = RandMoveSEIRVS(S0=S0, E0=E0, I0=I0, R0=0, V0=V0, gamma=gamma, rho=rho, eta=eta, kappa=kappa, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days, timeDelay=4)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
+    #print(details.sortedTransmissions())
+    #print("#######################")
+    for i in range(1000):
+        print(details.personHistory(i))
+    test.plot()
+
+
+
 
 def main():
     test = HubSIS(1000, .17, 4, 2, 25, 999, 1, 31, .3)
@@ -246,11 +276,11 @@ def testRandSIRVS():
     test.plot()
 
 if  __name__ == '__main__':
-    testRandSIRVS()
+    testRandSEIRVS()
     #testRandSEIRV()
-    testRandSEIR()
-    testRandSIRV()
-    testRandSEIRS()
-    testRandMoveSIS()
-    testRandSIRS()
-    testRandSIR()
+    #testRandSEIR()
+    #testRandSIRV()
+    #testRandSEIRS()
+    #testRandMoveSIS()
+    #testRandSIRS()
+    #testRandSIR()

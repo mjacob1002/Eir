@@ -131,7 +131,7 @@ class RandMoveSEIRVS(RandMoveSEIRV):
     def _RtoS(self):
         return self._changeHelp(self.Rcollect, self.kappa)
     
-    def run(self, getDetails):
+    def run(self, getDetails=True):
         for i in range(1, self.days+1):
             StoE = self._StoE(i)
             StoV = set()
@@ -143,6 +143,7 @@ class RandMoveSEIRVS(RandMoveSEIRV):
             self._stateChanger(StoE, self.Ecollect, "E", i)
             self._stateChanger(EtoI, self.Icollect, "I", i)
             self._stateChanger(ItoR, self.Rcollect, "R", i)
+            self._stateChanger(StoV, self.Vcollect, "V", i)
             self._stateChanger(RtoS, self.Scollect, "S", i)
             self._move(i, [self.Scollect, self.Ecollect, self.Icollect, self.Rcollect, self.Vcollect])
             self.S[i] = self.S[i-1] - len(StoE) - len(StoV) + len(RtoS)
@@ -150,6 +151,8 @@ class RandMoveSEIRVS(RandMoveSEIRV):
             self.I[i] = self.I[i-1] + len(EtoI) - len(ItoR)
             self.R[i] = self.R[i-1] + len(ItoR) - len(RtoS)
             self.V[i] = self.V[i-1] + len(StoV)
+        if getDetails:
+            return self.details
     
     def plot(self):
         "Plots the number of susceptible, exposed, infected, and recovered individuals on the y-axis and the number of days on the x-axis."
