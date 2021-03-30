@@ -47,6 +47,30 @@ class Person1:
         # isIncluded
         self.isIncluded = False
 
+def static_prob_help(collect: list, prob: float):
+    """
+    Used in order to determine who goes from collect state to another using probability prob. 
+
+    Parameters
+    ----------
+
+    collect:list
+        collect is a list of Person objects. Edits in place because passes a reference.
+    
+    prob: float
+        The probability of a Person object going from one state to another
+    """
+    transfers = set()
+    for i, person in enumerate(collect):
+        if not person.isIncluded: 
+            continue
+        event = randEvent(prob)
+        if not event:
+            continue
+        collect[i].isIncluded=False
+        transfers.add(i)
+    return transfers
+
 # computes the distance between two different Person objects
 def dist(p1: Person, p2: Person) -> float:
     x1, y1 = p1.x, p1.y
@@ -54,4 +78,3 @@ def dist(p1: Person, p2: Person) -> float:
     return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
 
 
-randEvent(.6)

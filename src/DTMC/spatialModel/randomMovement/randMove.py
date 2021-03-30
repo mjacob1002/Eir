@@ -3,6 +3,7 @@ import pandas as pd
 import math
 import src.utility as u
 from src.DTMC.spatialModel.simul_details import Simul_Details
+from src.utility import static_prob_help
 
 # not to be confused with the person object that is used in the Hub/Strong Infectious Model
 from src.utility import Person1 as Person
@@ -145,3 +146,18 @@ class RandMove():
             #print("Index: ", index)
             collect[index].isIncluded = True
             self.details.addStateChange(index, symbol, day)
+    
+    def _changeHelp(self, collect: list, prob: float):
+        """
+        Used in order to determine who goes from collect state to another using probability prob. 
+
+        Parameters
+        ----------
+
+        collect:list
+            collect is a list of Person objects. Edits in place because passes a reference.
+    
+        prob: float
+            The probability of a Person object going from one state to another
+        """
+        return static_prob_help(collect, prob)
