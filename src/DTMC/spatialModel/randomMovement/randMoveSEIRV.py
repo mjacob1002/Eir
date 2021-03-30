@@ -33,6 +33,9 @@ class RandMoveSEIRV(RandMoveSEIR):
     gamma: float
         The recovery probability of an individual going from I -> R.
     
+    eta: float
+        The probability of S->V if the person hasn't gone from S->E in that same state change.
+    
     planeSize : float
         The length of each side of the square plane in which the individuals are confined to. For example,
         if planeSize=50, then the region which people in the simulation are confined to is the square with
@@ -218,7 +221,7 @@ class RandMoveSEIRV(RandMoveSEIR):
         fig, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(nrows=5, sharex='all')
         ax1.plot(t, self.S, label="Susceptible", color='r')
         ax1.set_ylabel("# Susceptibles")
-        ax1.set_title("Random Movement SEIR Simulation")
+        ax1.set_title("Random Movement SEIRV Simulation")
         ax2.plot(t, self.E, label="Exposed", color='g')
         ax2.set_ylabel("# Exposed")
         ax3.plot(t, self.I, label="Active Cases", color='b')
