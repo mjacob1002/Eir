@@ -10,6 +10,11 @@ from src.DTMC.spatialModel.Hub.HubSIR import HubSIR
 from src.DTMC.spatialModel.Hub.HubSEIR import HubSEIR
 from src.DTMC.spatialModel.Hub.HubSEIRS import HubSEIRS
 from src.DTMC.spatialModel.Hub.HubSEIRV import HubSEIRV
+from src.DTMC.spatialModel.Hub.HubSEIRSV import HubSEIRSV
+from src.DTMC.spatialModel.Hub.HubSEIRD import HubSEIRD
+from src.DTMC.spatialModel.Hub.HubSEIRSD import HubSEIRSD
+from src.DTMC.spatialModel.Hub.HubSEIRSVD import HubSEIRSVD
+from src.DTMC.spatialModel.Hub.HubSEIRVD import HubSEIRVD
 from src.DTMC.spatialModel.StrongInfectious.StrongInfSIR import StrongInfSIR
 from src.DTMC.spatialModel.randomMovement.randMoveSEIR import RandMoveSEIR
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRS import RandMoveSEIRS
@@ -25,6 +30,7 @@ from src.DTMC.spatialModel.randomMovement.randMoveSEIRD import RandMoveSEIRD
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRSD import RandMoveSEIRSD
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRDV import RandMoveSEIRDV
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRSDV import RandMoveSEIRSDV
+
 
 
 def testRandSEIRDV():
@@ -298,8 +304,48 @@ def getHubSEIR():
     print(df.sortedTransmissions())
     print(test.toDataFrame())
 
+def getHubSEIRD():
+    test = HubSEIRD(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getHubSEIRSD():
+    test = HubSEIRSD(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, kappa=.2, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getHubSEIRVD():
+    test = HubSEIRVD(S0=999, E0=0, I0=1, R0=0, V0=0, pss=.17, rho=.3, gamma=.23, eta=.02, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31, timeDelay=5)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getHubSEIRSVD():
+    test = HubSEIRSVD(S0=999, E0=0, I0=1, R0=0, V0=0, pss=.17, rho=.3, gamma=.23, kappa=.2, eta=.02, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31, timeDelay = 5)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
 def getHubSEIRV():
     test = HubSEIRV(S0=999, E0=0, I0=1, R0=0, V0=0, pss=.17, rho=.3, gamma=.23, eta=.03, side=25, rstart=3, alpha=2, 
+    days=31, timeDelay=5)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getHubSEIRSV():
+    test = HubSEIRSV(S0=999, E0=0, I0=1, R0=0, V0=0, pss=.17, rho=.3, gamma=.23, eta=.03, kappa=.2, side=25, rstart=3, alpha=2, 
     days=31, timeDelay=5)
     df = test.run()
     print(df.sortedTransmissions())
@@ -508,7 +554,7 @@ def getHubSEIRS():
 
 
 if  __name__ == '__main__':
-    getHubSEIRV()
+    getHubSEIRVD()
     #testRandSEIRDV()
     #testRandMoveSIRDV()
     #testRandSIRSD()
