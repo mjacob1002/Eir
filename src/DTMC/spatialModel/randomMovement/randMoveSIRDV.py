@@ -138,6 +138,11 @@ class RandMoveSIRDV(RandMoveSIRD):
         ax5.set_xlabel("Days")
         ax5.set_ylabel("# Dead")
         ax5.plot(t, self.D, label="Dead")
+        ax1.legend()
+        ax2.legend()
+        ax3.legend()
+        ax4.legend()
+        ax5.legend()
         plt.show()
         
         
