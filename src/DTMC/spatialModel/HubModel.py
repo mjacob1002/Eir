@@ -73,4 +73,7 @@ class Hub(Spatial):
         else:
             # use the formula: w(r) = w0 * (1-r/rn)^alpha
             return self.w0 * (1 - r / r0) ** self.alpha
+        
+    def _changeHelp(self, collect:list, prob: float):
+        return u.static_prob_help(collect, prob)
 
