@@ -90,9 +90,10 @@ class HubSIS(Hub):
         # initialize the Scollect and Icollect arrays
         # this loop will make the isIncluded = True for all the susceptible
         for i in range(0, S0):
+            ss = u.randEvent(pss)
             # create the two person objects, with everything identical except the isIncluded boolean
-            p1 = Person(self.locx[i], self.locy[i], u.randEvent(pss), isIncluded=True)
-            p2 = Person(self.locx[i], self.locy[i], u.randEvent(pss))
+            p1 = Person(self.locx[i], self.locy[i], ss, isIncluded=True)
+            p2 = Person(self.locx[i], self.locy[i], ss)
             # put the locations in the Simul_Details object
             self.details.addLocation(0, (self.locx[i], self.locy[i]))
             # put the starting states in Simul_Details
@@ -102,13 +103,14 @@ class HubSIS(Hub):
             self.Icollect.append(p2)
         # this loop will make the isIncluded = True for all the infecteds
         for i in range(S0, S0 + I0):
+            ss = u.randEvent(pss)
             # put the locations in the Simul_Details object
             self.details.addLocation(0, (self.locx[i], self.locy[i]))
             # put the starting states in Simul_Details
             self.details.addStateChange(i, "I", 0)
             # create the two person objects, with everything identical except the isIncluded boolean
-            p1 = Person(self.locx[i], self.locy[i], u.randEvent(pss))
-            p2 = Person(self.locx[i], self.locy[i], u.randEvent(pss), isIncluded=True)
+            p1 = Person(self.locx[i], self.locy[i], ss)
+            p2 = Person(self.locx[i], self.locy[i], ss, isIncluded=True)
             # push them to the data structure/ array structure
             self.Scollect.append(p1)
             self.Icollect.append(p2)
