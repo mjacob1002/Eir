@@ -46,14 +46,16 @@ class HubSEIR(Hub):
         # create a Simul_Details object
         self.details = Simul_Details(days=days, popsize=self.popsize)
         for i in range(self.popsize):
+            # event is whether person is a super spreader
+            event = randEvent(self.pss)
             # susceptible version
-            p1 = Person(self.locx[i], self.locy[i], randEvent(self.pss))
+            p1 = Person(self.locx[i], self.locy[i], event)
             # exposed version
-            p2 = Person(self.locx[i], self.locy[i], randEvent(self.pss))
+            p2 = Person(self.locx[i], self.locy[i], event)
             # infectious version
-            p3 = Person(self.locx[i], self.locy[i], randEvent(self.pss))
+            p3 = Person(self.locx[i], self.locy[i], event)
             # removed version
-            p4 = Person(self.locx[i], self.locy[i], randEvent(self.pss))
+            p4 = Person(self.locx[i], self.locy[i], event)
             # depending on the number, say that the person is in S, I, R. Add that state to the Simul_Details object
             if i < S0:
                 p1.isIncluded = True

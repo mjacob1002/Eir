@@ -9,6 +9,7 @@ from src.DTMC.spatialModel.randomMovement.randMoveSIRS import RandMoveSIRS
 from src.DTMC.spatialModel.Hub.HubSIR import HubSIR
 from src.DTMC.spatialModel.Hub.HubSEIR import HubSEIR
 from src.DTMC.spatialModel.Hub.HubSEIRS import HubSEIRS
+from src.DTMC.spatialModel.Hub.HubSEIRV import HubSEIRV
 from src.DTMC.spatialModel.StrongInfectious.StrongInfSIR import StrongInfSIR
 from src.DTMC.spatialModel.randomMovement.randMoveSEIR import RandMoveSEIR
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRS import RandMoveSEIRS
@@ -297,6 +298,14 @@ def getHubSEIR():
     print(df.sortedTransmissions())
     print(test.toDataFrame())
 
+def getHubSEIRV():
+    test = HubSEIRV(S0=999, E0=0, I0=1, R0=0, V0=0, pss=.17, rho=.3, gamma=.23, eta=.03, side=25, rstart=3, alpha=2, 
+    days=31, timeDelay=5)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
 def getHubSIR():
     test = HubSIR(popsize=1000, pss=.2, rstart=3, alpha=2, side=45, S0=999, I0=1, R0=0, days=31, gamma=.4, w0=.7)
     d = test.run()
@@ -499,7 +508,7 @@ def getHubSEIRS():
 
 
 if  __name__ == '__main__':
-    getHubSEIRS()
+    getHubSEIRV()
     #testRandSEIRDV()
     #testRandMoveSIRDV()
     #testRandSIRSD()

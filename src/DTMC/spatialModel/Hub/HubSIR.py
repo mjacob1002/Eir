@@ -110,10 +110,11 @@ class HubSIR(HubSIS):
         # initialize the Scollect and Icollect arrays
         # this loop will make the isIncluded = True for all the susceptible
         for i in range(0, S0):
+            ss = u.randEvent(pss)
             # create the two person objects, with everything identical except the isIncluded boolean
-            p1 = Person(self.locx[i], self.locy[i], u.randEvent(pss), isIncluded=True)
-            p2 = Person(self.locx[i], self.locy[i], u.randEvent(pss))
-            p3 = Person(self.locx[i], self.locy[i], u.randEvent(pss))
+            p1 = Person(self.locx[i], self.locy[i], isIncluded=True)
+            p2 = Person(self.locx[i], self.locy[i], ss)
+            p3 = Person(self.locx[i], self.locy[i], ss)
             # push them to the data structure/ array structure
             self.Scollect.append(p1)
             self.Icollect.append(p2)
@@ -122,10 +123,11 @@ class HubSIR(HubSIS):
 
         # this loop will make the isIncluded = True for all the infecteds
         for i in range(S0, S0 + I0):
+            ss = u.randEvent(pss)
             # create the two person objects, with everything identical except the isIncluded boolean
-            p1 = Person(self.locx[i], self.locy[i], u.randEvent(pss))
-            p2 = Person(self.locx[i], self.locy[i], u.randEvent(pss), isIncluded=True)
-            p3 = Person(self.locx[i], self.locy[i], u.randEvent(pss))
+            p1 = Person(self.locx[i], self.locy[i], ss)
+            p2 = Person(self.locx[i], self.locy[i], ss, isIncluded=True)
+            p3 = Person(self.locx[i], self.locy[i], ss)
             # push them to the data structure/ array structure
             self.Scollect.append(p1)
             self.Icollect.append(p2)
@@ -133,10 +135,11 @@ class HubSIR(HubSIS):
             self.details.addLocation(0, (self.locx[i], self.locy[i]))
         # initialize the Rcollect array
         for i in range(S0 + I0, S0 + I0 + R0):
+            ss = u.randEvent(pss)
             # create the two person objects, with everything identical except the isIncluded boolean
-            p1 = Person(self.locx[i], self.locy[i], u.randEvent(pss))
-            p2 = Person(self.locx[i], self.locy[i], u.randEvent(pss))
-            p3 = Person(self.locx[i], self.locy[i], u.randEvent(pss), isIncluded=True)
+            p1 = Person(self.locx[i], self.locy[i], ss)
+            p2 = Person(self.locx[i], self.locy[i], ss)
+            p3 = Person(self.locx[i], self.locy[i], ss, isIncluded=True)
             # push them to the data structure/ array structure
             self.Scollect.append(p1)
             self.Icollect.append(p2)
