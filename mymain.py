@@ -21,7 +21,64 @@ from src.DTMC.spatialModel.randomMovement.randMoveSIRDV import RandMoveSIRDV
 from src.DTMC.spatialModel.randomMovement.randMoveSIRSDV import RandMoveSIRSDV
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRD import RandMoveSEIRD
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRSD import RandMoveSEIRSD
+from src.DTMC.spatialModel.randomMovement.randMoveSEIRDV import RandMoveSEIRDV
+from src.DTMC.spatialModel.randomMovement.randMoveSEIRSDV import RandMoveSEIRSDV
 
+
+def testRandSEIRDV():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    rho = .2
+    gamma = 0.4
+    mu = .1
+    eta=.03
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = RandMoveSEIRDV(S0=S0, E0=E0, I0=I0, R0=0, V0=0, rho=rho, gamma=gamma, mu=mu, eta=eta, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
+    print(details.sortedTransmissions())
+    print("######################")
+    print(test.Scollect[999].r0)
+    #print("#######################")
+    #print(details.personHistory(686)
+    #print("#######################")
+    #print(details.personHistory(3))
+    test.plot()
+
+def testRandSEIRSDV():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    rho = .2
+    gamma = 0.4
+    mu = .1
+    eta=.03
+    kappa = .1
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = RandMoveSEIRSDV(S0=S0, E0=E0, I0=I0, R0=0, V0=0, rho=rho, gamma=gamma, mu=mu, eta=eta, kappa=kappa, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
+    print(details.sortedTransmissions())
+    print("#######################")
+    print(details.personHistory(3))
+    test.plot()
 
 def testRandSEIRD():
     S0 = 999
@@ -425,12 +482,14 @@ def testRandSIRVS():
     print(df)
     print("###########################")
     print(details.sortedTransmissions())
+    print("######################")
+    print(test.Scollect[999].r0)
     print("#######################")
     print(details.personHistory(686))
     test.plot()
 
 if  __name__ == '__main__':
-    testRandSEIRSD()
+    testRandSEIRDV()
     #testRandMoveSIRDV()
     #testRandSIRSD()
     #testRandSEIRVS()
