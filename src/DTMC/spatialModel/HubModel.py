@@ -77,3 +77,27 @@ class Hub(Spatial):
     def _changeHelp(self, collect:list, prob: float):
         return u.static_prob_help(collect, prob)
 
+    # used to run the state changes
+    def _stateChanger(self, values: set, collect: list, symbol: str, day:int):
+        """
+        Takes care of the state changes to a particular state. 
+
+        Parameters
+        ----------
+
+        values: set
+            values contains all of the indices of the people who need to be set to isIncluded=True in the collect list
+        
+        collect: list
+            The particular list of Person objects that are going to be modified.
+        
+        symbol: str 
+            The string representing the particular state that is going to. Used for details.
+        
+        day: int
+            The day on which the transfer happened. Used for details.
+        """
+        for index in values:
+            #print("Index: ", index)
+            collect[index].isIncluded = True
+            self.details.addStateChange(index, symbol, day)
