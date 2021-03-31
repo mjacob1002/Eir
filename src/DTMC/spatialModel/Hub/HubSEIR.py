@@ -18,10 +18,15 @@ class HubSEIR(Hub):
     rho: float
         Rho is the probability of someone moving from E to I compartment. Rho is in [0, 1]. 
     """
-    def __init__(self, S0: int, I0: int, R0: int, pss: float, rho: float, 
+    def __init__(self, S0: int, E0: int, I0: int, R0: int, pss: float, rho: float, 
     gamma: float, side: float, rstart:float, alpha: int, days: int, w0=1.0, hubConstant=6**0.5):
         super(HubSEIR, self).__init__(popsize=S0+I0+R0, pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0,
                  days=days, w0=w0,hubConstant=hubConstant)
+        # adjust the popsize
+        self.popsize += E0
+        # locations in the plane
+        self.locx, self.locy = np.random.random(self.popsize)*self.side, np.random.random(self.popsize)*self.side
+        # probability of going from I to R
         self.gamma = gamma
         # initialize the probability of leaving E
         self.rho = rho
@@ -31,8 +36,10 @@ class HubSEIR(Hub):
         self.Rcollect = []
         # create the E collect datastructure
         self.Ecollect = []
+        self.E0 = E0
         # create numpy arrays to store number of people in each compartment
         self.E = np.zeros(days+1)
+        self.E[0] = E0
         self.R = np.zeros(days+1)
         # put the initial removed values into the array
         self.R[0] = R0
@@ -55,6 +62,9 @@ class HubSEIR(Hub):
                 p3.isIncluded = True
                 
                 self.details.addStateChange(i, "I", 0)
+            elif i < S0 + E0 + I0:
+                p2.isIncluded=True
+                self.details.addStateChange(i, "E", 0)
             else:
                 p4.isIncluded = True
                 self.details.addStateChange(i, "R", 0)
