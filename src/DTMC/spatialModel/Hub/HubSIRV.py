@@ -4,6 +4,8 @@ from matplotlib import pyplot as plt
 
 from .HubSIR import HubSIR
 from src.utility import Person, randEvent
+from src.DTMC.spatialModel.simul_details import Simul_Details
+
 
 class HubSIRV(HubSIR):
 
@@ -15,6 +17,7 @@ class HubSIRV(HubSIR):
         self.V[0] = V0
         self.popsize += V0
         self.timeDelay = timeDelay
+        self.details = Simul_Details(self.days, self.popsize)
         self.Scollect, self.Icollect, self.Rcollect, self.Vcollect = [], [], [], []
         if V0 != 0:
             self.locx = np.random.random(self.popsize)*side
