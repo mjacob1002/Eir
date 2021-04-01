@@ -417,6 +417,36 @@ class Hub_ICUV(Hub):
         arr = np.stack([t, self.S, self.E, self.I, self.L, self.infectious, self.ICU, self.R, self.D, self.V], axis=1)
         df = pd.DataFrame(arr, columns=["Days", "Susceptible", "Exposed", "Infectious", "Lag", "Total Infectious", "ICU", "Recovered", "Dead", "Vaccinated"])
         return df
+    
+    def plot(self):
+        """ Plots the number of people in each compartment except for L and I, as those are plotted as "infectious". """
+        t= np.linspace(0, self.days, self.days+1)
+        fig, (ax1, ax2, ax3, ax4, ax5, ax6, ax7) = plt.subplots(nrows=7, sharex='all')
+        ax1.set_ylabel("# Susceptibles")
+        ax1.plot(t, self.S, label="Susceptible", color='r')
+        ax2.set_ylabel("# Exposed")
+        ax2.plot(t, self.E, label="Exposed", color='b')
+        ax3.set_ylabel("# Infectious")
+        ax3.plot(t, self.infectious, label="Infectious", color='limegreen')
+        ax4.plot(t, self.ICU, label='Hospitalizations', color='g')
+        ax4.set_ylabel("# Hospitalizations")
+        ax5.set_ylabel("# Total Deaths")
+        ax5.plot(t, self.D, label="Total Dead", color='c')
+        ax6.plot(t, self.R, label="Recovered")
+        ax6.set_ylabel("# Recovered")
+        ax7.set_ylabel("# Vaccinated")
+        ax7.plot(t, self.V, label="Vaccinated", color='indigo')
+        ax7.set_xlabel("Days")
+        ax1.set_title("ICU Hub Model")
+        ax1.legend()
+        ax2.legend()
+        ax3.legend()
+        ax4.legend()
+        ax5.legend()
+        ax6.legend()
+        ax7.legend()
+        plt.show()
+
 
     
 
