@@ -7,6 +7,12 @@ from src.DTMC.spatialModel.randomMovement.randMoveSIS import RandMoveSIS
 from src.DTMC.spatialModel.randomMovement.randMoveSIR import RandMoveSIR
 from src.DTMC.spatialModel.randomMovement.randMoveSIRS import RandMoveSIRS
 from src.DTMC.spatialModel.Hub.HubSIR import HubSIR
+from src.DTMC.spatialModel.Hub.HubSIRD import HubSIRD
+from src.DTMC.spatialModel.Hub.HubSIRSD import HubSIRSD
+from src.DTMC.spatialModel.Hub.HubSIRV import HubSIRV
+from src.DTMC.spatialModel.Hub.HubSIRSV import HubSIRSV
+from src.DTMC.spatialModel.Hub.HubSIRVD import HubSIRVD
+from src.DTMC.spatialModel.Hub.HubSIRSVD import HubSIRSVD
 from src.DTMC.spatialModel.Hub.HubSIS import HubSIS
 from src.DTMC.spatialModel.Hub.HubSEIR import HubSEIR
 from src.DTMC.spatialModel.Hub.HubSEIRS import HubSEIRS
@@ -313,6 +319,23 @@ def getHubSEIRD():
     print(test.toDataFrame())
     test.plot()
 
+def getHubSIRD():
+    test = HubSIRD(S0=999, I0=1, R0=0, pss=.17, gamma=.23, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getHubSIRSD():
+    test = HubSIRSD(S0=999, I0=1, R0=0, pss=.17, gamma=.23, kappa=.15, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    print(df.personHistory(46))
+    test.plot()
+
 def getHubSEIRSD():
     test = HubSEIRSD(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, kappa=.2, mu=.05,side=25, rstart=3, alpha=2, 
     days=31)
@@ -337,6 +360,21 @@ def getHubSEIRSVD():
     print(test.toDataFrame())
     test.plot()
 
+def getHubSIRVD():
+    test = HubSIRVD(S0=999, I0=1, R0=0, V0=0, pss=.17, gamma=.23, eta=.02, mu=.01,side=25, rstart=3, alpha=2, 
+    days=31, timeDelay=5)
+    details = test.run()
+    print(test.toDataFrame())
+    print(details.personHistory(44))
+    test.plot()
+
+def getHubSIRSVD():
+    test = HubSIRSVD(S0=999, I0=1, R0=0, V0=0, pss=.17, gamma=.23, kappa = .2, eta=.02, mu=.01,side=25, rstart=3, alpha=2, days=31, timeDelay=5)
+    details = test.run()
+    print(test.toDataFrame())
+    print(details.personHistory(44))
+    test.plot()
+
 def getHubSEIRV():
     test = HubSEIRV(S0=999, E0=0, I0=1, R0=0, V0=0, pss=.17, rho=.3, gamma=.23, eta=.03, side=25, rstart=3, alpha=2, 
     days=31, timeDelay=5)
@@ -353,9 +391,26 @@ def getHubSEIRSV():
     print(test.toDataFrame())
     test.plot()
 
+def getHubSIRV():
+    test = HubSIRV(S0=999, I0=1, R0=0, V0=0, pss=.17, gamma=.23, eta=.03, side=50, rstart=3, alpha=2, 
+    days=31, timeDelay=5)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getHubSIRSV():
+    test = HubSIRSV(S0=999, I0=1, R0=0, V0=0, pss=.17, gamma=.23, eta=.03, kappa=.2, side=50, rstart=3, alpha=2, 
+    days=61, timeDelay=5)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
 def getHubSIR():
-    test = HubSIR(S0=999, I0=1, R0=0, pss=.2, rstart=3, alpha=2, side=45,days=31, gamma=.4, w0=.7)
+    test = HubSIR(S0=999, I0=1, R0=1, pss=.2, rstart=3, alpha=2, side=45,days=31, gamma=.4, w0=.7)
     d = test.run()
+    print(len(test.locx))
     print(d.personHistory(652))
     test.plot()
     df = test.toDataFrame()
@@ -555,8 +610,10 @@ def getHubSEIRS():
 
 
 if  __name__ == '__main__':
-    getHubSEIRSVD()
-    #getHubSIR()
+    getHubSIRSD()
+    #getHubSIRSVD()
+    #getHubSIRVD()
+    #getHubSIRSV()
     #getHubSEIRVD()
     #testRandSEIRDV()
     #testRandMoveSIRDV()

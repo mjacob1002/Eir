@@ -2,21 +2,16 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
-from .HubSIR import HubSIR
-from src.utility import randEvent, Person
+from .HubSIRD import HubSIRD
 
-class HubSIRD(HubSIR):
+class HubSIRSD(HubSIRD):
 
-    def __init__(self, S0: int, I0: int, R0: int, pss: float, rstart: float, side: float, days: int, gamma: float, mu:float, alpha=2.0, w0=1.0, hubConstant=6 ** 0.5):
-        super().__init__(S0=S0, I0=I0, R0=R0, pss=pss, rstart=rstart, side=side, days=days, gamma=gamma, alpha=alpha, w0=w0, hubConstant=hubConstant)
-        self.mu = mu
-        self.D = np.zeros(days+1)
-        self.Dcollect = []
-        for i in range(self.popsize):
-            self.Dcollect.append(Person(self.Scollect[i].x, self.Scollect[i].y, self.Scollect[i].ss))
+    def __init__(self, S0: int, I0: int, R0: int, pss: float, rstart: float, side: float, days: int, gamma: float, kappa:float, mu:float, alpha=2.0, w0=1.0, hubConstant=6 ** 0.5):
+        super().__init__(S0=S0, I0=I0, R0=R0, pss=pss, rstart=rstart, side=side, days=days, gamma=gamma, mu=mu, alpha=alpha, w0=w0, hubConstant=hubConstant)
+        self.kappa = kappa
     
-    def _ItoD(self):
-        return self._changeHelp(self.Icollect, self.mu)
+    def _RtoS(self):
+        return self._changeHelp(self.Rcollect, self.kappa)
     
     def run(self, getDetails=True):
         """
@@ -42,37 +37,19 @@ class HubSIRD(HubSIR):
             transferSI = self._StoI(i)
             transferIr = self._ItoR()
             transferID = self._ItoD()
+            transferRS = self._RtoS()
             # go after and change the indices in the collection data structure thing
             self._stateChanger(transferSI, self.Icollect, "I", i)
             self._stateChanger(transferIr, self.Rcollect, "R", i)
             self._stateChanger(transferID, self.Dcollect, "D", i)
+            self._stateChanger(transferRS, self.Scollect, "S", i)
             # change the number of people in each state on the day i by adjusting the previous day's count
-            self.S[i] = self.S[i - 1] - len(transferSI)
+            self.S[i] = self.S[i - 1] - len(transferSI) + len(transferRS)
             self.I[i] = self.I[i - 1] + len(transferSI) - len(transferIr) - len(transferID)
-            self.R[i] = self.R[i-1] + len(transferIr)
+            self.R[i] = self.R[i-1] + len(transferIr) - len(transferRS)
             self.D[i] = self.D[i-1] + len(transferID)
         if getDetails:
             return self.details
-
-
-    def toDataFrame(self):
-        """
-        Gives user access to pandas dataframe with amount of people in each state on each day.
-
-        Returns
-        -------
-
-        pd.DataFrame
-            DataFrame object containing the number of susceptibles and number of infecteds on each day. 
-
-        """
-        # create the linspaced numpy array
-        t = np.linspace(0, self.days, self.days + 1)
-        # create a 2D array with the days and susceptible and infected arrays
-        # do it over axis one so that it creates columns days, susceptible, infected
-        arr = np.stack([t, self.S, self.I, self.R, self.D], axis=1)
-        df = pd.DataFrame(arr, columns=["Days", "Susceptible", "Infected", "Recovered", "Dead"])
-        return df
     
     def plot(self):
         "Plots the number of susceptible, infected, dead, and recovered individuals on the y-axis and the number of days on the x-axis."
@@ -81,7 +58,7 @@ class HubSIRD(HubSIR):
         fig, (ax1, ax2, ax3, ax4) = plt.subplots(nrows=4, sharex='all')
         ax1.plot(t, self.S, label="Susceptible", color='r')
         ax1.set_ylabel("# Susceptibles")
-        ax1.set_title("Hub Model SIRD Simulation")
+        ax1.set_title("Hub Model SIRSD Simulation")
         ax4.plot(t, self.D, label="# Dead", color='g')
         ax4.set_ylabel("# Dead")
         ax2.plot(t, self.I, label="Active Cases", color='b')
