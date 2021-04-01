@@ -17,10 +17,15 @@ class HubSIR(HubSIS):
 
     Parameters
     ----------
-
-    popsize: int
-        size of the population.
+    S0: int
+        The initial amount of susceptibles at the start of the simulation.
     
+    I0: int
+        The initial amount of infectious individuals at the start of the simulation.
+    
+    R0: int
+        The inital amount of removed individuals at the start of the simulation.
+
     pss: float
         probability someone is considered a super spreader.
     
@@ -32,15 +37,6 @@ class HubSIR(HubSIS):
     
     side: float
         size of one side of the square plane.
-    
-    S0: int
-        The initial amount of susceptibles at the start of the simulation.
-    
-    I0: int
-        The initial amount of infectious individuals at the start of the simulation.
-    
-    R0: int
-        The inital amount of removed individuals at the start of the simulation.
     
     days: int
         The number of days that are simulated.
@@ -93,13 +89,18 @@ class HubSIR(HubSIS):
                  days: int,
                  gamma: float, w0=1.0,
                  hubConstant=6 ** 0.5):
+        super(HubSIR, self).__init__(S0, I0, pss, rstart, alpha, side, days, gamma, w0, hubConstant)
+        # reconfigure the population size
         self.popsize = S0 + I0 + R0
+        #print(self.popsize)
         # initialize the Simul_Details object
         self.details = Simul_Details(days=days, popsize=int(self.popsize))
 
         self.R0 = R0
-        super(HubSIR, self).__init__(S0, I0, pss, rstart, alpha, side, days, gamma, w0, hubConstant)
-        # create and initialize the removed array
+        # create new array of locations for all of the individuals in the population
+        self.locx = np.random.random(self.popsize)*side
+        self.locy = np.random.random(self.popsize) * side
+        #print("Leng of locations: ", len(self.locx))
         self.R = np.zeros(days + 1)
         self.R[0] = R0
         # create the R collection data structure and set the array structures back to undefined array
@@ -121,6 +122,7 @@ class HubSIR(HubSIS):
             self.Icollect.append(p2)
             self.Rcollect.append(p3)
             self.details.addLocation(0, (self.locx[i], self.locy[i]))
+            self.details.addStateChange(i, "S", 0)
 
         # this loop will make the isIncluded = True for all the infecteds
         for i in range(S0, S0 + I0):
@@ -134,6 +136,7 @@ class HubSIR(HubSIS):
             self.Icollect.append(p2)
             self.Rcollect.append(p3)
             self.details.addLocation(0, (self.locx[i], self.locy[i]))
+            self.details.addStateChange(i, "I", 0)
         # initialize the Rcollect array
         for i in range(S0 + I0, S0 + I0 + R0):
             ss = u.randEvent(pss)
