@@ -115,7 +115,7 @@ class HubSIS(Hub):
             # push them to the data structure/ array structure
             self.Scollect.append(p1)
             self.Icollect.append(p2)
-        print("Length of Scollect: ", len(self.Scollect))
+        #print("Length of Scollect: ", len(self.Scollect))
 
     # run state changes from S to I
     def _StoI(self, day: int):
