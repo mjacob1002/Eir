@@ -89,15 +89,16 @@ class HubSIR(HubSIS):
     
 
     """
-    def __init__(self, popsize: int, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, R0: int,
+    def __init__(self, S0: int, I0: int, R0: int, pss: float, rstart: float, alpha: int, side: float, 
                  days: int,
                  gamma: float, w0=1.0,
                  hubConstant=6 ** 0.5):
+        self.popsize = S0 + I0 + R0
         # initialize the Simul_Details object
-        self.details = Simul_Details(days=days, popsize=popsize)
+        self.details = Simul_Details(days=days, popsize=int(self.popsize))
 
         self.R0 = R0
-        super(HubSIR, self).__init__(popsize, pss, rstart, alpha, side, S0, I0, days, gamma, w0, hubConstant)
+        super(HubSIR, self).__init__(S0, I0, pss, rstart, alpha, side, days, gamma, w0, hubConstant)
         # create and initialize the removed array
         self.R = np.zeros(days + 1)
         self.R[0] = R0
@@ -112,7 +113,7 @@ class HubSIR(HubSIS):
         for i in range(0, S0):
             ss = u.randEvent(pss)
             # create the two person objects, with everything identical except the isIncluded boolean
-            p1 = Person(self.locx[i], self.locy[i], isIncluded=True)
+            p1 = Person(self.locx[i], self.locy[i], ss, isIncluded=True)
             p2 = Person(self.locx[i], self.locy[i], ss)
             p3 = Person(self.locx[i], self.locy[i], ss)
             # push them to the data structure/ array structure

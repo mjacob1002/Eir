@@ -77,15 +77,16 @@ class HubSIS(Hub):
         stores the y coordinate of each person in the simulation. 
 
     """
-    def __init__(self, popsize: int, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, days: int,
+    def __init__(self, S0: int, I0: int, pss: float, rstart: float, alpha: int, side: float, days: int,
                  gamma: float, w0=1.0,
                  hubConstant=6 ** 0.5):
+        self.popsize = S0 + I0
         # initialize the Simul_Details object
-        self.details = Simul_Details(days=days, popsize=popsize)
+        self.details = Simul_Details(days=days, popsize=self.popsize)
 
         self.gamma = gamma
         # call the super constructor
-        super(HubSIS, self).__init__(popsize, pss, rstart, alpha, side, S0, I0, days=days, w0=w0,
+        super(HubSIS, self).__init__(self.popsize, pss, rstart, alpha, side, S0, I0, days=days, w0=w0,
                                      hubConstant=hubConstant)
         # initialize the Scollect and Icollect arrays
         # this loop will make the isIncluded = True for all the susceptible

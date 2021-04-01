@@ -104,7 +104,7 @@ class Simul_Details():
         self.stateChanges = []
         # this is the number of rows
 
-        for i in range(popsize):
+        for i in range(int(popsize)):
             self.stateChanges.append([])  
          
     

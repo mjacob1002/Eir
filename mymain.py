@@ -7,6 +7,7 @@ from src.DTMC.spatialModel.randomMovement.randMoveSIS import RandMoveSIS
 from src.DTMC.spatialModel.randomMovement.randMoveSIR import RandMoveSIR
 from src.DTMC.spatialModel.randomMovement.randMoveSIRS import RandMoveSIRS
 from src.DTMC.spatialModel.Hub.HubSIR import HubSIR
+from src.DTMC.spatialModel.Hub.HubSIS import HubSIS
 from src.DTMC.spatialModel.Hub.HubSEIR import HubSEIR
 from src.DTMC.spatialModel.Hub.HubSEIRS import HubSEIRS
 from src.DTMC.spatialModel.Hub.HubSEIRV import HubSEIRV
@@ -245,7 +246,7 @@ def testRandSEIRVS():
 
 
 def main():
-    test = HubSIS(1000, .17, 4, 2, 25, 999, 1, 31, .3)
+    test = HubSIS(999, 1, .2, 3, 2, 25, 31, .3)
     details = test.run()
     test.plot()
     ddf = details.personHistory(5)
@@ -353,7 +354,7 @@ def getHubSEIRSV():
     test.plot()
 
 def getHubSIR():
-    test = HubSIR(popsize=1000, pss=.2, rstart=3, alpha=2, side=45, S0=999, I0=1, R0=0, days=31, gamma=.4, w0=.7)
+    test = HubSIR(S0=999, I0=1, R0=0, pss=.2, rstart=3, alpha=2, side=45,days=31, gamma=.4, w0=.7)
     d = test.run()
     print(d.personHistory(652))
     test.plot()
@@ -554,7 +555,9 @@ def getHubSEIRS():
 
 
 if  __name__ == '__main__':
-    getHubSEIRVD()
+    getHubSEIRSVD()
+    #getHubSIR()
+    #getHubSEIRVD()
     #testRandSEIRDV()
     #testRandMoveSIRDV()
     #testRandSIRSD()
