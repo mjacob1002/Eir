@@ -30,6 +30,19 @@ from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRD import StrongInfSEIRD
 from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIR import StrongInfSEIR
 from src.DTMC.spatialModel.StrongInfectious.StrongInfSIS import StrongInfSIS
 from src.DTMC.spatialModel.StrongInfectious.StrongInfSIR import StrongInfSIR
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRS import StrongInfSEIRS
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRSD import StrongInfSEIRSD
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRSV import StrongInfSEIRSV
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRSVD import StrongInfSEIRSVD
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRVD import StrongInfSEIRVD
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRV import StrongInfSEIRV
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRD import StrongInfSIRD
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRSD import StrongInfSIRSD
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRSV import StrongInfSIRSV
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRSVD import StrongInfSIRSVD
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRV import StrongInfSIRV
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRVD import StrongInfSIRVD
+
 
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRS import RandMoveSEIRS
 from src.DTMC.spatialModel.randomMovement.randMoveSIRV import RandMoveSIRV
@@ -271,7 +284,7 @@ def testRandSEIRVS():
 
 
 def main():
-    test = HubSIS(999, 1, .2, 3, 2, 25, 31, .3)
+    test = HubSIS(S0=999, I0=1, pss=.2, rstart=3, side=25, days=31, gamma=.3)
     details = test.run()
     test.plot()
     ddf = details.personHistory(5)
@@ -446,7 +459,9 @@ def getHubSIRSV():
     test.plot()
 
 def getHubSIR():
-    test = HubSIR(S0=999, I0=1, R0=1, pss=.2, rstart=3, alpha=2, side=45,days=31, gamma=.4, w0=.7)
+    for i in range(1, 31+1):
+        print(i)
+    test = HubSIR(S0=999, I0=1, R0=1, pss=.2, rstart=3, alpha=2, side=25,days=31, gamma=.2, w0=.7)
     d = test.run()
     print(len(test.locx))
     print(d.personHistory(652))
@@ -659,14 +674,127 @@ def getStrongInf_ICUV():
     print(test.toDataFrame())
     print(d.personHistory(473))
     test.plot()
+
+def getStrongInfSEIRS():
+    kappa = .2
+    test = StrongInfSEIRS(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, kappa=kappa, side=25, rstart=3, alpha=2, 
+    days=61)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+
+def getStrongInfSEIRSD():
+    test = StrongInfSEIRSD(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, kappa=.2, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getStrongInfSEIRSV():
+    test = StrongInfSEIRSV(S0=999, E0=0, I0=1, R0=0, V0=0, pss=.17, rho=.3, gamma=.23, eta=.03, kappa=.2, side=25, rstart=3, alpha=2, 
+    days=31, timeDelay=5)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getStrongInfSEIRSVD():
+    test = StrongInfSEIRSVD(S0=999, E0=0, I0=1, R0=0, V0=0, pss=.17, rho=.3, gamma=.23, kappa=.2, eta=.02, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31, timeDelay = 5)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getStrongInfSEIRV():
+    test = StrongInfSEIRV(S0=999, E0=0, I0=1, R0=0, V0=0, pss=.17, rho=.3, gamma=.23, eta=.03, side=25, rstart=3, alpha=2, 
+    days=31, timeDelay=5)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getStrongInfSEIRVD():
+    test = StrongInfSEIRVD(S0=999, E0=0, I0=1, R0=0, V0=0, pss=.17, rho=.3, gamma=.23, eta=.02, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31, timeDelay=5)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getStrongInfSIRD():
+    test = StrongInfSIRD(S0=999, I0=1, R0=0, pss=.17, gamma=.23, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getStrongInfSIRSD():
+    kappa = .2
+    test = StrongInfSIRSD(S0=999, I0=1, R0=0, pss=.17, gamma=.23, kappa=kappa, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getStrongInfSIRSV():
+    test = StrongInfSIRSV(S0=999, I0=1, R0=0, V0=0, pss=.17, gamma=.23, kappa = .2, eta=.02, side=25, rstart=3, alpha=2, days=31, timeDelay=5)
+    details = test.run()
+    print(test.toDataFrame())
+    print(details.personHistory(44))
+    test.plot()
+
+def getStrongInfSIRSVD():
+    test = StrongInfSIRSVD(S0=999, I0=1, R0=0, V0=0, pss=.17, gamma=.23, kappa = .2, eta=.02, mu=.01,side=25, rstart=3, alpha=2, days=31, timeDelay=5)
+    details = test.run()
+    print(test.toDataFrame())
+    print(details.personHistory(44))
+    test.plot()
+
+def getStrongInfSIRV():
+    test = StrongInfSIRV(S0=999, I0=1, R0=0, V0=0, pss=.17, gamma=.23, eta=.02, side=25, rstart=3, alpha=2, days=31, timeDelay=5)
+    details = test.run()
+    print(test.toDataFrame())
+    print(details.personHistory(44))
+    test.plot()
+
+def getStrongInfSIRVD():
+    test = StrongInfSIRVD(S0=999, I0=1, R0=0, V0=0, pss=.17, gamma=.23, eta=.02, mu=.02, side=25, rstart=3, alpha=2, days=31, timeDelay=5)
+    details = test.run()
+    print(test.toDataFrame())
+    print(details.personHistory(44))
+    test.plot()
+
+
+
+
 if  __name__ == '__main__':
-    getStrongInfSEIR()
+    #main()
+    #getStrongInfSEIRS()
+    #getStrongInfSEIRSD()
+    #getStrongInfSEIRSV()
+    #getStrongInfSEIRSVD()
+    #getStrongInfSEIRV()
+    #getStrongInfSEIRVD()
+    #getStrongInfSIRD()
+    #getStrongInfSIRSD()
+    #getStrongInfSIRSVD()
+    #getStrongInfSIRSV()
+    #getStrongInfSIRSVD()
+    #getStrongInfSIRV()
+    getStrongInfSIRVD()
+    #getStrongInfSEIR()
     #getStrongInfSIR()
     #getStrongInfSIS()
     #getStrongInfSEIRD()
     #getStrongInf_ICUV()
     #getHub_ICUV()
     #getHubSIR()
+    #getHubSEIR()
+    #getHubSIRV()
     #getHubSIRSVD()
     #getHubSIRVD()
     #getHubSIRSV()
