@@ -4,11 +4,11 @@ from src.utility import dist
 
 
 class StrongInfSIS(HubSIS):
-    def __init__(self, popsize: int, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, days: int,
-                 gamma: float, w0=1.0):
+    def __init__(self, pss: float, rstart: float, side: float, S0: int, I0: int, days: int,
+                 gamma: float, w0=1.0, alpha=2.0):
         # call the super constructor
-        super(StrongInfSIS, self).__init__(popsize, pss, rstart, alpha, side, S0, I0, days,
-                                           gamma, w0=w0,
+        super(StrongInfSIS, self).__init__(pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, days=days,
+                                           gamma=gamma, w0=w0,
                                            hubConstant=0)
 
     # the only assumption that changes in the strong infectious model is the formula for infection probability

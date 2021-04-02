@@ -7,8 +7,8 @@ from src.utility import Person
 from src.utility import dist
 
 class StrongInfSIR(HubSIR):
-    def __init__(self, popsize: int, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, R0: int, days: int, gamma: float, w0=.7):
-        super(StrongInfSIR, self).__init__(popsize=popsize, pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, R0=R0, days=days, gamma=gamma, w0=w0, hubConstant=1)
+    def __init__(self, pss: float, rstart: float, side: float, S0: int, I0: int, R0: int, days: int, gamma: float, w0=.7, alpha=2.0):
+        super(StrongInfSIR, self).__init__(pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, R0=R0, days=days, gamma=gamma, w0=w0, hubConstant=1)
     
 
     def _infect(self, inf: Person, sus: Person):

@@ -17,9 +17,11 @@ class HubSIS(Hub):
     Parameters
     ----------
 
+    S0: int
+        The initial amount of susceptibles at the start of the simulation.
     
-    popsize: int
-        size of the population.
+    I0: int
+        The initial amount of infectious individuals at the start of the simulation.
     
     pss: float
         probability someone is considered a super spreader.
@@ -32,12 +34,6 @@ class HubSIS(Hub):
     
     side: float
         size of one side of the square plane.
-    
-    S0: int
-        The initial amount of susceptibles at the start of the simulation.
-    
-    I0: int
-        The initial amount of infectious individuals at the start of the simulation.
         
     days: int
         The number of days that are simulated.
