@@ -6,8 +6,8 @@ import src.utility as u
 
 class RandMoveSIRS(RandMoveSIR):
     """
-    An SIR model that follows the Random Movement Model. When the individuals in the simulation move, 
-    they move according to a randomly generated angle and a randomly generated radius.
+    An SIRS model that follows the Random Movement Model. When the individuals in the simulation move, 
+    they move according to a randomly generated angle and a randomly generated distance.
 
     Parameters:
     ----------

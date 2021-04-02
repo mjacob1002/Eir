@@ -6,7 +6,7 @@ from src.utility import randEvent
 
 class RandMoveSIRVS(RandMoveSIRV):
     """
-    Class that simulates the random movement model with an SEIR model. People in the Exposed compartment are presumed to not be able to propogate infection.
+    Class that simulates the random movement model with an SIRVS model. People in the Exposed compartment are presumed to not be able to propogate infection.
 
     Parameters:
     ----------
@@ -85,7 +85,7 @@ class RandMoveSIRVS(RandMoveSIRV):
         A numpy array that stores the number of people in the vaccinated state on each given day of the simulation.
     
     popsize: int
-        The total size of the population in the simulation. Given by S0 + I0
+        The total size of the population in the simulation. Given by S0 + I0 + R0 + V0.
         
     Scollect: list
         Used to keep track of the states each Person object is in. If the copy of a Person object has 

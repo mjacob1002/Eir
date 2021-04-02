@@ -58,10 +58,10 @@ class RandMoveSIR(RandMoveSIS):
         The number of days that was simulated.
     
     w0: float optional
-        The probability of infection if the distance between an infectious person and susceptible person is 0.
+        The probability of infection if the distance between an infectious person and susceptible person is 0. Default is 1.0.
     
     alpha: float optional
-        A constant used in the _infect() method. The greater the constant, the greater the infection probability.
+        A constant used in the _infect() method. The greater the constant, the greater the infection probability. Default is 2.0.
 
     Attributes
     ----------
@@ -76,7 +76,7 @@ class RandMoveSIR(RandMoveSIS):
         A numpy array that stores the number of people in the recovered state on each given day of the simulation.
     
     popsize: int
-        The total size of the population in the simulation. Given by S0 + I0
+        The total size of the population in the simulation. Given by S0 + I0 + R0.
         
     Scollect: list
         Used to keep track of the states each Person object is in. If the copy of a Person object has 

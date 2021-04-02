@@ -63,10 +63,10 @@ class RandMoveSEIRVS(RandMoveSEIRV):
         The number of days that was simulated.
     
     w0: float optional
-        The probability of infection if the distance between an infectious person and susceptible person is 0.
+        The probability of infection if the distance between an infectious person and susceptible person is 0. Default is 1.0.
     
     alpha: float optional
-        A constant used in the _infect() method. The greater the constant, the greater the infection probability.
+        A constant used in the _infect() method. The greater the constant, the greater the infection probability. Default is 2.0.
     
     timeDelay: int optional
         Default is -1. Represents the number of days that vaccine rollout should be delayed. If <=0, there is no vaccine rollout delay.
