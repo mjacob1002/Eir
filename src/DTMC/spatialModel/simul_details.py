@@ -155,7 +155,7 @@ class Simul_Details():
     def _getMovementHistoryHelp(self, u:int):
         movementHistory = []
         for day, loc in enumerate(self.locations):
-            movementHistory.append(self.locations[day][u])
+            movementHistory.append(loc[u])
         return movementHistory
 
     
