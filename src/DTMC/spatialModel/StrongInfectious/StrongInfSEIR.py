@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 from ..Hub.HubSEIR import HubSEIR
-from src.utility import Person, randEvent
+from src.utility import Person, randEvent, dist
 
 class StrongInfSEIR(HubSEIR):
 

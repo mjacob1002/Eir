@@ -354,6 +354,8 @@ def getStrongInfSEIRD():
 
 def getStrongInfSEIR():
     test = StrongInfSEIR(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, side=25, rstart=3, alpha=2.0, days=31)
+    test.run()
+    print(test.toDataFrame())
 
 def getHubSIRD():
     test = HubSIRD(S0=999, I0=1, R0=0, pss=.17, gamma=.23, mu=.05,side=25, rstart=3, alpha=2, 
@@ -658,7 +660,8 @@ def getStrongInf_ICUV():
     print(d.personHistory(473))
     test.plot()
 if  __name__ == '__main__':
-    getStrongInfSIR()
+    getStrongInfSEIR()
+    #getStrongInfSIR()
     #getStrongInfSIS()
     #getStrongInfSEIRD()
     #getStrongInf_ICUV()
