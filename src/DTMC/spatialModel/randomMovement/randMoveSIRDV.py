@@ -163,6 +163,7 @@ class RandMoveSIRDV(RandMoveSIRD):
             self.Rcollect.append(p3)
             self.Vcollect.append(p4)
             self.Dcollect.append(p5)
+            self.details.addLocation(0, (p1.x, p1.y))
         self.D = np.zeros(days+1)
         self.V = np.zeros(days+1)
         self.V[0] = V0

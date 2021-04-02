@@ -134,6 +134,7 @@ class RandMoveSIS(RandMove):
             # append them to the data structure
             self.Scollect.append(p1)
             self.Icollect.append(p2)
+            self.details.addLocation(0, (p1.x, p1.y))
 
     # helps _move method with boundary checks
     

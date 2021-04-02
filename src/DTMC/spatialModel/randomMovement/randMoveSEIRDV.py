@@ -170,6 +170,7 @@ class RandMoveSEIRDV(RandMoveSEIRD):
             self.Rcollect.append(persons[3])
             self.Vcollect.append(persons[4])
             self.Dcollect.append(persons[5])
+            self.details.addLocation(0, (persons[0].x, persons[0].y))
     
     def _StoV(self):
         return self._changeHelp(self.Scollect, self.eta)

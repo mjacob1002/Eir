@@ -153,6 +153,7 @@ class RandMoveSEIR(RandMoveSIR):
             self.Ecollect.append(p2)
             self.Icollect.append(p3)
             self.Rcollect.append(p4)
+            self.details.addLocation(0, (p1.x, p1.y))
     
     # essentially the same function, except those who are infected will go to E not I. Simply return set of all infected people.
     # _StoI() also adds the transmission data as to who infected who, so that doesn't need to be written again.

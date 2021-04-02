@@ -145,6 +145,7 @@ class RandMoveSIRD(RandMoveSIR):
             self.Icollect.append(p2)
             self.Rcollect.append(p3)
             self.Dcollect.append(p4)
+            self.details.addLocation(0, (p1.x, p1.y))
         self.D = np.zeros(days+1)
     
     def _ItoD(self):

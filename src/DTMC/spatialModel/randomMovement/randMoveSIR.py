@@ -140,6 +140,7 @@ class RandMoveSIR(RandMoveSIS):
             self.Scollect.append(p1)
             self.Icollect.append(p2)
             self.Rcollect.append(p3)
+            self.details.addLocation(0, (p1.x, p1.y))
     
 
     def _ItoR(self):

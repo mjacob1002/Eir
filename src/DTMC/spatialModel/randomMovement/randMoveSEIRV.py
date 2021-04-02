@@ -173,6 +173,7 @@ class RandMoveSEIRV(RandMoveSEIR):
             self.Icollect.append(p3)
             self.Rcollect.append(p4)
             self.Vcollect.append(p5)
+            self.details.addLocation(0, (p1.x, p1.y))
     
     def _StoV(self):
         return self._changeHelp(self.Scollect, self.eta)

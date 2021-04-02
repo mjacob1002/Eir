@@ -154,6 +154,7 @@ class RandMoveSIRV(RandMoveSIR):
             self.Icollect.append(p2)
             self.Rcollect.append(p3)
             self.Vcollect.append(p4)
+            self.details.addLocation(0, (p1.x, p1.y))
     
     def _StoV(self):
         """
