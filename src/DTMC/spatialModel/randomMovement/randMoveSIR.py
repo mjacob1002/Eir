@@ -112,10 +112,10 @@ class RandMoveSIR(RandMoveSIS):
         # redirect details object to point to another object to delete copies in inheritance
         self.details = Simul_Details(days, self.popsize)
         self.Scollect, self.Icollect, self.Rcollect = [], [], []
-        spreading_r = np.random.normal(spread_r, sigma_r, S0+I0)
+        spreading_r = np.random.normal(spread_r, sigma_r, S0+I0+R0)
         # generate the random x, y locations with every position within the plane being equally likely
-        loc_x = np.random.random(S0+I0) * planeSize
-        loc_y = np.random.random(S0+I0) * planeSize
+        loc_x = np.random.random(S0+I0+R0) * planeSize
+        loc_y = np.random.random(S0+I0+R0) * planeSize
         # create the special objects:
         for i in range(self.popsize):
             # create the person object
