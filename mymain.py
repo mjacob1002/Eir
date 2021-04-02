@@ -22,8 +22,15 @@ from src.DTMC.spatialModel.Hub.HubSEIRD import HubSEIRD
 from src.DTMC.spatialModel.Hub.HubSEIRSD import HubSEIRSD
 from src.DTMC.spatialModel.Hub.HubSEIRSVD import HubSEIRSVD
 from src.DTMC.spatialModel.Hub.HubSEIRVD import HubSEIRVD
+from src.DTMC.spatialModel.Hub.Hub_ICUV import Hub_ICUV
+
 from src.DTMC.spatialModel.StrongInfectious.StrongInfSIR import StrongInfSIR
-from src.DTMC.spatialModel.randomMovement.randMoveSEIR import RandMoveSEIR
+from src.DTMC.spatialModel.StrongInfectious.StrongInf_ICUV import StrongInf_ICUV
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRD import StrongInfSEIRD
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIR import StrongInfSEIR
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSIS import StrongInfSIS
+from src.DTMC.spatialModel.StrongInfectious.StrongInfSIR import StrongInfSIR
+
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRS import RandMoveSEIRS
 from src.DTMC.spatialModel.randomMovement.randMoveSIRV import RandMoveSIRV
 from src.DTMC.spatialModel.randomMovement.randMoveSIRVS import RandMoveSIRVS
@@ -38,6 +45,18 @@ from src.DTMC.spatialModel.randomMovement.randMoveSEIRSD import RandMoveSEIRSD
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRDV import RandMoveSEIRDV
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRSDV import RandMoveSEIRSDV
 
+def getStrongInfSIS():
+    S0 = 999
+    I0 = 1
+    rstart = 3
+    side = 33
+    days=31
+    gamma = 0.3
+    pss = .17
+    test = StrongInfSIS(S0=S0, I0=I0, pss=pss, rstart=rstart, side=side, days=days, gamma=gamma)
+    test.run()
+    df = test.toDataFrame()
+    print(df)
 
 
 def testRandSEIRDV():
@@ -297,12 +316,18 @@ def getHubSIRS():
     print(df)
 
 def getStrongInfSIR():
-    test = StrongInfSIR(popsize=1000, pss=.2, rstart=4, alpha=2, side=50, S0=999, I0=1, R0=0, days=31, gamma=.4)
-    d = test.run()
-    print(d.personHistory(999))
-    test.plot()
-    df = test.toDataFrame()
-    print(df)
+    S0 = 999
+    I0 = 1
+    R0 = 0
+    rstart = 3
+    side=33
+    days=31
+    pss=.17
+    gamma = .3
+    test= StrongInfSIR(S0=S0, I0=I0, R0=R0, pss=pss, rstart=rstart, side=side, days=days, gamma=gamma)
+    test.run()
+    print(test.toDataFrame())
+
 
 def getHubSEIR():
     test = HubSEIR(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, side=25, rstart=3, alpha=2, 
@@ -318,6 +343,17 @@ def getHubSEIRD():
     print(df.sortedTransmissions())
     print(test.toDataFrame())
     test.plot()
+
+def getStrongInfSEIRD():
+    test = StrongInfSEIRD(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, mu=.05,side=25, rstart=3, alpha=2, 
+    days=31)
+    df = test.run()
+    print(df.sortedTransmissions())
+    print(test.toDataFrame())
+    test.plot()
+
+def getStrongInfSEIR():
+    test = StrongInfSEIR(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, side=25, rstart=3, alpha=2.0, days=31)
 
 def getHubSIRD():
     test = HubSIRD(S0=999, I0=1, R0=0, pss=.17, gamma=.23, mu=.05,side=25, rstart=3, alpha=2, 
@@ -608,9 +644,26 @@ def getHubSEIRS():
     print(df.sortedTransmissions())
     print(test.toDataFrame())
 
+def getHub_ICUV():
+    test = Hub_ICUV(S0=999, E0=0, I0=1, R0=0, V0=0, rho=.3, ioda=.3, gamma=.25, mu=0.007, omega=.14, phi = .42, chi=.15, kappa=.05, eta=.03, rstart=3, pss=.17, side=25, days=62)
+    d = test.run()
+    print(test.toDataFrame())
+    print(d.personHistory(473))
+    test.plot()
 
+def getStrongInf_ICUV():
+    test = StrongInf_ICUV(S0=999, E0=0, I0=1, R0=0, V0=0, rho=.3, ioda=.3, gamma=.25, mu=0.007, omega=.14, phi = .42, chi=.15, kappa=.05, eta=.03, rstart=3, pss=.17, side=25, days=62, w0=.7)
+    d = test.run()
+    print(test.toDataFrame())
+    print(d.personHistory(473))
+    test.plot()
 if  __name__ == '__main__':
-    getHubSIRSD()
+    getStrongInfSIR()
+    #getStrongInfSIS()
+    #getStrongInfSEIRD()
+    #getStrongInf_ICUV()
+    #getHub_ICUV()
+    #getHubSIR()
     #getHubSIRSVD()
     #getHubSIRVD()
     #getHubSIRSV()
