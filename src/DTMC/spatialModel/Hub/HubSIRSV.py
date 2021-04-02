@@ -5,7 +5,92 @@ from matplotlib import pyplot as plt
 from .HubSIRV import HubSIRV
 
 class HubSIRSV(HubSIRV):
+    """
+    SIRSV compartmental model with the Hub model assumption. 
 
+    Parameters
+    ----------
+
+    popsize: int
+        size of the population.
+    
+    pss: float
+        probability someone is considered a super spreader.
+    
+    rstart: float
+        the spreading radius of every normal spreader.
+    
+    side: float
+        size of one side of the square plane.
+    
+    S0: int
+        The initial amount of susceptibles at the start of the simulation.
+    
+    I0: int
+        The initial amount of infectious individuals at the start of the simulation.
+    
+    R0: int
+        The inital amount of removed individuals at the start of the simulation.
+    
+    days: int
+        The number of days that are simulated.
+    
+    gamma: float
+        The probability of someone from I going to R.
+    
+    kappa: float
+        The probability of someone going from R compartment to S.
+    
+    eta: float
+        The probability of someone goign from S to V, given they don't go from S to I.
+    
+    w0: float (optional)
+        The probability of infection if an infectious and susceptible individual are in the same location. Default is 1.0.
+    
+    hubConstant: float (optional)
+        The factor k multliplied to the rstart if the person is a super spreader. Default is sqrt(6).
+    
+    alpha: int
+        constant used in the P(infection) formula. Default is 2.0.
+
+    
+    Attributes
+    ----------
+    details: Simul_Details
+        an object that can be returned using run(getDetails=True) that provides more insight about simulation
+        by showing transmissions chains, personal history with states, and more. 
+    S : ndarray
+        stores the number of people S compartmet on each day.
+    
+    I : ndarray
+        stores the number of people I compartmet on each day.
+    
+    R : ndarray
+        stores the number of people R compartmet on each day.
+    
+    V: ndarray
+        stores the number of people in the V compartment on each day.
+    
+    Scollect: list
+        contains the Person objects of everyone in simulation. If an element in Scollect has isIncluded=True,
+        that means person is currently in susceptible compartment.
+    
+    Icollect: list
+        contains the Person objects of everyone in simulation. If an element in Icollect has isIncluded=True,
+        that means person is currently in infected compartment.
+    
+    Rcollect: list
+        contains the Person objects of everyone in simulation. If an element in Rcollect has isIncluded=True,
+        that means person is currently in removed compartment.
+    
+    locx: ndarray
+        stores the x coordinate of each person in the simulation.
+    
+    locy: ndarray
+        stores the y coordinate of each person in the simulation.
+    
+
+    """
     def __init__(self, S0: int, I0: int, R0:int, V0: int, pss: float, gamma: float, kappa: float, eta:float, rstart: float, side: float, days:int, alpha=2, w0=1.0, hubConstant=6**0.5, timeDelay=-1):
         super().__init__(S0=S0, I0=I0, R0=R0, V0=V0, pss=pss, gamma=gamma, eta=eta, rstart=rstart, side=side, days=days, alpha=alpha, w0=w0, hubConstant=hubConstant, timeDelay=timeDelay)
         self.kappa = kappa

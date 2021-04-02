@@ -32,9 +32,6 @@ class HubSIR(HubSIS):
     rstart: float
         the spreading radius of every normal spreader.
     
-    alpha: int
-        constant used in the P(infection) formula.
-    
     side: float
         size of one side of the square plane.
     
@@ -45,10 +42,13 @@ class HubSIR(HubSIS):
         The probability of someone from I going to R.
     
     w0: float (optional)
-        The probability of infection if an infectious and susceptible individual are in the same location.
+        The probability of infection if an infectious and susceptible individual are in the same location. Default is 1.0.
     
     hubConstant: float (optional)
-        The factor k multliplied to the rstart if the person is a super spreader.
+        The factor k multliplied to the rstart if the person is a super spreader. Default is sqrt(6).
+    
+    alpha: float optional
+        constant used in the P(infection) formula. Default is 2.0.
 
     
     Attributes

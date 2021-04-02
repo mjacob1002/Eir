@@ -4,7 +4,111 @@ from matplotlib import pyplot as plt
 from .HubSEIRV import HubSEIRV
 
 class HubSEIRSV(HubSEIRV):
+    """
+    Object that represents the Hub Model SEIRSV. In this model, E is assumed to not be
+    able to spread the virus.
 
+    Parameters
+    ----------
+    S0: int
+        Initial amount of susceptibles at the start of the simulation.
+
+    E0: int
+        Initial amount of exposed at the start of the simulation.
+    
+    I0: int
+        Initial amount of infected at the start of the simulation.
+    
+    R0: int
+        Initial amount of recovered at the start of the simulation. 
+    
+    V0: int
+        Initial amount of vaccianted people at the start of the simulation.
+
+    pss: float
+        The probability that the randomly generated person at the start of the simulation is a super spreader.
+    
+    rho: float
+        Rho is the probability of someone moving from E to I compartment. Rho is in [0, 1]. 
+    
+    gamma: float
+        The probability of someone going from I to R.
+    
+    kappa: float
+        The probability of someone going from R to S compartment.
+    
+    eta: float
+        The probability of someone going from S to V, given that they aren't going from S to E.
+    
+    rstart: float
+        The spreading radius of a normal spreader.
+    
+    days: int   
+        The nubmer of days being simulated.
+    
+    w0: float optional
+        The probability of a susceptible getting infected if the distance between the infectious person and susceptible is 0. Default is 1.0.
+    
+    hubConstant: float optional
+        The scale by which the spreading radius of a super spreader increases. Default is sqrt(6).
+    
+    alpha: float optional
+        Constant used in the infect probability generator. Default is 2.0.
+    
+    Attributes
+    ----------
+
+    S: ndarray
+        A numpy array that stores the number of people in the susceptible state on each given day of the simulation.
+    
+    E: ndarray
+        A numpy array that stores the number of people in the exposed state on each given day of the simulation.
+    
+    I: ndarray
+        A numpy array that stores the number of people in the infected state on each given day of the simulation.
+    
+    R: ndarray
+        A numpy array that stores the number of people in the recovered state on each given day of the simulation.
+    
+    V: ndarray
+        A numpy array that stores the number of people in the vaccinated state on each given day of the simulation.
+    
+    popsize: int
+        The total size of the population in the simulation. Given by S0 + E0 + I0 + R0 + V0.
+        
+    Scollect: list
+        Used to keep track of the states each Person object is in. If the copy of a Person object has 
+        isIncluded == True, then the person is SUSCEPTIBLE. Has a total of popsize Person objects,
+        with numbers [0, popsize). 
+    
+    Ecollect: list
+        Used to keep track of the states each Person object is in. If the copy of a Person object has 
+        isIncluded == True, then the person is EXPOSED. Has a total of popsize Person objects,
+        with numbers [0, popsize). 
+    
+    Icollect: list
+         Used to keep track of the states each Person object is in. If the copy of a Person object has 
+        isIncluded == True, then the person is INFECTED. Has a total of popsize Person objects,
+        with numbers [0, popsize).
+    
+    Rcollect: list
+        Used to keep track of the states each Person object is in. If the copy of a Person object has 
+        isIncluded == True, then the person is RECOVERED. Has a total of popsize Person objects,
+        with numbers [0, popsize).
+    
+    Vcollect: list
+        Used to keep track of the states each Person object is in. If the copy of a Person object has 
+        isIncluded == True, then the person is VACCINATED. Has a total of popsize Person objects,
+        with numbers [0, popsize).
+
+
+    details: Simul_Details 
+        An object that can be returned to give a more in-depth look into the simulation. With this object,
+        one can see transmission chains, state changes, the movement history of each individaul, the state
+        history of each person, and more.
+    
+
+    """
     def __init__(self, S0: int, E0: int, I0: int, R0: int, V0:int, pss: float, rho: float, 
         gamma: float, eta: float, kappa:float, side: float, rstart:float, alpha: int, days: int, w0=1.0, hubConstant=6**0.5, timeDelay=-1):
         super(HubSEIRSV, self).__init__(S0=S0, E0=E0, I0=I0, R0=R0, V0=V0, pss=pss, rho=rho, gamma=gamma, eta=eta, side=side, rstart=rstart, alpha=alpha, 
