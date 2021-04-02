@@ -85,11 +85,10 @@ class HubSIR(HubSIS):
     
 
     """
-    def __init__(self, S0: int, I0: int, R0: int, pss: float, rstart: float, alpha: int, side: float, 
-                 days: int,
-                 gamma: float, w0=1.0,
-                 hubConstant=6 ** 0.5):
-        super(HubSIR, self).__init__(S0, I0, pss, rstart, alpha, side, days, gamma, w0, hubConstant)
+    def __init__(self, S0: int, I0: int, R0: int, pss: float, rstart: float, side: float, 
+                 days: int, gamma: float, alpha=2.0, w0=1.0,hubConstant=6 ** 0.5):
+        super(HubSIR, self).__init__(S0=S0, I0=I0, pss=pss, rstart=rstart, alpha=alpha, days=days, side=side, w0=w0, gamma=gamma, hubConstant=hubConstant)
+        print(self.gamma)
         # reconfigure the population size
         self.popsize = S0 + I0 + R0
         #print(self.popsize)
@@ -198,7 +197,7 @@ class HubSIR(HubSIS):
             This includes, transmission chains, state history of particular people, and more. 
         """
         for i in range(1, self.days + 1):
-            print("Day ",i)
+            print("Day ",i, "self.days: ", self.days)
             # run the transfers from different compartments
             transferSI = self._StoI(i)
             transferIr = self._ItoR()

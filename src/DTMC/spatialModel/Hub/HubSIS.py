@@ -73,9 +73,9 @@ class HubSIS(Hub):
         stores the y coordinate of each person in the simulation. 
 
     """
-    def __init__(self, S0: int, I0: int, pss: float, rstart: float, alpha: int, side: float, days: int,
+    def __init__(self, S0: int, I0: int, pss: float, rstart: float, side: float, days: int,
                  gamma: float, w0=1.0,
-                 hubConstant=6 ** 0.5):
+                 hubConstant=6 ** 0.5, alpha=2.0):
         self.popsize = S0 + I0
         # initialize the Simul_Details object
         self.details = Simul_Details(days=days, popsize=self.popsize)
