@@ -4,6 +4,7 @@ import math
 import src.utility as u
 from src.DTMC.spatialModel.simul_details import Simul_Details
 from src.utility import static_prob_help
+import src.exceptions as e
 
 # not to be confused with the person object that is used in the Hub/Strong Infectious Model
 from src.utility import Person1 as Person
@@ -161,3 +162,22 @@ class RandMove():
             The probability of a Person object going from one state to another
         """
         return static_prob_help(collect, prob)
+
+    def negValCheck(self, vals: list):
+        """
+        Checks to make sure that values are non-negative
+        """
+        for val in vals:
+            if val < 0:
+                raise e.NegativeValException(val)
+    
+    def probValCheck(self, probs: list):
+        """Checks to make sure probability values are 0<=p<=1"""
+        for p in probs:
+            # if the value is less than 0
+            if p < 0:
+                raise e.ProbabilityExcpetion(p, False)
+            # if the value is greater than 1
+            elif p > 1:
+                raise e.ProbabilityExcpetion(p, True)
+        

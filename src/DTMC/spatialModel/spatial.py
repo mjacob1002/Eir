@@ -5,6 +5,8 @@ from src.utility import Person
 import src.utility as u
 import multiprocessing as mp
 
+import src.exceptions as e
+
 
 class Spatial:
     """
@@ -107,3 +109,23 @@ class Spatial:
 
     def _statechange(self):
         pass
+
+    def negValCheck(self, vals: list):
+        """
+        Checks to make sure that values are non-negative
+        """
+        for val in vals:
+            if val < 0:
+                raise e.NegativeValException(val)
+    
+    def probValCheck(self, probs: list):
+        """Checks to make sure probability values are 0<=p<=1"""
+        for p in probs:
+            # if the value is less than 0
+            if p < 0:
+                raise e.ProbabilityExcpetion(p, False)
+            # if the value is greater than 1
+            elif p > 1:
+                raise e.ProbabilityExcpetion(p, True)
+        
+
