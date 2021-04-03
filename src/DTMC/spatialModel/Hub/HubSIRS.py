@@ -87,12 +87,13 @@ class HubSIRS(HubSIR):
     
 
     """
-    def __init__(self, popsize: int, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, R0: int,
+    def __init__(self, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, R0: int,
                  days: int,
                  gamma: float, kappa: float, w0=1.0,
                  hubConstant=6 ** 0.5):
         self.kappa = kappa
-        super(HubSIRS, self).__init__(popsize, pss, rstart, alpha, side, S0, I0, R0, days, gamma, w0, hubConstant)
+        self.popsize = S0 +I0 + R0
+        super(HubSIRS, self).__init__(S0=S0, I0=I0, R0=R0, pss=pss, rstart=rstart, side=side, days=days, gamma=gamma, alpha=alpha, w0=w0, hubConstant=hubConstant)
 
     # run transfers from R to S
     def _RS(self):
