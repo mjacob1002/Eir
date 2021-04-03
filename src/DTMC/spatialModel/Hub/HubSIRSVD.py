@@ -10,9 +10,6 @@ class HubSIRSVD(HubSIRVD):
 
     Parameters
     ----------
-
-    popsize: int
-        size of the population.
     
     pss: float
         probability someone is considered a super spreader.
@@ -59,6 +56,10 @@ class HubSIRSVD(HubSIRVD):
     
     Attributes
     ----------
+
+     popsize: int
+        size of the population.
+        
     details: Simul_Details
         an object that can be returned using run(getDetails=True) that provides more insight about simulation
         by showing transmissions chains, personal history with states, and more. 
