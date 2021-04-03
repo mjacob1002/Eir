@@ -58,6 +58,397 @@ from src.DTMC.spatialModel.randomMovement.randMoveSEIRSD import RandMoveSEIRSD
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRDV import RandMoveSEIRDV
 from src.DTMC.spatialModel.randomMovement.randMoveSEIRSDV import RandMoveSEIRSDV
 
+from src.DTMC.spatialModel.PeriodicMovement.periodicSEIR import PeriodicSEIR
+from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRD import PeriodicSEIRD
+from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRDV import PeriodicSEIRDV
+from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRS import PeriodicSEIRS
+from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRSD import PeriodicSEIRSD
+from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRSDV import PeriodicSEIRSDV
+from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRV import PeriodicSEIRV
+from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRVS import PeriodicSEIRVS
+from src.DTMC.spatialModel.PeriodicMovement.periodicSIR import PeriodicSIR
+from src.DTMC.spatialModel.PeriodicMovement.periodicSIRD import PeriodicSIRD
+from src.DTMC.spatialModel.PeriodicMovement.periodicSIRDV import PeriodicSIRDV
+from src.DTMC.spatialModel.PeriodicMovement.periodicSIRS import PeriodicSIRS
+from src.DTMC.spatialModel.PeriodicMovement.periodicSIRSD import PeriodicSIRSD
+from src.DTMC.spatialModel.PeriodicMovement.periodicSIRSDV import PeriodicSIRSDV
+from src.DTMC.spatialModel.PeriodicMovement.periodicSIRV import PeriodicSIRV
+from src.DTMC.spatialModel.PeriodicMovement.periodicSIRVS import PeriodicSIRVS
+from src.DTMC.spatialModel.PeriodicMovement.periodicSIS import PeriodicSIS
+
+def getPeriodicSIRSD():
+    S0 = 999
+    I0 = 1
+    R0 = 0
+    gamma = 0.3
+    kappa = .2
+    mu = .02
+    plane = 33
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSIRSD(S0=S0, I0=I0, R0=R0, gamma=gamma, kappa=kappa, mu=mu, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+
+def getPeriodicSIRSDV():
+    S0 = 999
+    I0 = 1
+    R0 = 0
+    V0 = 0
+    gamma = 0.3
+    kappa = .2
+    mu = .02
+    eta= .01
+    plane = 33
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSIRSDV(S0=S0, I0=I0, R0=R0, V0=V0, gamma=gamma, kappa=kappa, mu=mu, eta=eta, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+
+def getPeriodicSIRV():
+    S0 = 999
+    I0 = 1
+    R0 = 0
+    V0 = 0
+    gamma = 0.3
+    eta= .01
+    plane = 33
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSIRV(S0=S0, I0=I0, R0=R0, V0=V0, gamma=gamma, eta=eta, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+
+def getPeriodicSIRVS():
+    S0 = 999
+    I0 = 1
+    R0 = 0
+    V0 = 0
+    gamma = 0.3
+    eta= .01
+    kappa = .2
+    plane = 33
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSIRVS(S0=S0, I0=I0, R0=R0, V0=V0, gamma=gamma, eta=eta, kappa=kappa, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+
+def getPeriodicSIS():
+    S0 = 999
+    I0 = 1
+    gamma = 0.3
+    plane = 33
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSIS(S0=S0, I0=I0, gamma=gamma, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    stuff = details.personHistory(523, movement=True)
+    print(len(stuff[1]))
+
+
+def getPeriodicSIRDV():
+    S0 = 999
+    I0 = 1
+    R0 = 0
+    V0 = 0
+    gamma = 0.2
+    mu = .02
+    eta = .02
+    plane = 33
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSIRDV(S0=S0, I0=I0, R0=R0, V0=V0, gamma=gamma, mu=mu, eta=eta, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+
+def getPeriodicSIRD():
+    S0 = 999
+    I0 = 1
+    R0 = 0
+    gamma = 0.4
+    mu = .02
+    plane = 33
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSIRD(S0=S0, I0=I0, R0=R0, gamma=gamma, mu=mu, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+
+def getPeriodicSIRS():
+    S0 = 999
+    I0 = 1
+    R0 = 0
+    gamma = 0.4
+    kappa = .2
+    plane = 50
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSIRS(S0=S0, I0=I0, R0=R0, gamma=gamma, kappa=kappa, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+
+def getPeriodicSIR():
+    S0 = 999
+    I0 = 1
+    R0 = 0
+    gamma = 0.4
+    plane = 50
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSIR(S0=S0, I0=I0, R0=R0, gamma=gamma, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+def getPeriodicSEIRVS():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    R0=0
+    V0=0
+    rho = .2
+    gamma = 0.4
+    kappa = .2
+    mu = .02
+    eta = .02
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSEIRVS(S0=S0, E0=E0, I0=I0, R0=R0, V0=V0, rho=rho, gamma=gamma, eta=eta, kappa=kappa, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    #print("###########################")
+    #print(details.sortedTransmissions())
+    #print("#######################")
+    #print(details.locations[21])
+    #print(len(details.locations[0]))
+    #print(details.personHistory(686, movement=True))
+    test.plot()
+
+def getPeriodicSEIRV():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    R0=0
+    V0=0
+    rho = .2
+    gamma = 0.4
+    kappa = .2
+    mu = .02
+    eta = .02
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSEIRV(S0=S0, E0=E0, I0=I0, R0=R0, V0=V0, rho=rho, gamma=gamma, eta=eta, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    #print("###########################")
+    #print(details.sortedTransmissions())
+    #print("#######################")
+    #print(details.locations[21])
+    #print(len(details.locations[0]))
+    #print(details.personHistory(686, movement=True))
+    test.plot()
+
+def getPeriodicSEIRSDV():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    R0=0
+    V0=0
+    rho = .2
+    gamma = 0.4
+    kappa = .2
+    mu = .02
+    eta = .02
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSEIRSDV(S0=S0, E0=E0, I0=I0, R0=R0, V0=V0, rho=rho, gamma=gamma, kappa=kappa, eta=eta, mu=mu, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    #print("###########################")
+    #print(details.sortedTransmissions())
+    #print("#######################")
+    #print(details.locations[21])
+    #print(len(details.locations[0]))
+    #print(details.personHistory(686, movement=True))
+    test.plot()
+
+def getPeriodicSEIRSD():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    rho = .2
+    gamma = 0.4
+    kappa = .2
+    mu = .02
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSEIRSD(S0=S0, E0=E0, I0=I0, R0=0, rho=rho, gamma=gamma, kappa=kappa, mu=mu, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    #print("###########################")
+    #print(details.sortedTransmissions())
+    #print("#######################")
+    #print(details.locations[21])
+    #print(len(details.locations[0]))
+    #print(details.personHistory(686, movement=True))
+    test.plot()
+
+
+def getPeriodicSEIRS():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    rho = .2
+    gamma = 0.4
+    kappa = .2
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSEIRS(S0=S0, E0=E0, I0=I0, R0=0, rho=rho, gamma=gamma, kappa=kappa, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    #print("###########################")
+    #print(details.sortedTransmissions())
+    #print("#######################")
+    #print(details.locations[21])
+    #print(len(details.locations[0]))
+    #print(details.personHistory(686, movement=True))
+    test.plot()
+
+def getPeriodicSEIRDV():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    V0=0
+    rho = .2
+    gamma = 0.4
+    mu = .05
+    eta=.03
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSEIRDV(S0=S0, E0=E0, I0=I0, R0=0, V0=V0, rho=rho, gamma=gamma, mu=mu, eta=eta, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days, timeDelay=4)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    test.plot()
+
+def getPeriodicSEIRD():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    rho = .2
+    gamma = 0.4
+    mu = .05
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSEIRD(S0=S0, E0=E0, I0=I0, R0=0, rho=rho, gamma=gamma, mu=mu, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    test.plot()
+
+def getPeriodicSEIR():
+    S0 = 999
+    E0 = 0
+    I0 = 1
+    rho = .2
+    gamma = 0.4
+    kappa = .2
+    plane = 25
+    move_R = 5
+    sigma_R = 2
+    spread_r = 1
+    sigma_r = .25
+    days = 31
+    test = PeriodicSEIR(S0=S0, E0=E0, I0=I0, R0=0, rho=rho, gamma=gamma, planeSize=plane, move_r=move_R, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
+    days=days)
+    details = test.run()
+    df = test.toDataFrame()
+    print(df)
+    print("###########################")
+    #print(details.sortedTransmissions())
+    print("#######################")
+    #print(details.locations[21])
+    #print(len(details.locations[0]))
+    print(details.personHistory(686, movement=True))
+    #test.plot()
+
 def getStrongInfSIS():
     S0 = 999
     I0 = 1
@@ -91,14 +482,7 @@ def testRandSEIRDV():
     details = test.run()
     df = test.toDataFrame()
     print(df)
-    print("###########################")
-    print(details.sortedTransmissions())
-    print("######################")
-    print(test.Scollect[999].r0)
-    #print("#######################")
-    #print(details.personHistory(686)
-    #print("#######################")
-    #print(details.personHistory(3))
+    print(details.personHistory(7, movement=True))
     test.plot()
 
 def testRandSEIRSDV():
@@ -124,7 +508,7 @@ def testRandSEIRSDV():
     print("###########################")
     print(details.sortedTransmissions())
     print("#######################")
-    print(details.personHistory(3))
+    print(details.personHistory(3, movement=True))
     test.plot()
 
 def testRandSEIRD():
@@ -148,7 +532,7 @@ def testRandSEIRD():
     print("###########################")
     print(details.sortedTransmissions())
     print("#######################")
-    print(details.personHistory(3))
+    print(details.personHistory(3, movement=True))
     test.plot()
 
 def testRandSEIRSD():
@@ -173,7 +557,7 @@ def testRandSEIRSD():
     print("###########################")
     print(details.sortedTransmissions())
     print("#######################")
-    print(details.personHistory(3))
+    print(details.personHistory(3, movement=True))
     test.plot()
 
 
@@ -199,7 +583,7 @@ def testRandMoveSIRSDV():
     #print(details.sortedTransmissions())
     #print("#######################")
     for i in range(1000):
-        print(details.personHistory(i))
+        print(details.personHistory(i, movement=True))
     test.plot()
 
 def testRandMoveSIRDV():
@@ -224,7 +608,7 @@ def testRandMoveSIRDV():
     #print(details.sortedTransmissions())
     #print("#######################")
     for i in range(1000):
-        print(details.personHistory(i))
+        print(details.personHistory(i, movement=True))
     test.plot()
 
 
@@ -251,7 +635,7 @@ def testRandSEIRV():
     #print(details.sortedTransmissions())
     #print("#######################")
     for i in range(1000):
-        print(details.personHistory(i))
+        print(details.personHistory(i, movement=True))
     
     test.plot()
 def testRandSEIRVS():
@@ -277,7 +661,7 @@ def testRandSEIRVS():
     #print(details.sortedTransmissions())
     #print("#######################")
     for i in range(1000):
-        print(details.personHistory(i))
+        print(details.personHistory(i, movement=True))
     test.plot()
 
 
@@ -315,13 +699,13 @@ def testRandMoveSIS():
     #print(details.personHistory(4))
     #print(details.transmissions)
     print("#####################################")
-    print(details.personTransmissionHistory(7))
+    print(details.personHistory(7, movement=True))
     #dic = details.sortedTransmissions()
     #print(dic)
 
 
 def getHubSIRS():
-    test = HubSIRS(popsize=1000, pss=.2, rstart=3, alpha=2, side=25, S0=999, I0=1, R0=0, days=31, gamma=.4, kappa= .2, w0=.7)
+    test = HubSIRS(pss=.2, rstart=3, alpha=2, side=25, S0=999, I0=1, R0=0, days=31, gamma=.4, kappa= .2, w0=.7)
     d = test.run()
     print(d.personHistory(652))
     test.plot()
@@ -772,6 +1156,23 @@ def getStrongInfSIRVD():
 
 
 if  __name__ == '__main__':
+    getPeriodicSIS()
+    #getPeriodicSIRVS()
+    #getPeriodicSIRV()
+    #getPeriodicSIRSDV()
+    #getPeriodicSIRSD()
+    #getPeriodicSIRS()
+    #getPeriodicSIRDV()
+    #getPeriodicSIRD()
+    #getPeriodicSIR()
+    #getPeriodicSEIRVS()
+    #getPeriodicSEIRV()
+    #getPeriodicSEIRSDV()
+    #getPeriodicSEIRSD()
+    #getPeriodicSEIRS()
+    #getPeriodicSEIRDV()
+    #getPeriodicSEIRD()
+    #getPeriodicSEIR()
     #main()
     #getStrongInfSEIRS()
     #getStrongInfSEIRSD()
@@ -785,7 +1186,7 @@ if  __name__ == '__main__':
     #getStrongInfSIRSV()
     #getStrongInfSIRSVD()
     #getStrongInfSIRV()
-    getStrongInfSIRVD()
+    #getStrongInfSIRVD()
     #getStrongInfSEIR()
     #getStrongInfSIR()
     #getStrongInfSIS()
@@ -793,6 +1194,7 @@ if  __name__ == '__main__':
     #getStrongInf_ICUV()
     #getHub_ICUV()
     #getHubSIR()
+    getHubSIRS()
     #getHubSEIR()
     #getHubSIRV()
     #getHubSIRSVD()
