@@ -76,6 +76,9 @@ class HubSIS(Hub):
     def __init__(self, S0: int, I0: int, pss: float, rstart: float, side: float, days: int,
                  gamma: float, w0=1.0,
                  hubConstant=6 ** 0.5, alpha=2.0):
+        # error checking
+        self.negValCheck([S0, I0, pss, rstart, side, days, gamma, w0, hubConstant, alpha])
+        self.probValCheck([pss, gamma, w0])
         self.popsize = S0 + I0
         # initialize the Simul_Details object
         self.details = Simul_Details(days=days, popsize=self.popsize)
