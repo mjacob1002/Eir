@@ -6,8 +6,8 @@ from src.DTMC.spatialModel.Hub.HubSIRS import HubSIRS
 from src.utility import dist, randEvent, Person
 
 class StrongInfSIRS(HubSIRS):
-    def __init__(popsize: int, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, R0: int, days:int, gamma: float, kappa: float, w0=.7):
-        super(StrongInfSIR, self).__init__(popsize=popsize, pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, R0=R0, days=days, gamma=gamma, w0=w0, hubConstant=1)
+    def __init__(self, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, R0: int, days:int, gamma: float, kappa: float, w0=.7):
+        super(StrongInfSIRS, self).__init__(pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, R0=R0, days=days, gamma=gamma, kappa=kappa, w0=w0, hubConstant=1)
 
     def _infect(self, inf: Person, sus: Person):
         # compute the distance between two Person objects
