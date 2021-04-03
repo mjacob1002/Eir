@@ -37,7 +37,7 @@ class HubSIRV(HubSIR):
     
     V0: int
         The initial amount of vaccinated indivdiausl at the start of the simulation.
-        
+
     days: int
         The number of days that are simulated.
     
@@ -128,6 +128,7 @@ class HubSIRV(HubSIR):
             self.Icollect.append(p[1])
             self.Rcollect.append(p[2])
             self.Vcollect.append(p[3])
+            self.details.addLocation(0, (p[1].x,p[1].y))
 
     def _StoV(self):
         return self._changeHelp(self.Scollect, self.eta)

@@ -66,7 +66,7 @@ class HubSEIR(Hub):
         A numpy array that stores the number of people in the recovered state on each given day of the simulation.
     
     popsize: int
-        The total size of the population in the simulation. Given by S0 + E0 + I0 + R0 + V0.
+        The total size of the population in the simulation. Given by S0 + E0 +I0 + R0 + V0.
         
     Scollect: list
         Used to keep track of the states each Person object is in. If the copy of a Person object has 

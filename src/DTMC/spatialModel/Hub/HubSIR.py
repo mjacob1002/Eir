@@ -147,6 +147,7 @@ class HubSIR(HubSIS):
             self.Scollect.append(p1)
             self.Icollect.append(p2)
             self.Rcollect.append(p3)
+            # add location at Day 0
             self.details.addLocation(0, (self.locx[i], self.locy[i]))
             self.details.addStateChange(i, "R", 0)
         print("Initial S0: ", self.S[0], " Initial I0: ", self.I[0], " Initial R0: ", self.R[0])
