@@ -128,4 +128,12 @@ class Spatial:
             elif p > 1:
                 raise e.ProbabilityExcpetion(p, True)
         
-
+    def intCheck(self, nums:list):
+        for num in nums:
+            if type(num) != int:
+                raise e.NotIntException(num)
+    
+    def floatCheck(self, nums:list):
+        for num in nums:
+            if type(num) != int and type(num) != float:
+                raise e.NotFloatException(num)

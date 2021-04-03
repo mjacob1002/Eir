@@ -181,3 +181,14 @@ class RandMove():
             elif p > 1:
                 raise e.ProbabilityExcpetion(p, True)
         
+    def intCheck(self, nums:list):
+        """ Makes sure everything in nums is an int"""
+        for num in nums:
+            if type(num) != int:
+                raise e.NotIntException(num)
+    
+    def floatCheck(self, nums:list):
+        """Makes sure everything in nums is either a float or an int"""
+        for num in nums:
+            if type(num) != int and type(num) != float:
+                raise e.NotFloatException(num)
