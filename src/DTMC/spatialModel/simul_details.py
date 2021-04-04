@@ -200,7 +200,7 @@ class Simul_Details():
             on every day. 
         """
         # exception handling
-        self._intCheck(u)
+        self._intCheck([u])
         self._isPersonHere(u)
         
         if movement:
@@ -281,6 +281,7 @@ class Simul_Details():
             representing the susceptible individual who was infected
         """
         # exception handling
+        self._intCheck([day])
         self._isDayHere(day)
         return self.transmissions[day]
     

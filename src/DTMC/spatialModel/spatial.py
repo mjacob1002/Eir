@@ -126,7 +126,7 @@ class Spatial:
                 raise e.ProbabilityException(p, False)
             # if the value is greater than 1
             elif p > 1:
-                raise e.ProbabilityExcpetion(p, True)
+                raise e.ProbabilityException(p, True)
         
     def intCheck(self, nums:list):
         for num in nums:
