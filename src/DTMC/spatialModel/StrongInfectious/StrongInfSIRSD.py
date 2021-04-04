@@ -8,6 +8,11 @@ from ..Hub.HubSIRSD import HubSIRSD
 class StrongInfSIRSD(HubSIRSD):
 
     def __init__(self, S0: int, I0: int, R0: int, pss: float, rstart: float, side: float, days: int, gamma: float, kappa:float, mu:float, alpha=2.0, w0=0.7):
+         # error checking
+        self.intCheck([S0, I0, R0,days])
+        self.floatCheck([pss, gamma, kappa, mu, side, rstart, w0, alpha])
+        self.negValCheck([S0, I0, R0, pss, gamma, kappa, mu, side, rstart, days, w0, alpha])
+        self.probCheck([pss, gamma, kappa, mu, w0])
         super().__init__(S0=S0, I0=I0, R0=R0, pss=pss, rstart=rstart, side=side, days=days, gamma=gamma, kappa=kappa, mu=mu, alpha=alpha, w0=w0, hubConstant=1)
 
     def _infect(self, inf: Person, sus: Person):

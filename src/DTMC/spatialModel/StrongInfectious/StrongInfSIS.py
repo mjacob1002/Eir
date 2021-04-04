@@ -6,6 +6,11 @@ from src.utility import dist
 class StrongInfSIS(HubSIS):
     def __init__(self, pss: float, rstart: float, side: float, S0: int, I0: int, days: int,
                  gamma: float, w0=1.0, alpha=2.0):
+        # error checking
+        self.intCheck([S0, I0, days])
+        self.floatCheck([pss, rstart, side, gamma, w0, alpha])
+        self.negValCheck([S0, I0, pss, rstart, side, days, gamma, w0, alpha])
+        self.probValCheck([pss, gamma, w0])
         # call the super constructor
         super(StrongInfSIS, self).__init__(pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, days=days,
                                            gamma=gamma, w0=w0,

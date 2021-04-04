@@ -94,6 +94,11 @@ class StrongInf_ICUV(Hub_ICUV):
         """
     def __init__(self, S0:int, E0:int, I0:int, R0:int, V0:int, rho: float, ioda: float,  gamma: float, mu: float, phi: float, chi: float, omega: float, kappa: float, eta: float, rstart: float, 
         pss: float, side: float, days: int, alpha=2.3, w0=.70, timeDelay=-1):
+        # error checks
+        self.intCheck([S0, E0, I0, R0, V0, days])
+        self.floatCheck([rho, ioda, gamma, mu, phi, chi, omega, kappa, eta, rstart, pss, side, alpha, w0, timeDelay])
+        self.negValCheck([S0, E0, I0, R0, V0, rstart, side, days, alpha])
+        self.probValCheck([rho, ioda, gamma, mu, phi, chi, omega, kappa, eta, w0])
         # call the super constructor
         super().__init__(S0=S0, E0=E0, I0=I0, R0=R0, V0=V0, rho=rho, ioda=ioda, gamma=gamma, mu=mu, omega=omega, phi =phi, chi=chi, kappa=kappa, eta=eta, rstart=rstart, pss=pss, side=side, days=days, w0=w0, hubConstant=1, timeDelay=timeDelay)
 

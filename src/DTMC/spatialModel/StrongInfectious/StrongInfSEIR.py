@@ -9,6 +9,12 @@ class StrongInfSEIR(HubSEIR):
     def __init__(self, S0: int, E0: int, I0: int, R0: int, pss: float, rho: float, 
         gamma: float, side: float, rstart:float, alpha: int, days: int, w0=0.7):
 
+        #error checking
+        self.intCheck([S0, E0, I0, R0, days])
+        self.floatCheck([pss, rho, gamma, side, rstart, w0, alpha])
+        self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, side, rstart, days, w0, alpha])
+        self.probCheck([pss, rho, gamma, w0])
+
         super().__init__(S0, E0, I0, R0, pss, rho, gamma, side, rstart, alpha, days, w0, 1)
     
     def _infect(self, inf: Person, sus: Person):

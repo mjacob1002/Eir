@@ -8,6 +8,11 @@ from src.utility import dist
 
 class StrongInfSIR(HubSIR):
     def __init__(self, pss: float, rstart: float, side: float, S0: int, I0: int, R0: int, days: int, gamma: float, w0=.7, alpha=2.0):
+        # error checking
+        self.intCheck([S0, I0, R0,days])
+        self.floatCheck([pss, gamma, side, rstart, w0, alpha])
+        self.negValCheck([S0, I0, R0, pss, gamma, side, rstart, days, w0, alpha])
+        self.probCheck([pss, gamma, w0])
         super(StrongInfSIR, self).__init__(pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, R0=R0, days=days, gamma=gamma, w0=w0, hubConstant=1)
     
 

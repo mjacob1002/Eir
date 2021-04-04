@@ -8,6 +8,11 @@ from ..Hub.HubSIRV import HubSIRV
 class StrongInfSIRV(HubSIRV):
 
     def __init__(self, S0: int, I0: int, R0:int, V0: int, pss: float, gamma: float, eta:float, rstart: float, side: float, days:int, alpha=2, w0=0.7, timeDelay=-1):
+        # error checking
+        self.intCheck([S0, I0, R0, V0, days])
+        self.floatCheck([pss, gamma, eta, side, rstart, w0, alpha, timeDelay])
+        self.negValCheck([S0, I0, R0, V0, pss, gamma, eta,side, rstart, days, w0, alpha])
+        self.probCheck([pss, gamma, eta, w0])
         super().__init__(S0=S0, I0=I0, R0=R0, V0=V0, pss=pss, gamma=gamma, eta=eta, rstart=rstart, side=side, days=days, alpha=alpha, w0=w0, hubConstant=1, timeDelay=timeDelay)
 
     def _infect(self, inf: Person, sus: Person):
