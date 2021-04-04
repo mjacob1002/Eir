@@ -11,7 +11,7 @@ class StrongInfSIRS(HubSIRS):
         self.intCheck([S0, I0, R0,days])
         self.floatCheck([pss, gamma, kappa, side, rstart, w0, alpha])
         self.negValCheck([S0, I0, R0, pss, gamma, kappa, side, rstart, days, w0, alpha])
-        self.probCheck([pss, gamma, kappa, w0])
+        self.probValCheck([pss, gamma, kappa, w0])
         super(StrongInfSIRS, self).__init__(pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, R0=R0, days=days, gamma=gamma, kappa=kappa, w0=w0, hubConstant=1)
 
     def _infect(self, inf: Person, sus: Person):

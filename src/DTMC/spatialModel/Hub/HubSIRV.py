@@ -100,7 +100,7 @@ class HubSIRV(HubSIR):
         self.intCheck([S0, I0, R0, V0, days])
         self.floatCheck([pss, gamma, eta, side, rstart, w0, alpha, hubConstant, timeDelay])
         self.negValCheck([S0, I0, R0, V0, pss, gamma, eta,side, rstart, days, w0, hubConstant, alpha])
-        self.probCheck([pss, gamma, eta, w0])
+        self.probValCheck([pss, gamma, eta, w0])
         super().__init__(S0=S0, I0=I0, R0=R0, pss=pss, rstart=rstart, alpha=alpha, side=side, days=days, gamma=gamma, w0=w0, hubConstant=hubConstant)
         self.V0 = V0
         self.V = np.zeros(days+1)

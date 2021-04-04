@@ -95,7 +95,7 @@ class HubSIRS(HubSIR):
         self.intCheck([S0, I0, R0,days])
         self.floatCheck([pss, gamma, kappa, side, rstart, w0, alpha, hubConstant])
         self.negValCheck([S0, I0, R0, pss, gamma, kappa, side, rstart, days, w0, hubConstant, alpha])
-        self.probCheck([pss, gamma, kappa, w0])
+        self.probValCheck([pss, gamma, kappa, w0])
         self.kappa = kappa
         self.popsize = S0 +I0 + R0
         super(HubSIRS, self).__init__(S0=S0, I0=I0, R0=R0, pss=pss, rstart=rstart, side=side, days=days, gamma=gamma, alpha=alpha, w0=w0, hubConstant=hubConstant)

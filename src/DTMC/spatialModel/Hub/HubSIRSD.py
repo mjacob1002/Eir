@@ -97,7 +97,7 @@ class HubSIRSD(HubSIRD):
         self.intCheck([S0, I0, R0,days])
         self.floatCheck([pss, gamma, kappa, mu, side, rstart, w0, alpha, hubConstant])
         self.negValCheck([S0, I0, R0, pss, gamma, kappa, mu, side, rstart, days, w0, hubConstant, alpha])
-        self.probCheck([pss, gamma, kappa, mu, w0])
+        self.probValCheck([pss, gamma, kappa, mu, w0])
         super().__init__(S0=S0, I0=I0, R0=R0, pss=pss, rstart=rstart, side=side, days=days, gamma=gamma, mu=mu, alpha=alpha, w0=w0, hubConstant=hubConstant)
         self.kappa = kappa
     

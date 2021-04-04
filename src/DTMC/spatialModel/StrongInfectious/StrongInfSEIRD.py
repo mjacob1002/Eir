@@ -14,7 +14,7 @@ class StrongInfSEIRD(HubSEIRD):
         self.intCheck([S0, E0, I0, R0, days])
         self.floatCheck([pss, rho, gamma, mu, side, rstart, w0, alpha])
         self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, mu, side, rstart, days, w0, alpha])
-        self.probCheck([pss, rho, gamma, mu, w0])
+        self.probValCheck([pss, rho, gamma, mu, w0])
 
         super().__init__(S0, E0, I0, R0, pss, rho, gamma, mu, side, rstart, alpha, days, w0, 1)
     

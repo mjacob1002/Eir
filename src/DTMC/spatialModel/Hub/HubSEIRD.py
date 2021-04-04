@@ -111,7 +111,7 @@ class HubSEIRD(HubSEIR):
         self.intCheck([S0, E0, I0, R0, days])
         self.floatCheck([pss, rho, gamma, mu, side, rstart, w0, alpha, hubConstant])
         self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, mu, side, rstart, days, w0, hubConstant, alpha])
-        self.probCheck([pss, rho, gamma, mu, w0])
+        self.probValCheck([pss, rho, gamma, mu, w0])
 
         super(HubSEIRD, self).__init__(S0=S0, E0=E0, I0=I0, R0=R0, pss=pss, rho=rho, gamma=gamma, side=side, rstart=rstart, alpha=alpha, days=days, hubConstant=hubConstant)
         self.Dcollect = []

@@ -111,7 +111,7 @@ class HubSIRSVD(HubSIRVD):
         self.intCheck([S0, I0, R0, V0, days])
         self.floatCheck([pss, gamma, kappa, eta, mu, side, rstart, w0, alpha, hubConstant, timeDelay])
         self.negValCheck([S0, I0, R0, V0, pss, gamma, kappa, eta, mu, side, rstart, days, w0, hubConstant, alpha])
-        self.probCheck([pss, gamma, kappa, eta, mu, w0])
+        self.probValCheck([pss, gamma, kappa, eta, mu, w0])
         super().__init__(S0=S0, I0=I0, R0=R0, V0=V0, pss=pss, gamma=gamma, eta=eta, mu=mu, side=side, rstart=rstart, alpha=alpha, days=days, timeDelay=timeDelay)
         self.kappa = kappa
     

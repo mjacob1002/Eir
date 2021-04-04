@@ -102,7 +102,7 @@ class HubSEIRS(HubSEIR):
         self.intCheck([S0, E0, I0, R0, days])
         self.floatCheck([pss, rho, gamma, kappa, side, rstart, w0, alpha, hubConstant])
         self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, kappa, side, rstart, days, w0, hubConstant, alpha])
-        self.probCheck([pss, rho, gamma, kappa, w0])
+        self.probValCheck([pss, rho, gamma, kappa, w0])
         super(HubSEIRS, self).__init__(S0, E0, I0, R0, pss, rho, gamma, side, rstart, alpha, days, w0=w0, hubConstant=hubConstant)
         self.kappa = kappa
     

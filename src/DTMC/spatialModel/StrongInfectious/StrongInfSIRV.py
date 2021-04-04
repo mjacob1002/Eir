@@ -12,7 +12,7 @@ class StrongInfSIRV(HubSIRV):
         self.intCheck([S0, I0, R0, V0, days])
         self.floatCheck([pss, gamma, eta, side, rstart, w0, alpha, timeDelay])
         self.negValCheck([S0, I0, R0, V0, pss, gamma, eta,side, rstart, days, w0, alpha])
-        self.probCheck([pss, gamma, eta, w0])
+        self.probValCheck([pss, gamma, eta, w0])
         super().__init__(S0=S0, I0=I0, R0=R0, V0=V0, pss=pss, gamma=gamma, eta=eta, rstart=rstart, side=side, days=days, alpha=alpha, w0=w0, hubConstant=1, timeDelay=timeDelay)
 
     def _infect(self, inf: Person, sus: Person):

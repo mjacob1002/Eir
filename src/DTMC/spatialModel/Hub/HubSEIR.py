@@ -102,7 +102,7 @@ class HubSEIR(Hub):
         self.intCheck([S0, E0, I0, R0, days])
         self.floatCheck([pss, rho, gamma, side, rstart, w0, alpha, hubConstant])
         self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, side, rstart, days, w0, hubConstant, alpha])
-        self.probCheck([pss, rho, gamma, w0])
+        self.probValCheck([pss, rho, gamma, w0])
 
         super(HubSEIR, self).__init__(popsize=S0+I0+R0, pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0,
                  days=days, w0=w0,hubConstant=hubConstant)
