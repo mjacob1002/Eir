@@ -108,17 +108,17 @@ class Simul_Details():
         for i in range(int(popsize)):
             self.stateChanges.append([])  
     
-    def isPersonHere(self, u: int):
+    def _isPersonHere(self, u: int):
         """Checks to makes sure that the Person exists in the simulation."""
         if not 0 <= u < self.popsize:
             raise e.PersonNotFound(u)
     
-    def intCheck(self, nums:list):
+    def _intCheck(self, nums:list):
         for num in nums:
             if type(num) != int:
                 raise e.NotIntException(num)
     
-    def isDayHere(self, day: int):
+    def _isDayHere(self, day: int):
         if not 0 <= day <= self.days:
             raise e.DayOutOfRange
     
@@ -200,8 +200,8 @@ class Simul_Details():
             on every day. 
         """
         # exception handling
-        self.intCheck(u)
-        self.isPersonHere(u)
+        self._intCheck(u)
+        self._isPersonHere(u)
         
         if movement:
             return self.stateChanges[u], self._getMovementHistoryHelp(u)
@@ -247,8 +247,8 @@ class Simul_Details():
             day 3. 
         """
         # exception handling
-        self.intCheck(u)
-        self.isPersonHere(u)
+        self._intCheck(u)
+        self._isPersonHere(u)
 
         history = []
         for i in range(1, self.days+1):
@@ -281,7 +281,7 @@ class Simul_Details():
             representing the susceptible individual who was infected
         """
         # exception handling
-        self.isDayHere(day)
+        self._isDayHere(day)
         return self.transmissions[day]
     
     # return a sort list of tuples from greatest to smallest, with first element being person "n"
