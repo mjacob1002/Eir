@@ -66,7 +66,7 @@ class DayOutOfRange(Exception):
     """ Checks to make sure that the day inputted in any Simul_Details is in the range of 0, self.days+1"""
 
     def __init__(self, *args):
-        super()._-init__()
+        super().__init__()
         if args:
             self.message = args[0]
         else:
