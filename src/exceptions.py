@@ -14,7 +14,7 @@ class NegativeValException(Exception):
         else:
             return "NegativeValException was raised."
 
-class ProbabilityExcpetion(Exception):
+class ProbabilityException(Exception):
     """Makes sure that values are between 0 and 1, inclusive."""
     def __init__(self, *args):
         super().__init__()

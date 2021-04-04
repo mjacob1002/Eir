@@ -123,7 +123,7 @@ class Spatial:
         for p in probs:
             # if the value is less than 0
             if p < 0:
-                raise e.ProbabilityExcpetion(p, False)
+                raise e.ProbabilityException(p, False)
             # if the value is greater than 1
             elif p > 1:
                 raise e.ProbabilityExcpetion(p, True)
