@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
+import src.exceptions as e
 """
 
 
@@ -106,7 +107,20 @@ class Simul_Details():
 
         for i in range(int(popsize)):
             self.stateChanges.append([])  
-         
+    
+    def isPersonHere(self, u: int):
+        """Checks to makes sure that the Person exists in the simulation."""
+        if not 0 <= u < self.popsize:
+            raise e.PersonNotFound(u)
+    
+    def intCheck(self, nums:list):
+        for num in nums:
+            if type(num) != int:
+                raise e.NotIntException(num)
+    
+    def isDayHere(self, day: int):
+        if not 0 <= day <= self.days:
+            raise e.DayOutOfRange
     
     # Add the tuples of locations to the locations 2D array
     # day is the current day of the simulation, location
@@ -185,6 +199,10 @@ class Simul_Details():
             only if movement=True. Returns a list of tuples representing (x,y) positions of person u
             on every day. 
         """
+        # exception handling
+        self.intCheck(u)
+        self.isPersonHere(u)
+        
         if movement:
             return self.stateChanges[u], self._getMovementHistoryHelp(u)
         return self.stateChanges[u]
@@ -228,6 +246,10 @@ class Simul_Details():
             person u infected them, respectively. For example, (9, 3) means that person u infected person 9 on
             day 3. 
         """
+        # exception handling
+        self.intCheck(u)
+        self.isPersonHere(u)
+
         history = []
         for i in range(1, self.days+1):
             # get the tranmission history on day i
@@ -258,6 +280,8 @@ class Simul_Details():
             a list containing tuples, the first element being the infectious individual, the second element
             representing the susceptible individual who was infected
         """
+        # exception handling
+        self.isDayHere(day)
         return self.transmissions[day]
     
     # return a sort list of tuples from greatest to smallest, with first element being person "n"
