@@ -112,6 +112,10 @@ class RandMoveSIRSD(RandMoveSIRD):
     
      """
     def __init__(self, S0, I0, R0, gamma, mu, kappa, planeSize, move_r:float, sigma_R:float, spread_r:float, sigma_r: float, days:int, w0=1.0, alpha=2.0):
+        self.intCheck([S0, I0, R0, days])
+        self.floatCheck(gamma, kappa, mu, planeSize, move_r, sigma_R, spread_r, sigma_r, w0, alpha)
+        self.negValCheck(S0, I0, R0, gamma, kappa, mu, planeSize, move_r, sigma_R, spread_r, sigma_r, days, w0, alpha)
+        self.probValCheck([gamma, kappa, mu, w0])
         self.kappa = kappa
         super(RandMoveSIRSD, self).__init__(S0=S0, I0=I0, R0=R0, gamma=gamma, mu=mu, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
         days=days)

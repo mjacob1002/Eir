@@ -93,6 +93,10 @@ class RandMoveSIS(RandMove):
 
     def __init__(self, S0:int, I0:int, gamma:float, planeSize:float, move_r:float, sigma_R:float, spread_r:float, sigma_r: float,
     days:int, w0=1.0, alpha=2.0):
+        self.intCheck([S0, I0, days])
+        self.floatCheck(gamma, planeSize, move_r, sigma_R, spread_r, sigma_r, w0, alpha)
+        self.negValCheck(S0, I0, gamma, planeSize, move_r, sigma_R, spread_r, sigma_r, days, w0, alpha)
+        self.probValCheck([gamma, w0])
         # call to super constructor
         super(RandMoveSIS, self).__init__(planeSize, move_r, spread_r, w0=w0)
         self.details = Simul_Details(days=days, popsize=S0+I0)

@@ -101,6 +101,10 @@ class RandMoveSIRS(RandMoveSIR):
 
     def __init__(self, S0:int, I0:int, R0:int, gamma:float, kappa:float, planeSize:float, move_r:float, sigma_R:float, spread_r:float, sigma_r: float,
     days:int, w0=1.0, alpha=2.0):
+        self.intCheck([S0, I0, R0, days])
+        self.floatCheck(gamma, kappa, planeSize, move_r, sigma_R, spread_r, sigma_r, w0, alpha)
+        self.negValCheck(S0, I0, R0, gamma, kappa, planeSize, move_r, sigma_R, spread_r, sigma_r, days, w0, alpha)
+        self.probValCheck([gamma, kappa, w0])
         super(RandMoveSIRS, self).__init__(S0=S0, I0=I0, R0=R0, gamma=gamma, planeSize=planeSize,move_r=move_r, sigma_R=sigma_R, spread_r=spread_r,sigma_r=sigma_r,
         days=days, w0=w0, alpha=alpha)
         self.kappa = kappa

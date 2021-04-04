@@ -122,6 +122,10 @@ class RandMoveSIRDV(RandMoveSIRD):
     
      """
     def __init__(self, S0, I0, R0, V0, gamma, mu, eta, planeSize, move_r:float, sigma_R:float, spread_r:float, sigma_r: float, days:int, w0=1.0, alpha=2.0, timeDelay=-4):
+        self.intCheck([S0, I0, R0, V0, days])
+        self.floatCheck(gamma, mu, eta, planeSize, move_r, sigma_R, spread_r, sigma_r, w0, alpha, timeDelay)
+        self.negValCheck(S0, I0, R0, V0, gamma, mu, eta, planeSize, move_r, sigma_R, spread_r, sigma_r, days, w0, alpha)
+        self.probValCheck([gamma, mu, eta, w0])
         self.timeDelay = timeDelay
         super(RandMoveSIRDV, self).__init__(S0=S0, I0=I0, R0=0, gamma=gamma, mu=mu, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
         days=days)
