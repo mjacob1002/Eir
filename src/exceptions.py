@@ -35,6 +35,7 @@ class NotIntException(Exception):
     """Checks to make sure that an int passed in to the parameter."""
 
     def __init__(self, *args):
+        super().__init__()
         if args:
             self.message = args[0]
         else:
@@ -49,6 +50,7 @@ class NotIntException(Exception):
 class NotFloatException(Exception):
     """Checks to make sure an int/float was passed in as a parameter."""
     def __init__(self, *args):
+        super().__init__()
         if args:
             self.message = args[0]
         else:
@@ -60,3 +62,37 @@ class NotFloatException(Exception):
         else:
             return "NotFloatException was raised."
 
+class DayOutOfRange(Exception):
+    """ Checks to make sure that the day inputted in any Simul_Details is in the range of 0, self.days+1"""
+
+    def __init__(self, *args):
+        super()._-init__()
+        if args:
+            self.message = args[0]
+        else:
+            self.message = None
+        
+    def __str__(self):
+        if self.message:
+            return f"Days only go from 0 to {self.days}; {self.message} is out of range."
+        else:
+            return "DayOutOfRange Exception"
+
+class PersonNotFound(Exception):
+    """ Thrown if the Person is not in the number of people in the simulation for the Simul_Details object."""
+
+    def __init__(self, *args):
+        super().__init__()
+        if args:
+            self.message = args[0]
+        else:
+            args = None
+    
+    def __str__(self):
+        if self.message:
+            return f"{self.message} is not found. Persons range from 0 to {self.popsize-1}."
+        else:
+            return "PersonNotFound Exception"
+    
+
+        
