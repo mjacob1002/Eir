@@ -1046,7 +1046,7 @@ def getHubSEIRS():
     print(test.toDataFrame())
 
 def getHub_ICUV():
-    test = Hub_ICUV(S0=999, E0=0, I0=1, R0=0, V0=0, rho=.3, ioda=.3, gamma=.25, mu=0.007, omega=.14, phi = .42, chi=.15, kappa=.05, eta=.03, rstart=3, pss=.17, side=25, days=62)
+    test = Hub_ICUV(S0=999, E0=0, I0=1, R0=0, V0=0, rho=.3, ioda=.3, gamma=.25, mu=0.007, omega=.14, phi = .42, chi=.15, kappa=.05, eta=.02, rstart=3, pss=.17, side=25, days=62)
     d = test.run()
     print(test.toDataFrame())
     print(d.personHistory(473))
@@ -1154,9 +1154,8 @@ def getStrongInfSIRVD():
 
 
 
-
 if  __name__ == '__main__':
-    getPeriodicSIS()
+    #getPeriodicSIS()
     #getPeriodicSIRVS()
     #getPeriodicSIRV()
     #getPeriodicSIRSDV()
@@ -1192,9 +1191,9 @@ if  __name__ == '__main__':
     #getStrongInfSIS()
     #getStrongInfSEIRD()
     #getStrongInf_ICUV()
-    #getHub_ICUV()
+    getHub_ICUV()
     #getHubSIR()
-    getHubSIRS()
+    #getHubSIRS()
     #getHubSEIR()
     #getHubSIRV()
     #getHubSIRSVD()

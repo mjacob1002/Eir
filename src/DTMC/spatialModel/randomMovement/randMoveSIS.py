@@ -93,6 +93,7 @@ class RandMoveSIS(RandMove):
 
     def __init__(self, S0:int, I0:int, gamma:float, planeSize:float, move_r:float, sigma_R:float, spread_r:float, sigma_r: float,
     days:int, w0=1.0, alpha=2.0):
+        # error checks
         self.intCheck([S0, I0, days])
         self.floatCheck(gamma, planeSize, move_r, sigma_R, spread_r, sigma_r, w0, alpha)
         self.negValCheck(S0, I0, gamma, planeSize, move_r, sigma_R, spread_r, sigma_r, days, w0, alpha)
