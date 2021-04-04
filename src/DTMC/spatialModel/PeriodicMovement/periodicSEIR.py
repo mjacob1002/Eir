@@ -11,6 +11,9 @@ class PeriodicSEIR(RandMoveSEIR):
 
     def __init__(self, S0:int, E0:int, I0:int, R0:int, rho: float, gamma: float, planeSize: float, move_r: float, sigma_R: float, 
         spread_r: float, sigma_r: float, days:int, w0=1.0, alpha=2.0, k = 5, std=pi/2):
+        # error check
+        self.floatCheck([k, std])
+        self.negValCheck([k, std])
         # add the stuff for theta's normal distribution in the _move function.
         self.k = k
         self.std = std
