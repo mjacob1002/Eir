@@ -98,6 +98,12 @@ class HubSEIR(Hub):
     """
     def __init__(self, S0: int, E0: int, I0: int, R0: int, pss: float, rho: float, 
     gamma: float, side: float, rstart:float, days: int, w0=1.0, hubConstant=6**0.5, alpha=2.0):
+        #error checking
+        self.intCheck([S0, E0, I0, R0, days])
+        self.floatCheck([pss, rho, gamma, side, rstart, w0, alpha, hubConstant])
+        self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, side, rstart, days, w0, hubConstant, alpha])
+        self.probCheck([pss, rho, gamma, w0])
+
         super(HubSEIR, self).__init__(popsize=S0+I0+R0, pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0,
                  days=days, w0=w0,hubConstant=hubConstant)
         # adjust the popsize

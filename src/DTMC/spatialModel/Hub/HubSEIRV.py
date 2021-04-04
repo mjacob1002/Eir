@@ -112,6 +112,13 @@ class HubSEIRV(HubSEIR):
     """
     def __init__(self, S0: int, E0: int, I0: int, R0: int, V0:int, pss: float, rho: float, 
         gamma: float, eta: float, side: float, rstart:float, alpha: int, days: int, w0=1.0, hubConstant=6**0.5, timeDelay=-1):
+        # error checking
+        # error checking
+        self.intCheck([S0, E0, I0, R0, V0, days])
+        self.floatCheck([pss, rho, gamma, eta, side, rstart, w0, alpha, hubConstant, timeDelay])
+        self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, eta, side, rstart, days, w0, hubConstant, alpha])
+        self.probCheck([pss, rho, gamma, eta, w0])
+
         # S->v, given that didn't go to S->E
         super(HubSEIRV, self).__init__(S0=S0, E0=E0, I0=I0, R0=R0, pss=pss, rho=rho, gamma=gamma, side=side, rstart=rstart, alpha=alpha, 
         days=days)

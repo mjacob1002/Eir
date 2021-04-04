@@ -77,6 +77,8 @@ class HubSIS(Hub):
                  gamma: float, w0=1.0,
                  hubConstant=6 ** 0.5, alpha=2.0):
         # error checking
+        self.intCheck([S0, I0, days])
+        self.floatCheck([pss, rstart, side, gamma, w0, hubConstant, alpha])
         self.negValCheck([S0, I0, pss, rstart, side, days, gamma, w0, hubConstant, alpha])
         self.probValCheck([pss, gamma, w0])
         self.popsize = S0 + I0

@@ -99,7 +99,12 @@ class Hub_ICUV(Hub):
         """
     def __init__(self, S0:int, E0:int, I0:int, R0:int, V0:int, rho: float, ioda: float,  gamma: float, mu: float, phi: float, chi: float, omega: float, kappa: float, eta: float, rstart: float, 
         pss: float, side: float, days: int, alpha=2.3, w0=1.0, hubConstant=6**0.5, timeDelay=-1):
-        
+        # error checks
+        self.intCheck([S0, E0, I0, R0, V0, days])
+        self.floatCheck([rho, ioda, gamma, mu, phi, chi, omega, kappa, eta, rstart, pss, side, alpha, w0, hubConstant, timeDelay])
+        self.negValCheck([S0, E0, I0, R0, V0, rstart, side, days, alpha, hubConstant])
+        self.probValCheck([rho, ioda, gamma, mu, phi, chi, omega, kappa, eta, w0])
+
         super().__init__(popsize=S0+I0+R0, pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, days=days, w0=w0, hubConstant=hubConstant)
         # initialize the numpy arrays
         self.timeDelay = timeDelay

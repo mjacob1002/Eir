@@ -87,6 +87,11 @@ class HubSIR(HubSIS):
     """
     def __init__(self, S0: int, I0: int, R0: int, pss: float, rstart: float, side: float, 
                  days: int, gamma: float, alpha=2.0, w0=1.0,hubConstant=6 ** 0.5):
+        # error checking
+        self.intCheck([S0, I0, R0,days])
+        self.floatCheck([pss, gamma, side, rstart, w0, alpha, hubConstant])
+        self.negValCheck([S0, I0, R0, pss, gamma, side, rstart, days, w0, hubConstant, alpha])
+        self.probCheck([pss, gamma, w0])
         super(HubSIR, self).__init__(S0=S0, I0=I0, pss=pss, rstart=rstart, alpha=alpha, days=days, side=side, w0=w0, gamma=gamma, hubConstant=hubConstant)
         print(self.gamma)
         # reconfigure the population size
