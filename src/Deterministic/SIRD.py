@@ -8,6 +8,10 @@ import pandas as pd
 class SIRD(SIR):
     # omega is the amount of people that go from I to D
     def __init__(self, beta: float, gamma: float, omega: float, S0: int, I0: int, R0: int):
+        self.intCheck([S0, I0, R0])
+        self.floatCheck([beta, gamma, omega, S0, I0, R0])
+        self.negValCheck([beta, gamma, omega, S0, I0, R0])
+        self.probCheck([gamma, omega])
         super(SIRD, self).__init__(beta, gamma, S0, I0, R0)
         self.omega = omega
         assert self.gamma + self.omega <= 1

@@ -9,6 +9,11 @@ from multipledispatch import dispatch
 class SIS(CompartmentalModel):
 
     def __init__(self, beta, gamma, S0, I0):
+        self.intCheck([S0, I0])
+        self.floatCheck([beta, gamma, S0, I0])
+        self.probCheck([gamma])
+        self.negValCheck([beta, gamma])
+        
         super(SIS, self).__init__(S0, I0)
         # infection rate
         self.beta = beta
@@ -32,7 +37,7 @@ class SIS(CompartmentalModel):
             I[i] = I[i - 1] + dt * f[1]
         return S, I
 
-    def _simulate(self, days: int, dt: float) -> tuple:
+    def _simulate(self, days: int, dt: float):
         # total number of iterations that will be run + the starting value at time 0
         size = int(days / dt + 1)
         # create the arrays to store the different values

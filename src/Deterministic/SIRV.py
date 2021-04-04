@@ -9,18 +9,22 @@ from multipledispatch import dispatch
 # S -> I -> R, S- > V
 class SIRV(SIR):
 
-    def __init__(self, beta, gamma, rho, S0, I0, R0, V0):
+    def __init__(self, beta, gamma, eta, S0, I0, R0, V0):
+        self.intCheck([S0, I0, R0, V0])
+        self.floatCheck([beta, gamma, eta])
+        self.negValCheck([beta, gamma, eta, S0, I0, R0, V0])
+        self.probCheck([gamma, eta])
         super(SIRV, self).__init__(beta, gamma, S0, I0, R0)
         self.V0 = V0
-        self.rho = rho
+        self.eta = eta
         self.N = S0 + I0 + R0 + V0
 
     def changeV0(self, x: int):
         self.V0 = x
         self.N = self.S0 + self.I0 + self.R0 + self.V0
 
-    def changeRho(self, x: int):
-        self.rho = x
+    def changeEta(self, x: int):
+        self.eta = x
 
     def _deriv(self, s, i):
         # amount of people going from S -> I
@@ -28,7 +32,7 @@ class SIRV(SIR):
         # amount of people going from I -> R
         y = self.gamma * i
         # amount of people going from S -> V
-        z = self.rho * s
+        z = self.eta * s
         return -x - z, x - y, y, z
 
     @dispatch(float, np.ndarray, np.ndarray, np.ndarray, np.ndarray)

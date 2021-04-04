@@ -8,13 +8,14 @@ from multipledispatch import dispatch
 class SIR(CompartmentalModel):
     # beta is the transmission rate, gamma is the recovery rate
     # S0, I0, R0 are the starting Susceptible, infected, and removed people respectively
+    """  """
     
     def __init__(self, beta: float, gamma: float, S0: int, I0: int, R0: int):
-        # makes sure all values are non-negative
-        assert beta > 0, gamma > 0
-        assert S0 >= 0
-        assert I0 >= 0
-        assert R0 >= 0
+        # run error checks
+        self.intCheck([S0, I0, R0])
+        self.floatCheck([beta, gamma, S0, I0, R0])
+        self.negValCheck([beta, gamma, S0, I0, R0])
+        self.prob([gamma])
         super(SIR, self).__init__(S0, I0)
         self.R0 = R0
         self.beta = beta
@@ -155,14 +156,14 @@ class SIR(CompartmentalModel):
         return df
 
     # create everything as a percentage of the total population, given a dataframe
-    def normalizeDataFrame(self, df: pd.DataFrame) -> pd.DataFrame:
+    def normalizeDataFrame(self, df: pd.DataFrame):
         colnames = list(df.columns)
         colnames.pop(0)
         for i in colnames:
             df[i] = df[i].div(self.N)
         return df
 
-    def normalizeRun(self, days: int, dt: float, accumulate=True) -> pd.DataFrame:
+    def normalizeRun(self, days: int, dt: float, accumulate=True):
         df: pd.DataFrame
         if accumulate:
             df = self.accumulate(days, dt, plot=False)
@@ -186,10 +187,10 @@ class SIR(CompartmentalModel):
 
 
 # start of code just to get plot for paper
-S0, I0, R0 = 999, 1, 0
-beta = 1.5
-gamma = .3
-test = SIR(beta=beta, gamma=gamma, S0=S0, I0=I0, R0=R0)
-test.run(days=31, dt=.1)
-x = test.normalizeRun(days=31, dt=.1, accumulate=False)
-print(x)
+#S0, I0, R0 = 999, 1, 0
+#beta = 1.5
+#gamma = .3
+#test = SIR(beta=beta, gamma=gamma, S0=S0, I0=I0, R0=R0)
+#test.run(days=31, dt=.1)
+#x = test.normalizeRun(days=31, dt=.1, accumulate=False)
+#print(x)

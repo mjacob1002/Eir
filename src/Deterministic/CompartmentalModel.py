@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from multipledispatch import dispatch
-
+import src.exceptions as e
 
 # sources:
 # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5348083/
@@ -33,6 +33,31 @@ class CompartmentalModel:
     @dispatch(int, float, bool)
     def run(self, days: int, dt: float, plot=True):
         pass
+    
+    def intCheck(self, vals: list):
+        for val in vals:
+            if type(val) != int:
+                raise e.NotIntException(val)
+    
+    def floatCheck(self, vals: list):
+        for val in vals:
+            if type(val) != int or type(val) != float:
+                raise e.NotFloatException(val)
+    
+    def negValCheck(self, vals: list):
+        for val in vals:
+            if val < 0:
+                raise e.NegativeValException(val)
+    
+    def probCheck(self, vals: list):
+        for val in vals:
+            if not 0 <= val <= 1:
+                raise e.ProbabilityExcpetion(val)
+    
+
+    
+
+        
 
 
 

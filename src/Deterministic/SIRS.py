@@ -7,12 +7,11 @@ from multipledispatch import dispatch
 
 class SIRS(SIR):
     def __init__(self, beta: float, gamma: float, kappa: float, S0, I0, R0):
-        # checking for valid input
-        assert beta > 0, gamma > 0
-        assert kappa > 0
-        assert S0 >= 0
-        assert I0 >= 0
-        assert R0 >= 0
+        # error checking 
+        self.intCheck([S0, I0, R0])
+        self.floatCheck([beta, gamma, kappa, S0, I0, R0])
+        self.negValCheck([beta, gamma, kappa, S0, I0, R0])
+        self.probCheck([gamma, kappa])
         # call the superclass constructor
         super(SIRS, self).__init__(beta, gamma, S0, I0, R0)
         # map kappa to a class variable
