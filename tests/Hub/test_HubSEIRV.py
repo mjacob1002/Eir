@@ -52,7 +52,7 @@ class Test_HubSEIRV(unittest.TestCase):
         self.assertRaises(e.NotFloatException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, .15, .2, 25, 3, 31, 1.0, True, 2)
         self.assertRaises(e.NotFloatException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, .15, .2, 25, 3, 31, 1.0, 6**0.5, '2')
         self.assertRaises(e.NotFloatException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, .15, '.2', 25, 3, 31, 1.0, 6**0.5, 2)
-        self.assertRaises(e.NotFloatException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, .15, '.2', 25, 3, 31, 1.0, 6**0.5, 2, '1')
+        self.assertRaises(e.NotFloatException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, .15, .2, 25, 3, 31, 1.0, 6**0.5, 2, '1')
         # checks for negative values
         self.assertRaises(e.NegativeValException, HubSEIRV, -999, 1, 1, 0, 0, .23, .2, .15, .2, 25, 3, 31, 1.0, 6**0.5, 2)
         self.assertRaises(e.NegativeValException, HubSEIRV, 999, -1, 1, 0, 0, .23, .2, .15, .2, 25, 3, 31, 1.0, 6**0.5, 2)
@@ -63,7 +63,7 @@ class Test_HubSEIRV(unittest.TestCase):
         self.assertRaises(e.NegativeValException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, .15, .2, -25, 3, 31, 1.0, 6**0.5, 2)
         self.assertRaises(e.NegativeValException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, -.15, .2, 25, 3, 31, 1.0, -6**0.5, 2)
         self.assertRaises(e.NegativeValException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, .15, .2, 25, 3, 31, -1.0, 6**0.5, 2)
-        self.assertRaises(e.NotFloatException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, .15, -.2, 25, 3, 31, 1.0, 6**0.5, '2')
+        self.assertRaises(e.NegativeValException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, .15, -.2, 25, 3, 31, 1.0, 6**0.5, 2)
         self.assertRaises(e.NegativeValException, HubSEIRV, 999, 1, 1, 0, -10, .23, .2, .15, .2, 25, 3, 31, 1.0, 6**0.5, 2)
         # checks probability
         self.assertRaises(e.ProbabilityException, HubSEIRV, 999, 1, 1, 0, 0, .23, .2, 1.15, .2, 25, 3, 31, 1.0, 6**0.5, 2)
