@@ -179,7 +179,7 @@ class RandMove():
                 raise e.ProbabilityException(p, False)
             # if the value is greater than 1
             elif p > 1:
-                raise e.ProbabilityExction(p, True)
+                raise e.ProbabilityException(p, True)
         
     def intCheck(self, nums:list):
         """ Makes sure everything in nums is an int"""
