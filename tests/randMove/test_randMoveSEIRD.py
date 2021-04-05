@@ -59,8 +59,8 @@ class Test_RandMoveSEIRD(unittest.TestCase):
         # probability check
         self.assertRaises(e.ProbabilityException, RandMoveSEIRD, 999, 1, 0, 0, .25, .3, .2, 25, 3, .3, 1, .25, 31, 1.01, 2.0)
         self.assertRaises(e.ProbabilityException, RandMoveSEIRD, 999, 1, 0, 0, .25, 1.3, .2, 25, 3, .3, 1, .25, 31, 1.0, 2.0)
-        self.assertRaises(e.NegativeValException, RandMoveSEIRD, 999, 1, -1, 0, .25, .3, .2, 25, -3, .3, 1, .25, 31, 1.0, 2.0)
-        self.assertRaises(e.NegativeValException, RandMoveSEIRD, 999, 1, 1, 0, .25, .3, -.2, 25, -3, .3, 1, .25, 31, 1.0, 2.0)
+        self.assertRaises(e.ProbabilityException, RandMoveSEIRD, 999, 1, 1, 0, 1.25, .3, .2, 25, 3, .3, 1, .25, 31, 1.0, 2.0)
+        self.assertRaises(e.ProbabilityException, RandMoveSEIRD, 999, 1, 1, 0, .25, .3, 1.2, 25, 3, .3, 1, .25, 31, 1.0, 2.0)
 
         print("Input Test passed")
 
