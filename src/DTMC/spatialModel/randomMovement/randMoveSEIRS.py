@@ -118,7 +118,7 @@ class RandMoveSEIRS(RandMoveSEIR):
         self.intCheck([S0, E0, I0, R0, days])
         self.floatCheck(rho, gamma, kappa, planeSize, move_r, sigma_R, spread_r, sigma_r, w0, alpha)
         self.negValCheck(S0, E0, I0, R0, rho, gamma, kappa, planeSize, move_r, sigma_R, spread_r, sigma_r, days, w0, alpha)
-        self.probValCheck([rho, gamma, w0])
+        self.probValCheck([rho, gamma, kappa, w0])
         super(RandMoveSEIRS, self).__init__(S0=S0, E0=E0, I0=I0, R0=R0, rho=rho, gamma=gamma, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days, w0=w0, alpha=alpha)
         self.kappa = kappa
 
