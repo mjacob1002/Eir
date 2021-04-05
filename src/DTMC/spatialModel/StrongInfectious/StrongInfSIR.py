@@ -12,7 +12,7 @@ class StrongInfSIR(HubSIR):
         self.intCheck([S0, I0, R0,days])
         self.floatCheck([pss, gamma, side, rstart, w0, alpha])
         self.negValCheck([S0, I0, R0, pss, gamma, side, rstart, days, w0, alpha])
-        self.probvalCheck([pss, gamma, w0])
+        self.probValCheck([pss, gamma, w0])
         super(StrongInfSIR, self).__init__(pss=pss, rstart=rstart, alpha=alpha, side=side, S0=S0, I0=I0, R0=R0, days=days, gamma=gamma, w0=w0, hubConstant=1)
     
 

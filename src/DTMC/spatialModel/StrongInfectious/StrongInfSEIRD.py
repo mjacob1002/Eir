@@ -16,7 +16,7 @@ class StrongInfSEIRD(HubSEIRD):
         self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, mu, side, rstart, days, w0, alpha])
         self.probValCheck([pss, rho, gamma, mu, w0])
 
-        super().__init__(S0, E0, I0, R0, pss, rho, gamma, mu, side, rstart, alpha, days, w0, 1)
+        super().__init__(S0=S0, E0=E0, I0=I0, R0=R0, pss=pss, rho=rho, gamma=gamma, mu=mu, side=side, rstart=rstart, alpha=alpha, days=days, w0=w0, hubConstant=1)
     
     def _infect(self, inf: Person, sus: Person):
         """
