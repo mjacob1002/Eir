@@ -76,6 +76,9 @@ from src.DTMC.spatialModel.PeriodicMovement.periodicSIRV import PeriodicSIRV
 from src.DTMC.spatialModel.PeriodicMovement.periodicSIRVS import PeriodicSIRVS
 from src.DTMC.spatialModel.PeriodicMovement.periodicSIS import PeriodicSIS
 
+# generate a fixed seed to make sure reproducible results
+np.random.seed(0)
+
 def getPeriodicSIRSD():
     S0 = 999
     I0 = 1
@@ -1039,7 +1042,7 @@ def testRandSIRVS():
 
 def getHubSEIRS():
     kappa = .2
-    test = HubSEIRS(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, kappa=kappa, side=25, rstart=3, alpha=2, 
+    test = HubSEIRS(S0=999, E0=0, I0=1, R0=0, pss=.17, rho=.3, gamma=.23, kappa=kappa, side=25, rstart=3, 
     days=31)
     df = test.run()
     print(df.sortedTransmissions())
@@ -1048,9 +1051,11 @@ def getHubSEIRS():
 def getHub_ICUV():
     test = Hub_ICUV(S0=999, E0=0, I0=1, R0=0, V0=0, rho=.3, ioda=.3, gamma=.25, mu=0.007, omega=.14, phi = .42, chi=.15, kappa=.05, eta=.02, rstart=3, pss=.17, side=25, days=62)
     d = test.run()
-    print(test.toDataFrame())
-    print(d.personHistory(473))
-    test.plot()
+    df = test.toDataFrame()
+    print(df)
+    #df.to_csv("test1.csv", index=False)
+    df2 = pd.read_csv("test1.csv")
+    print(df.equals(df2))
 
 def getStrongInf_ICUV():
     test = StrongInf_ICUV(S0=999, E0=0, I0=1, R0=0, V0=0, rho=.3, ioda=.3, gamma=.25, mu=0.007, omega=.14, phi = .42, chi=.15, kappa=.05, eta=.03, rstart=3, pss=.17, side=25, days=62, w0=.7)
@@ -1155,6 +1160,12 @@ def getStrongInfSIRVD():
 
 
 if  __name__ == '__main__':
+    getHubSEIRS()
+    getHubSEIRV()
+    getHubSEIRD()
+    getHubSEIRSV()
+    getHubSEIRSVD()
+    getHubSEIRVD()
     #getPeriodicSIS()
     #getPeriodicSIRVS()
     #getPeriodicSIRV()
@@ -1191,7 +1202,7 @@ if  __name__ == '__main__':
     #getStrongInfSIS()
     #getStrongInfSEIRD()
     #getStrongInf_ICUV()
-    getHub_ICUV()
+    #getHub_ICUV()
     #getHubSIR()
     #getHubSIRS()
     #getHubSEIR()

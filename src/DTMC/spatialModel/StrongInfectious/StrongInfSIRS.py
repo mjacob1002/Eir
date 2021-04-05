@@ -6,7 +6,7 @@ from src.DTMC.spatialModel.Hub.HubSIRS import HubSIRS
 from src.utility import dist, randEvent, Person
 
 class StrongInfSIRS(HubSIRS):
-    def __init__(self, pss: float, rstart: float, alpha: int, side: float, S0: int, I0: int, R0: int, days:int, gamma: float, kappa: float, w0=.7):
+    def __init__(self, pss: float, rstart: float, side: float, S0: int, I0: int, R0: int, days:int, gamma: float, kappa: float, w0=.7, alpha=2.0):
         # error checking
         self.intCheck([S0, I0, R0,days])
         self.floatCheck([pss, gamma, kappa, side, rstart, w0, alpha])
