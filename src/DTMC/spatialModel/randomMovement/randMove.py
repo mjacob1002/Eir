@@ -163,11 +163,11 @@ class RandMove():
         """
         return static_prob_help(collect, prob)
 
-    def negValCheck(self, vals: list):
+    def negValCheck(self, *args):
         """
         Checks to make sure that values are non-negative
         """
-        for val in vals:
+        for val in args:
             if val < 0:
                 raise e.NegativeValException(val)
     
@@ -179,7 +179,7 @@ class RandMove():
                 raise e.ProbabilityException(p, False)
             # if the value is greater than 1
             elif p > 1:
-                raise e.ProbabilityException(p, True)
+                raise e.ProbabilityExction(p, True)
         
     def intCheck(self, nums:list):
         """ Makes sure everything in nums is an int"""
@@ -187,8 +187,8 @@ class RandMove():
             if type(num) != int:
                 raise e.NotIntException(num)
     
-    def floatCheck(self, nums:list):
+    def floatCheck(self, *args):
         """Makes sure everything in nums is either a float or an int"""
-        for num in nums:
+        for num in args:
             if type(num) != int and type(num) != float:
                 raise e.NotFloatException(num)
