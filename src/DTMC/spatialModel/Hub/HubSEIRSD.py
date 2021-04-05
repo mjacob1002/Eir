@@ -108,7 +108,7 @@ class HubSEIRSD(HubSEIRD):
 
     """
     def __init__(self, S0: int, E0: int, I0: int, R0: int, pss: float, rho: float, 
-        gamma: float, kappa: float, mu: float, side: float, rstart:float, alpha: int, days: int, w0=1.0, hubConstant=6**0.5):
+        gamma: float, kappa: float, mu: float, side: float, rstart:float, days: int, w0=1.0, hubConstant=6**0.5, alpha=2.0):
         #error checking
         self.intCheck([S0, E0, I0, R0, days])
         self.floatCheck([pss, rho, gamma, kappa, mu, side, rstart, w0, alpha, hubConstant])
