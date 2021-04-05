@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import unittest
 
-from src.DTMC.spatialModel.randomMovement.randMoveSIRD import RandMoveSIRD
-import src.exceptions as e
+from Eir.DTMC.spatialModel.randomMovement.randMoveSIRD import RandMoveSIRD
+import Eir.exceptions as e
 
 np.random.seed(347446)
 

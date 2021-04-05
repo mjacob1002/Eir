@@ -2,79 +2,79 @@ from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
 # file purely used for testing code by running this file in the terminal
-from src.DTMC.spatialModel.Hub.HubSIRS import HubSIRS
-from src.DTMC.spatialModel.randomMovement.randMoveSIS import RandMoveSIS
-from src.DTMC.spatialModel.randomMovement.randMoveSIR import RandMoveSIR
-from src.DTMC.spatialModel.randomMovement.randMoveSIRS import RandMoveSIRS
-from src.DTMC.spatialModel.Hub.HubSIR import HubSIR
-from src.DTMC.spatialModel.Hub.HubSIRD import HubSIRD
-from src.DTMC.spatialModel.Hub.HubSIRSD import HubSIRSD
-from src.DTMC.spatialModel.Hub.HubSIRV import HubSIRV
-from src.DTMC.spatialModel.Hub.HubSIRSV import HubSIRSV
-from src.DTMC.spatialModel.Hub.HubSIRVD import HubSIRVD
-from src.DTMC.spatialModel.Hub.HubSIRSVD import HubSIRSVD
-from src.DTMC.spatialModel.Hub.HubSIS import HubSIS
-from src.DTMC.spatialModel.Hub.HubSEIR import HubSEIR
-from src.DTMC.spatialModel.Hub.HubSEIRS import HubSEIRS
-from src.DTMC.spatialModel.Hub.HubSEIRV import HubSEIRV
-from src.DTMC.spatialModel.Hub.HubSEIRSV import HubSEIRSV
-from src.DTMC.spatialModel.Hub.HubSEIRD import HubSEIRD
-from src.DTMC.spatialModel.Hub.HubSEIRSD import HubSEIRSD
-from src.DTMC.spatialModel.Hub.HubSEIRSVD import HubSEIRSVD
-from src.DTMC.spatialModel.Hub.HubSEIRVD import HubSEIRVD
-from src.DTMC.spatialModel.Hub.Hub_ICUV import Hub_ICUV
+from Eir.DTMC.spatialModel.Hub.HubSIRS import HubSIRS
+from Eir.DTMC.spatialModel.randomMovement.randMoveSIS import RandMoveSIS
+from Eir.DTMC.spatialModel.randomMovement.randMoveSIR import RandMoveSIR
+from Eir.DTMC.spatialModel.randomMovement.randMoveSIRS import RandMoveSIRS
+from Eir.DTMC.spatialModel.Hub.HubSIR import HubSIR
+from Eir.DTMC.spatialModel.Hub.HubSIRD import HubSIRD
+from Eir.DTMC.spatialModel.Hub.HubSIRSD import HubSIRSD
+from Eir.DTMC.spatialModel.Hub.HubSIRV import HubSIRV
+from Eir.DTMC.spatialModel.Hub.HubSIRSV import HubSIRSV
+from Eir.DTMC.spatialModel.Hub.HubSIRVD import HubSIRVD
+from Eir.DTMC.spatialModel.Hub.HubSIRSVD import HubSIRSVD
+from Eir.DTMC.spatialModel.Hub.HubSIS import HubSIS
+from Eir.DTMC.spatialModel.Hub.HubSEIR import HubSEIR
+from Eir.DTMC.spatialModel.Hub.HubSEIRS import HubSEIRS
+from Eir.DTMC.spatialModel.Hub.HubSEIRV import HubSEIRV
+from Eir.DTMC.spatialModel.Hub.HubSEIRSV import HubSEIRSV
+from Eir.DTMC.spatialModel.Hub.HubSEIRD import HubSEIRD
+from Eir.DTMC.spatialModel.Hub.HubSEIRSD import HubSEIRSD
+from Eir.DTMC.spatialModel.Hub.HubSEIRSVD import HubSEIRSVD
+from Eir.DTMC.spatialModel.Hub.HubSEIRVD import HubSEIRVD
+from Eir.DTMC.spatialModel.Hub.Hub_ICUV import Hub_ICUV
 
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSIR import StrongInfSIR
-from src.DTMC.spatialModel.StrongInfectious.StrongInf_ICUV import StrongInf_ICUV
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRD import StrongInfSEIRD
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIR import StrongInfSEIR
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSIS import StrongInfSIS
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSIR import StrongInfSIR
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRS import StrongInfSEIRS
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRSD import StrongInfSEIRSD
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRSV import StrongInfSEIRSV
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRSVD import StrongInfSEIRSVD
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRVD import StrongInfSEIRVD
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSEIRV import StrongInfSEIRV
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRD import StrongInfSIRD
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRSD import StrongInfSIRSD
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRSV import StrongInfSIRSV
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRSVD import StrongInfSIRSVD
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRV import StrongInfSIRV
-from src.DTMC.spatialModel.StrongInfectious.StrongInfSIRVD import StrongInfSIRVD
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSIR import StrongInfSIR
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInf_ICUV import StrongInf_ICUV
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSEIRD import StrongInfSEIRD
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSEIR import StrongInfSEIR
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSIS import StrongInfSIS
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSIR import StrongInfSIR
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSEIRS import StrongInfSEIRS
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSEIRSD import StrongInfSEIRSD
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSEIRSV import StrongInfSEIRSV
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSEIRSVD import StrongInfSEIRSVD
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSEIRVD import StrongInfSEIRVD
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSEIRV import StrongInfSEIRV
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSIRD import StrongInfSIRD
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSIRSD import StrongInfSIRSD
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSIRSV import StrongInfSIRSV
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSIRSVD import StrongInfSIRSVD
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSIRV import StrongInfSIRV
+from Eir.DTMC.spatialModel.StrongInfectious.StrongInfSIRVD import StrongInfSIRVD
 
 
-from src.DTMC.spatialModel.randomMovement.randMoveSEIRS import RandMoveSEIRS
-from src.DTMC.spatialModel.randomMovement.randMoveSIRV import RandMoveSIRV
-from src.DTMC.spatialModel.randomMovement.randMoveSIRVS import RandMoveSIRVS
-from src.DTMC.spatialModel.randomMovement.randMoveSEIRV import RandMoveSEIRV
-from src.DTMC.spatialModel.randomMovement.randMoveSEIRVS import RandMoveSEIRVS
-from src.DTMC.spatialModel.randomMovement.randMoveSIRD import RandMoveSIRD
-from src.DTMC.spatialModel.randomMovement.randMoveSIRSD import RandMoveSIRSD
-from src.DTMC.spatialModel.randomMovement.randMoveSIRDV import RandMoveSIRDV
-from src.DTMC.spatialModel.randomMovement.randMoveSIRSDV import RandMoveSIRSDV
-from src.DTMC.spatialModel.randomMovement.randMoveSEIRD import RandMoveSEIRD
-from src.DTMC.spatialModel.randomMovement.randMoveSEIRSD import RandMoveSEIRSD
-from src.DTMC.spatialModel.randomMovement.randMoveSEIRDV import RandMoveSEIRDV
-from src.DTMC.spatialModel.randomMovement.randMoveSEIRSDV import RandMoveSEIRSDV
+from Eir.DTMC.spatialModel.randomMovement.randMoveSEIRS import RandMoveSEIRS
+from Eir.DTMC.spatialModel.randomMovement.randMoveSIRV import RandMoveSIRV
+from Eir.DTMC.spatialModel.randomMovement.randMoveSIRVS import RandMoveSIRVS
+from Eir.DTMC.spatialModel.randomMovement.randMoveSEIRV import RandMoveSEIRV
+from Eir.DTMC.spatialModel.randomMovement.randMoveSEIRVS import RandMoveSEIRVS
+from Eir.DTMC.spatialModel.randomMovement.randMoveSIRD import RandMoveSIRD
+from Eir.DTMC.spatialModel.randomMovement.randMoveSIRSD import RandMoveSIRSD
+from Eir.DTMC.spatialModel.randomMovement.randMoveSIRDV import RandMoveSIRDV
+from Eir.DTMC.spatialModel.randomMovement.randMoveSIRSDV import RandMoveSIRSDV
+from Eir.DTMC.spatialModel.randomMovement.randMoveSEIRD import RandMoveSEIRD
+from Eir.DTMC.spatialModel.randomMovement.randMoveSEIRSD import RandMoveSEIRSD
+from Eir.DTMC.spatialModel.randomMovement.randMoveSEIRDV import RandMoveSEIRDV
+from Eir.DTMC.spatialModel.randomMovement.randMoveSEIRSDV import RandMoveSEIRSDV
 
-from src.DTMC.spatialModel.PeriodicMovement.periodicSEIR import PeriodicSEIR
-from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRD import PeriodicSEIRD
-from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRDV import PeriodicSEIRDV
-from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRS import PeriodicSEIRS
-from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRSD import PeriodicSEIRSD
-from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRSDV import PeriodicSEIRSDV
-from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRV import PeriodicSEIRV
-from src.DTMC.spatialModel.PeriodicMovement.periodicSEIRVS import PeriodicSEIRVS
-from src.DTMC.spatialModel.PeriodicMovement.periodicSIR import PeriodicSIR
-from src.DTMC.spatialModel.PeriodicMovement.periodicSIRD import PeriodicSIRD
-from src.DTMC.spatialModel.PeriodicMovement.periodicSIRDV import PeriodicSIRDV
-from src.DTMC.spatialModel.PeriodicMovement.periodicSIRS import PeriodicSIRS
-from src.DTMC.spatialModel.PeriodicMovement.periodicSIRSD import PeriodicSIRSD
-from src.DTMC.spatialModel.PeriodicMovement.periodicSIRSDV import PeriodicSIRSDV
-from src.DTMC.spatialModel.PeriodicMovement.periodicSIRV import PeriodicSIRV
-from src.DTMC.spatialModel.PeriodicMovement.periodicSIRVS import PeriodicSIRVS
-from src.DTMC.spatialModel.PeriodicMovement.periodicSIS import PeriodicSIS
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSEIR import PeriodicSEIR
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSEIRD import PeriodicSEIRD
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSEIRDV import PeriodicSEIRDV
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSEIRS import PeriodicSEIRS
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSEIRSD import PeriodicSEIRSD
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSEIRSDV import PeriodicSEIRSDV
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSEIRV import PeriodicSEIRV
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSEIRVS import PeriodicSEIRVS
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIR import PeriodicSIR
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIRD import PeriodicSIRD
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIRDV import PeriodicSIRDV
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIRS import PeriodicSIRS
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIRSD import PeriodicSIRSD
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIRSDV import PeriodicSIRSDV
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIRV import PeriodicSIRV
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIRVS import PeriodicSIRVS
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIS import PeriodicSIS
 
 # generate a fixed seed to make sure reproducible results
 np.random.seed(0)
@@ -1160,6 +1160,7 @@ def getStrongInfSIRVD():
 
 
 if  __name__ == '__main__':
+    getHubSEIRSVD()
     #getHubSEIRS()
     #getHubSEIRV()
     #getHubSEIRD()
@@ -1197,11 +1198,11 @@ if  __name__ == '__main__':
     #getStrongInfSIRSVD()
     #getStrongInfSIRV()
     #getStrongInfSIRVD()
-    getStrongInfSEIR()
-    getStrongInfSIR()
-    getStrongInfSIS()
-    getStrongInfSEIRD()
-    getStrongInf_ICUV()
+    #getStrongInfSEIR()
+    #getStrongInfSIR()
+    #getStrongInfSIS()
+    #getStrongInfSEIRD()
+    #getStrongInf_ICUV()
     #getHub_ICUV()
     #getHubSIR()
     #getHubSIRS()

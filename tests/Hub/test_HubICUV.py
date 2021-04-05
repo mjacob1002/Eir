@@ -5,8 +5,8 @@ import pandas as pd
 import unittest
 
 
-from src.DTMC.spatialModel.Hub.Hub_ICUV import Hub_ICUV
-import src.exceptions as e
+from Eir.DTMC.spatialModel.Hub.Hub_ICUV import Hub_ICUV
+import Eir.exceptions as e
 # seed the RNG for reproducibility. Seed it to 0
 np.random.seed(0)
 

@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import unittest
 
-from src.DTMC.spatialModel.Hub.HubSIRS import HubSIRS
-import src.exceptions as e 
+from Eir.DTMC.spatialModel.Hub.HubSIRS import HubSIRS
+import Eir.exceptions as e 
 
 # seed the RNG; only for unit testing and reproducibility purposes
 np.random.seed(0)

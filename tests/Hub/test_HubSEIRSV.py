@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import unittest
 
-from src.DTMC.spatialModel.Hub.HubSEIRSV import HubSEIRSV
-import src.exceptions as e
+from Eir.DTMC.spatialModel.Hub.HubSEIRSV import HubSEIRSV
+import Eir.exceptions as e
 # keep this seed when running test so that outputs can be checked
 np.random.seed(7363817)
 
