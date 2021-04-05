@@ -139,7 +139,7 @@ class RandMoveSEIRDV(RandMoveSEIRD):
         spread_r: float, sigma_r: float, days:int, w0=1.0, alpha=2.0, timeDelay=-1):
         self.intCheck([S0, E0, I0, R0, V0, days])
         self.floatCheck(rho, gamma, mu, eta, planeSize, move_r, sigma_R, spread_r, sigma_r, w0, alpha, timeDelay)
-        self.negValCheck(S0, E0, I0, R0, V0, rho, gamma, planeSize, move_r, sigma_R, spread_r, sigma_r, days, w0, alpha)
+        self.negValCheck(S0, E0, I0, R0, V0, rho, gamma, mu, eta, planeSize, move_r, sigma_R, spread_r, sigma_r, days, w0, alpha)
         self.probValCheck([rho, gamma, w0, mu, eta])
         super(RandMoveSEIRDV, self).__init__(S0=S0, E0=E0, I0=I0, R0=0, rho=rho, gamma=gamma, mu=mu, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
         days=days)
