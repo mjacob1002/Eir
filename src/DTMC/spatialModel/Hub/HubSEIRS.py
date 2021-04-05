@@ -97,13 +97,13 @@ class HubSEIRS(HubSEIR):
 
     """
     def __init__(self, S0: int, E0: int, I0: int, R0: int, pss: float, rho: float, 
-        gamma: float, kappa: float, side: float, rstart:float, alpha: int, days: int, w0=1.0, hubConstant=6**0.5):
+        gamma: float, kappa: float, side: float, rstart:float, days: int, w0=1.0, hubConstant=6**0.5, alpha=2.0):
         #error checking
         self.intCheck([S0, E0, I0, R0, days])
         self.floatCheck([pss, rho, gamma, kappa, side, rstart, w0, alpha, hubConstant])
         self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, kappa, side, rstart, days, w0, hubConstant, alpha])
         self.probValCheck([pss, rho, gamma, kappa, w0])
-        super(HubSEIRS, self).__init__(S0, E0, I0, R0, pss, rho, gamma, side, rstart, alpha, days, w0=w0, hubConstant=hubConstant)
+        super(HubSEIRS, self).__init__(S0, E0, I0, R0, pss, rho, gamma, side, rstart, days, w0=w0, hubConstant=hubConstant, alpha=alpha)
         self.kappa = kappa
     
     def _RtoS(self):
