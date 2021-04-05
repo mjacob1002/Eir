@@ -63,7 +63,7 @@ class Test_HubSEIR(unittest.TestCase):
         self.assertRaises(e.ProbabilityException, HubSEIR, 999, 1, 1, 0, .23, .2, 1.15, 25, 3, 31, 1.0, 6**0.5, 2)
         self.assertRaises(e.ProbabilityException, HubSEIR, 999, 1, 1, 0, .23, 1.2, .15, 25, 3, 31, 1.0, 6**0.5, 2)
         self.assertRaises(e.ProbabilityException, HubSEIR, 999, 1, 1, 0, 1.23, .2, .15, 25, 3, 31, 1.0, 6**0.5, 2)
-        self.assertRaises(e.ProbabilityException, HubSEIR, 999, 1, 1, 0, .23, .2, .15, 25, 3, 31, 1.1, 6**0.5, 2)
+        self.assertRaises(e.ProbabilityException, HubSEIR, 999, 1, 1, 0, .23, 9.2, .15, 25, 3, 31, 1.1, 6**0.5, 2)
         print("Input Test Passed")
 
 

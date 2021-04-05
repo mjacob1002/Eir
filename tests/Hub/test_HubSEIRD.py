@@ -60,13 +60,13 @@ class Test_HubSEIRD(unittest.TestCase):
         self.assertRaises(e.NegativeValException, HubSEIRD, 999, 1, 1, 0, .23, .2, .15, .2, -25, 3, 31, 1.0, 6**0.5, 2)
         self.assertRaises(e.NegativeValException, HubSEIRD, 999, 1, 1, 0, .23, .2, -.15, .2, 25, 3, 31, 1.0, -6**0.5, 2)
         self.assertRaises(e.NegativeValException, HubSEIRD, 999, 1, 1, 0, .23, .2, .15, .2, 25, 3, 31, -1.0, 6**0.5, 2)
-        self.assertRaises(e.NotFloatException, HubSEIRD, 999, 1, 1, 0, .23, .2, .15, -.2, 25, 3, 31, 1.0, 6**0.5, '2')
+        self.assertRaises(e.NegativeValException, HubSEIRD, 999, 1, 1, 0, .23, .2, .15, -.2, 25, 3, 31, 1.0, 6**0.5, 2)
         # checks probability
         self.assertRaises(e.ProbabilityException, HubSEIRD, 999, 1, 1, 0, .23, .2, 1.15, .2, 25, 3, 31, 1.0, 6**0.5, 2)
         self.assertRaises(e.ProbabilityException, HubSEIRD, 999, 1, 1, 0, .23, 1.2, .15, .2, 25, 3, 31, 1.0, 6**0.5, 2)
         self.assertRaises(e.ProbabilityException, HubSEIRD, 999, 1, 1, 0, 1.23, .2, .15, .2, 25, 3, 31, 1.0, 6**0.5, 2)
         self.assertRaises(e.ProbabilityException, HubSEIRD, 999, 1, 1, 0, .23, .2, .15, .2, 25, 3, 31, 1.1, 6**0.5, 2)
-        self.assertRaises(e.NotFloatException, HubSEIRD, 999, 1, 1, 0, .23, .2, .15, 1.2, 25, 3, 31, 1.0, 6**0.5, '2')
+        self.assertRaises(e.ProbabilityException, HubSEIRD, 999, 1, 1, 0, .23, .2, .15, 1.2, 25, 3, 31, 1.0, 6**0.5, 2)
         print("Input Test Passed")
 
 
