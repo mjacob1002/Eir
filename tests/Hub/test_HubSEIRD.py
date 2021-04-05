@@ -7,7 +7,7 @@ import src.exceptions as e
 # keep this seed when running test so that outputs can be checked
 np.random.seed(7363817)
 
-class Test_HubSEIRS(unittest.TestCase):
+class Test_HubSEIRD(unittest.TestCase):
     
     def __init__(self):
         self.test = HubSEIRD(S0=999, E0=1, I0=1, R0=0, pss=.23, rho=.2, gamma=.15, mu=.2, side=25, rstart=3, days=31, w0=.73, alpha=2)
@@ -72,7 +72,7 @@ class Test_HubSEIRS(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    a = Test_HubSEIRS()
+    a = Test_HubSEIRD()
     #a.generateCSV()
     a.checkOutputs()
     a.checkSimulInputs()
