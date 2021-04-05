@@ -127,7 +127,7 @@ class HubSEIRSVD(HubSEIRVD):
          # error checking
         self.intCheck([S0, E0, I0, R0, V0, days])
         self.floatCheck([pss, rho, gamma, kappa, eta, mu, side, rstart, w0, alpha, hubConstant, timeDelay])
-        self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, kappa, eta, side, rstart, days, w0, hubConstant, alpha])
+        self.negValCheck([S0, E0, I0, R0, pss, rho, gamma, kappa, eta, mu, side, rstart, days, w0, hubConstant, alpha])
         self.probValCheck([pss, rho, gamma, kappa, eta, mu,w0])
         super().__init__(S0=S0, E0=E0, I0=I0, R0=R0, V0=V0, pss=pss, rho=rho, gamma=gamma, eta=eta, mu=mu, side=side, rstart=rstart, alpha=alpha, days=days, hubConstant=hubConstant, timeDelay=timeDelay)
         self.kappa = kappa
