@@ -141,7 +141,7 @@ class HubSIRV(HubSIR):
     
     def run(self, getDetails=True):
         for i in range(1, self.days + 1):
-            print("Day ",i)
+            #print("Day ",i)
             # run the transfers from different compartments
             transferSI = self._StoI(i)
             transferIr = self._ItoR()

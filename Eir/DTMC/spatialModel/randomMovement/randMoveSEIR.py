@@ -129,7 +129,7 @@ class RandMoveSEIR(RandMoveSIR):
         self.E = np.zeros(days+1)
         self.E[0] = E0
         self.popsize = S0 + E0 + I0 + R0
-        print("Population: ", self.popsize)
+        #print("Population: ", self.popsize)
         # reinstantiate the Simul_Details object
         self.details = Simul_Details(days=days, popsize=self.popsize)
         # create the collection data structures

@@ -124,7 +124,7 @@ class HubSIRD(HubSIR):
             This includes, transmission chains, state history of particular people, and more. 
         """
         for i in range(1, self.days + 1):
-            print("Day ",i)
+            #print("Day ",i)
             # run the transfers from different compartments
             transferSI = self._StoI(i)
             transferIr = self._ItoR()

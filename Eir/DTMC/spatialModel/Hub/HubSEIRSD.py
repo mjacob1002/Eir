@@ -124,7 +124,7 @@ class HubSEIRSD(HubSEIRD):
     
     def run(self, getDetails=True):
         for i in range(1, self.days + 1):
-            print("Day: ", i)
+            #print("Day: ", i)
             # run the transfers from different compartments
             transferSE = self._StoE(i)
             transferEI = self._EtoI()

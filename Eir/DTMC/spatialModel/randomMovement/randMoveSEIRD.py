@@ -156,7 +156,7 @@ class RandMoveSEIRD(RandMoveSEIR):
             self.Rcollect.append(p4)
             self.Dcollect.append(p5)
             self.details.addLocation(0, (p1.x, p1.y))
-        print(len(self.Scollect))
+        #print(len(self.Scollect))
 
     def _ItoD(self):
         """

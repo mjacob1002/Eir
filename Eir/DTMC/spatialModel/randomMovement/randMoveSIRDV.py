@@ -197,7 +197,7 @@ class RandMoveSIRDV(RandMoveSIRD):
 
         # for all the days in the simulation
         for i in range(1, self.days+1):
-            print("Day ", i)
+            #print("Day ", i)
             #print("Location: (", self.Scollect[0].x, ",", self.Scollect[0].y, ").")
             # run the state changes
             StoI = self._StoI(i)

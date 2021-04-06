@@ -93,7 +93,7 @@ class HubSIR(HubSIS):
         self.negValCheck([S0, I0, R0, pss, gamma, side, rstart, days, w0, hubConstant, alpha])
         self.probValCheck([pss, gamma, w0])
         super(HubSIR, self).__init__(S0=S0, I0=I0, pss=pss, rstart=rstart, alpha=alpha, days=days, side=side, w0=w0, gamma=gamma, hubConstant=hubConstant)
-        print(self.gamma)
+        #print(self.gamma)
         # reconfigure the population size
         self.popsize = S0 + I0 + R0
         #print(self.popsize)
@@ -155,7 +155,7 @@ class HubSIR(HubSIS):
             # add location at Day 0
             self.details.addLocation(0, (self.locx[i], self.locy[i]))
             self.details.addStateChange(i, "R", 0)
-        print("Initial S0: ", self.S[0], " Initial I0: ", self.I[0], " Initial R0: ", self.R[0])
+        #print("Initial S0: ", self.S[0], " Initial I0: ", self.I[0], " Initial R0: ", self.R[0])
     # run state changes from I to R
     def _ItoR(self):
         """
@@ -203,7 +203,7 @@ class HubSIR(HubSIS):
             This includes, transmission chains, state history of particular people, and more. 
         """
         for i in range(1, self.days + 1):
-            print("Day ",i, "self.days: ", self.days)
+            #print("Day ",i, "self.days: ", self.days)
             # run the transfers from different compartments
             transferSI = self._StoI(i)
             transferIr = self._ItoR()
