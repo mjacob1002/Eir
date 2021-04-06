@@ -50,7 +50,7 @@ class SIRD(SIR):
             n = n - f[3] * dt
         return S, I, R, D
 
-    def _simulate(self, days: int, dt: float) -> tuple:
+    def _simulate(self, days: int, dt: float):
         # total number of iterations that will be run + the starting value at time 0
         size = int(days / dt + 1)
         # create the arrays to store the different values
@@ -63,7 +63,7 @@ class SIRD(SIR):
 
     # create the variable labels for the 'run' function
     @dispatch(bool, bool, bool, bool)
-    def _includeVar(self, sx: bool, ix: bool, rx: bool, Dx: bool) -> list:
+    def _includeVar(self, sx: bool, ix: bool, rx: bool, Dx: bool):
         labels = []
         if sx:
             labels.append("Susceptible")
@@ -105,6 +105,8 @@ class SIRD(SIR):
 
     # plot an accumulation function of total cases
     def accumulate(self, days: int, dt: float, plot=True):
+        self.floatCheck([days, dt])
+        self.negValCheck([days, dt])
         t = np.linspace(0, days, int(days / dt) + 1)
         S, I, R, D = self._simulate(days, dt)
         # create a numpy array that will hold all of the values
