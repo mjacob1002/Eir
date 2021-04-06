@@ -22,6 +22,9 @@ class Simul_Details():
     popsize: int
         the number of people in the simulation.
     
+    static: optional bool
+        Used to detect whether the spatial object is static
+    
     Attributes
     ----------
     transmissions: dictionary
@@ -79,8 +82,9 @@ class Simul_Details():
 
     """
 
-    def __init__(self, days: int, popsize : int):
-
+    def __init__(self, days: int, popsize : int, static=False):
+        # boolean value to autodetect if it is static
+        self.static = static
         # popsize is the size of the population
         self.popsize = popsize
         # number of days the simulation goes for
@@ -168,7 +172,11 @@ class Simul_Details():
     # helper function for personHistory
     def _getMovementHistoryHelp(self, u:int):
         movementHistory = []
+        if self.static:
+            movementHistory.append(locations[0][u])
+            return movementHistory
         for day, loc in enumerate(self.locations):
+            print(len(loc))
             movementHistory.append(loc[u])
         return movementHistory
 
