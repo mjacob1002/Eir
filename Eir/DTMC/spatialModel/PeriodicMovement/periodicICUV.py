@@ -10,10 +10,109 @@ from Eir.utility import Person2 as Person
 from Eir.utility import randEvent, dist
 
 class PeriodicICUV(RandMove):
+    """
+        Runs a simulation using the Hub Model for an ICU Compartmental Model.
 
+        Parameters
+        ----------
+        S0 : int
+            The starting number of susceptible individuals in the simulation.
+        
+        E0: int
+            The starting number of exposed individuals in the simulation.
+        
+        I0: int
+            The starting number of infected individuals in the simulation.
+
+        R0: int
+            The starting number of recovered individuals in the simulation.
+        
+        V0: int
+            The starting number of vaccinated individuals in the simulation.
+        
+        rho: float
+            The probability of an individual leaving the E compartment.
+        
+        ioda: float
+            The probability that, given an individual is leaving the E compartment, he goes to L compartment. The probability of that person going to I compartment is (1-ioda).
+        
+        gamma: float
+            The probability of a person in I compartment going to the R compartment
+        
+        mu: float
+            The probability of going from I to D, given that the person didn't go from I to R.
+        
+        phi: float
+            The probability of going from L compartment to ICU compartment.
+        
+        chi: float
+            The probability of going from ICU compartment to R compartment.
+        
+        omega: float
+            The probability of going from ICU compartment to D compartment, given that individual didn't go from ICU compartment to R compartment.
+        
+        kappa: float
+            The probability of going from R compartment to S compartment.
+        
+        eta: float 
+            The probability of going from S compartment to V compartment, given that the individual didn't go from S compartment to E compartment. 
+        
+        move_R: float
+            The mean of the distribution of movement radii of a a person in the simulation. Used when genereating the movement radius of each individual in the simulation.
+        
+        sigma_R: float
+            The standard deviation of the distribution of movement radii of a a person in the simulation. Used when genereating the movement radius of each individual in the simulation.
+
+        spread_r: float
+            The mean of the distribution of spreading radii of a person in simulation. Used when generating the spreading radius of each individaul in the simultion. 
+        
+        sigma_r: float
+            The standard deviation of the distribution of spreading radii of a normal spreader.
+        
+        
+        side: float
+            The length of one side of the square plane that the individuals are confined to.
+        
+        days: int
+            The number of days that the simulations lasts for.
+        
+        alpha: float, optional
+            A constant used in the formula for calculating probability of infection between infectious person and susceptible person. Default is 2.0.
+        
+        w0: float, optional
+            The probability of a susceptible being infected by an infectious individual if they are 0 units apart. Default is 1.0.
+        
+        timeDelay: float, optional
+            The amount of days for which the vaccine rollout is delayed. Checks the day and makes sure that the day > timeDelay before simulating vaccine distribution. Default is -1.
+        
+        k: float optional
+            Default is 5.0. The number which divides 2*pi in order to determine the mean of the distribution of thetas when movement occurs. For example, if k=5, then the mean of the normal distribution from which thetas are picked is 2*pi/5.0.
+        
+        std: float optional
+            Default is pi/2. The standard deviation which is used for the distribution of thetas when movement occurs.
+
+        Attributes
+        ----------
+
+        Scollect, Ecollect, Icollect, Lcollect, ICUcollect, Rcollect, Dcollect, Vcollect: list
+            Lists that contains copies of the Person objects and are used to determine what state each Person is currently in.
+        
+        S, E, I, L, ICU, R, D, V, infectious: ndarray
+            Numpy arrays that contain the total number of people in each state on each given day. Infectious people are classified as those in compartment I + those in compartments L.
+        
+        run(getDetails=True): method
+            Has parameter getDetails set to True by default. Actually runs the simulation after the object is constructed. If getDetails=True, then the method
+            returns a Simul_Details object that will allow user to get more details about the simulation, such as transmissions, state transfers, etc.
+        
+        toDataFrame(): method
+            After running the 'run' method, toDataFrame will convert the numpy arrays to a pandas DataFrame and return it.
+    """
+
+    
     def __init__(self, S0:int, E0:int, I0:int, R0:int, V0:int, rho: float, ioda: float,  gamma: float, mu: float, phi: float, chi: float, omega: float, kappa: float, eta: float, move_R: float, sigma_R: float, spread_r: float, 
         sigma_r: float, side: float, days: int, alpha=2.3, w0=1.0, timeDelay=-1, k=5, std=pi/2):
         # error checks
+        
         self.intCheck([S0, E0, I0, R0, V0, days])
         self.floatCheck(rho, ioda, gamma, mu, phi, chi, omega, kappa, eta, spread_r, sigma_r, move_R, sigma_R, side, alpha, w0, timeDelay)
         self.negValCheck(S0, E0, I0, R0, V0, spread_r, sigma_r, move_R, sigma_R, side, days, alpha)
