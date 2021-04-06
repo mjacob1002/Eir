@@ -76,7 +76,7 @@ class SIS(CompartmentalModel):
             labels.append("Infected")
         return labels
 
-    @dispatch(int, float, plot=bool, Sbool=bool, Ibool=bool)
+    @dispatch(int, float, plot=True, Sbool=True, Ibool=True)
     def run(self, days: int, dt: float, plot=True, Sbool=True, Ibool=True):
         # evenly space the days
         t = np.linspace(0, days, int(days / dt) + 1)
