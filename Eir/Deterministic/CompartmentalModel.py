@@ -10,6 +10,7 @@ import Eir.exceptions as e
 
 # this is an abstract class that should never be instantiated
 class CompartmentalModel:
+    """ Base Class for all Deterministic Compartmental Models. Should never be instantiated."""
     def __init__(self, S0, I0):
         assert S0 >= 0
         assert I0 >= 0
@@ -41,7 +42,7 @@ class CompartmentalModel:
     
     def floatCheck(self, vals: list):
         for val in vals:
-            if type(val) != int or type(val) != float:
+            if type(val) != int and type(val) != float:
                 raise e.NotFloatException(val)
     
     def negValCheck(self, vals: list):

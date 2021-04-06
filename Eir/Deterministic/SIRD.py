@@ -6,6 +6,30 @@ import pandas as pd
 
 
 class SIRD(SIR):
+    """
+    SIRD deterministic model.
+
+    Parameters
+    ----------
+
+    beta: float
+        Effective transmission rate of infectious person, on average
+    
+    gamma: float
+        Proportion of people who go from I to R
+    
+    omega: float
+        Proportion of people who go from I to D.
+    
+    S0: int
+        Initial number of susceptibles
+    
+    I0: int
+        Initial number of infecteds
+    
+    R0: int
+        Initial number of removeds.
+    """
     # omega is the amount of people that go from I to D
     def __init__(self, beta: float, gamma: float, omega: float, S0: int, I0: int, R0: int):
         self.intCheck([S0, I0, R0])

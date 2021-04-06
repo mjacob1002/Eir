@@ -7,7 +7,26 @@ from multipledispatch import dispatch
 # Flow of the Compartmental Model:
 # S -> I - > S
 class SIS(CompartmentalModel):
+    """
+    SIS deterministic model.
 
+    Parameters
+    ----------
+
+    beta: float
+        Effective transmission rate of an infectious person, on average.
+    
+    gamma: float 
+        Proportion of people in I who go to S.
+    
+    S0: int
+        Initial susceptibles.
+    
+    I0: int
+        Initial infecteds.
+
+
+    """ 
     def __init__(self, beta, gamma, S0, I0):
         self.intCheck([S0, I0])
         self.floatCheck([beta, gamma, S0, I0])
