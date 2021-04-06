@@ -35,6 +35,6 @@ class Test_SIRV(unittest.TestCase):
 
 if __name__ == '__main__':
     a = Test_SIRV()
-    a.generateCSV()
+    #a.generateCSV()
     a.checkOutput()
     # mutliple dispatcher will take care of type errors
