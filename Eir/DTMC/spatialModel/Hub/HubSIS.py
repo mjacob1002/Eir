@@ -83,7 +83,7 @@ class HubSIS(Hub):
         self.probValCheck([pss, gamma, w0])
         self.popsize = S0 + I0
         # initialize the Simul_Details object
-        self.details = Simul_Details(days=days, popsize=self.popsize)
+        self.details = Simul_Details(days=days, popsize=self.popsize, static=True)
 
         self.gamma = gamma
         # call the super constructor

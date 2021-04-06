@@ -128,7 +128,7 @@ class HubSEIR(Hub):
         # put the initial removed values into the array
         self.R[0] = R0
         # create a Simul_Details object
-        self.details = Simul_Details(days=days, popsize=self.popsize)
+        self.details = Simul_Details(days=days, popsize=self.popsize, static=True)
         for i in range(self.popsize):
             # event is whether person is a super spreader
             event = randEvent(self.pss)

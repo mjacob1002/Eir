@@ -108,7 +108,7 @@ class HubSIRV(HubSIR):
         self.V[0] = V0
         self.popsize += V0
         self.timeDelay = timeDelay
-        self.details = Simul_Details(self.days, self.popsize)
+        self.details = Simul_Details(self.days, self.popsize, static=True)
         self.Scollect, self.Icollect, self.Rcollect, self.Vcollect = [], [], [], []
         if V0 != 0:
             self.locx = np.random.random(self.popsize)*side

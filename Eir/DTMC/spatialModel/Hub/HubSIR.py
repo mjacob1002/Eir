@@ -98,7 +98,7 @@ class HubSIR(HubSIS):
         self.popsize = S0 + I0 + R0
         #print(self.popsize)
         # initialize the Simul_Details object
-        self.details = Simul_Details(days=days, popsize=int(self.popsize))
+        self.details = Simul_Details(days=days, popsize=int(self.popsize), static=True)
 
         self.R0 = R0
         # create new array of locations for all of the individuals in the population

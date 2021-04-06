@@ -117,7 +117,7 @@ class Hub_ICUV(Hub):
         # initialize popsize
         self.popsize = S0 + E0 + I0 + R0 +V0
         # create the Siml_Details object
-        self.details = Simul_Details(days=self.days, popsize=self.popsize)
+        self.details = Simul_Details(days=self.days, popsize=self.popsize, static=True)
         # create the data structures
         self.Scollect = []
         self.Ecollect = []

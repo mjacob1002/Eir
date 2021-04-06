@@ -130,7 +130,7 @@ class HubSEIRV(HubSEIR):
         self.locx, self.locy = np.random.random(self.popsize)*side, np.random.random(self.popsize)*side
         self.eta = eta
         self.timeDelay = timeDelay
-        self.details = Simul_Details(days, self.popsize)
+        self.details = Simul_Details(days, self.popsize, static=True)
 
         for i in range(self.popsize):
             event = randEvent(pss)
