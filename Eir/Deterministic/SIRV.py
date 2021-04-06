@@ -8,7 +8,33 @@ from multipledispatch import dispatch
 # Flow of the Compartmental Model:
 # S -> I -> R, S- > V
 class SIRV(SIR):
+    """
+    SIRV deterministic model.
 
+    Parameters
+    ----------
+
+    beta: float
+        Effective transmission rate of an infectious person, on average.
+    
+    gamma: float
+        Proportion of people that go from I to R.
+    
+    eta: float
+        Proportion of people that go from S to V.
+    
+    S0: int
+        Initial susceptibles at the start of the simulation.
+    
+    I0: int
+        Initial infecteds at the start of the simulation.
+    
+    R0: int
+        Initial recovereds at the start of the simulation.
+    
+    V0: int
+        Initial vaccinated at the start of the simulation.
+    """
     def __init__(self, beta, gamma, eta, S0, I0, R0, V0):
         self.intCheck([S0, I0, R0, V0])
         self.floatCheck([beta, gamma, eta])
@@ -61,7 +87,7 @@ class SIRV(SIR):
 
     # include the variables that will be plotted in the run function
     @dispatch(bool, bool, bool, bool)
-    def _includeVar(self, sx: bool, ix: bool, rx: bool, vx) -> list:
+    def _includeVar(self, sx: bool, ix: bool, rx: bool, vx):
         labels = []
         if sx:
             labels.append("Susceptible")
@@ -102,6 +128,8 @@ class SIRV(SIR):
         return df
 
     def accumulate(self, days: int, dt: float, plot=True):
+        self.floatCheck([days, dt])
+        self.negValCheck([days, dt])
         t = np.linspace(0, days, int(days / dt) + 1)
         S, I, R, V = self._simulate(days, dt)
         # create a numpy array that will hold all of the values
