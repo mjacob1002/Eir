@@ -6,6 +6,30 @@ from multipledispatch import dispatch
 
 
 class SIRS(SIR):
+    """
+    SIRS deterministic model.
+
+    Parameters
+    ----------
+
+    beta: float
+        Effective transmission rate of an infectious person, on average.
+    
+    gamma: float
+        Proportion of people that go from I to R.
+    
+    kappa: float
+        Proportion of people that go from R to S
+    
+    S0: int
+        Initial susceptibles at the start of the simulation.
+    
+    I0: int
+        Initial infecteds at the start of the simulation.
+    
+    R0: int
+        Initial recovereds at the start of the simulation.
+    """
     def __init__(self, beta: float, gamma: float, kappa: float, S0, I0, R0):
         # error checking 
         self.intCheck([S0, I0, R0])
@@ -22,7 +46,7 @@ class SIRS(SIR):
         self.kappa = x
 
     @dispatch(float, float, float)
-    def _deriv(self, s, i, r) -> tuple:
+    def _deriv(self, s, i, r):
         # doing all of the changes from SIR model
         a, b, c = super(SIRS, self)._deriv(s, i)
         # compute the people becoming resusceptible from the R compartment
@@ -32,7 +56,7 @@ class SIRS(SIR):
 
     # run Euler 's method, when accumulating cases, which is different from usual
     @dispatch(float, float, float)
-    def _derivAccumulate(self, s, i, r) -> tuple:
+    def _derivAccumulate(self, s, i, r):
         # doing all of the changes from SIR model
         a, b, c = super(SIRS, self)._deriv(s, i)
         # compute the people becoming resusceptible from the R compartment
@@ -76,7 +100,7 @@ class SIRS(SIR):
         return S, I, R
 
     # does the work of initializing arrays and then updating the arrays using Euler's method
-    def _simulate(self, days: int, dt: float) -> tuple:
+    def _simulate(self, days: int, dt: float):
         # total number of iterations that will be run + the starting value at time 0
         size = int(days / dt + 1)
         # create the arrays to store the different values
@@ -89,6 +113,8 @@ class SIRS(SIR):
 
     # function uses to determine the total number of cases cumulatively
     def accumulate(self, days: int, dt: float, plot=True):
+        self.floatCheck([days, dt])
+        self.negValCheck([days, dt])
         # create a linrange object
         t = np.linspace(0, days, int(days / dt) + 1)
         # return the S, I, R, and accumulated cases
@@ -115,6 +141,6 @@ class SIRS(SIR):
         return df
 
 
-test = SIRS(beta=1.5, gamma=.3, kappa=.05, S0=99999, I0=1, R0=0)
-x = test.accumulate(31, .1)
-print(x)
+#test = SIRS(beta=1.5, gamma=.3, kappa=.05, S0=99999, I0=1, R0=0)
+#x = test.accumulate(31, .1)
+#print(x)
