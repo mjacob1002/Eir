@@ -1,0 +1,1 @@
+Due to inheritance of StrongInf models to their respective Hub Models, the Hub Models should suffice for testing.
