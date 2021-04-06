@@ -6,7 +6,7 @@ Eir is an API that allows the user to conduct stochastic simulations of epidemic
 
 One can install Eir by running the following command via the command line:
 
-'''shell pip install Eir '''
+```shell pip install Eir ```
 
 ## Documentation
 
