@@ -20,6 +20,6 @@ from Eir.DTMC.spatialModel.periodicICUV import PeriodicICUV
   test.plot()
 ```
 
-To understand the variables and their meaning, the documentation can be found in the code by doing the standard ```__doc___``` in Python. 
+To understand the variables and their meaning, the documentation can be found in the code by doing the standard ```__doc__``` in Python. 
 
 
