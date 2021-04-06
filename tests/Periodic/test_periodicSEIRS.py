@@ -68,7 +68,7 @@ class Test_PeriodicSEIRS(unittest.TestCase):
 
 if __name__ == '__main__':
     a = Test_PeriodicSEIRS()
-    a.generateCSV()
+    #a.generateCSV()
     a.checkOutput()
     a.checkSimulInputs()
     a.checkInputs()
