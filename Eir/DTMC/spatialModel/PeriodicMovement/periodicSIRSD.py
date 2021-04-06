@@ -10,8 +10,8 @@ from Eir.utility import Person2 as Person
 class PeriodicSIRSD(RandMoveSIRSD):
     
     def __init__(self, S0:int, I0:int, R0:int, gamma:int, mu:float, kappa:float, planeSize:float, move_r:float, sigma_R:float, spread_r:float, sigma_r:float, days:int, w0=1.0, alpha=2.0, k=5, std=pi/2):
-        self.floatCheck([k, std])
-        self.negValCheck([k, std])
+        self.floatCheck(k, std)
+        self.negValCheck(k, std)
 
         super().__init__(S0, I0, R0, gamma, mu, kappa, planeSize, move_r, sigma_R, spread_r, sigma_r, days, w0=w0, alpha=alpha)
 

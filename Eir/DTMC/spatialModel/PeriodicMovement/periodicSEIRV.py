@@ -13,8 +13,8 @@ class PeriodicSEIRV(RandMoveSEIRV):
 
     def __init__(self, S0:int, E0:int, I0:int, R0:int, V0: int, rho: float, gamma: float, eta:float, planeSize: float, move_r: float, sigma_R: float, 
         spread_r: float, sigma_r: float, days:int, w0=1.0, alpha=2.0, timeDelay=-1, k=5, std=pi/2):
-        self.floatCheck([k, std])
-        self.negValCheck([k, std])
+        self.floatCheck(k, std)
+        self.negValCheck(k, std)
 
         super().__init__(S0=S0, E0=E0, I0=I0, R0=R0, V0=V0, rho=rho, gamma=gamma, eta=eta, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days, w0=w0, alpha=alpha, timeDelay=timeDelay)
 
