@@ -14,11 +14,11 @@ class Test_PeriodicSIRVS(unittest.TestCase):
         self.sdetails = self.test.run()
 
     def generateCSV(self):
-        self.test.toDataFrame().to_csv('randMoveSIRSV.csv', index=False)
+        self.test.toDataFrame().to_csv('PeriodicSIRSV.csv', index=False)
     
     def checkOutput(self):
         df = self.test.toDataFrame()
-        df2 = pd.read_csv('randMoveSIRSV.csv')
+        df2 = pd.read_csv('PeriodicSIRSV.csv')
         assert df.equals(df2)
         print("Output test passed")
     
