@@ -15,7 +15,7 @@ class PeriodicSEIRSDV(RandMoveSEIRSDV):
         self.floatCheck(k, std)
         self.negValCheck(k, std)
         
-        super().__init__(S0=S0, E0=E0, I0=I0, R0=R0, V0=V0, rho=rho, gamma=gamma, mu=mu, eta=eta, kappa=kappa, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days)
+        super().__init__(S0=S0, E0=E0, I0=I0, R0=R0, V0=V0, rho=rho, gamma=gamma, mu=mu, eta=eta, kappa=kappa, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r, days=days, w0=w0, alpha=alpha, timeDelay=timeDelay)
 
         self.k, self.std = k, std
 
