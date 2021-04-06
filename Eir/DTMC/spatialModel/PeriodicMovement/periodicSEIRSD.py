@@ -18,7 +18,7 @@ class PeriodicSEIRSD(RandMoveSEIRSD):
 
 
         super().__init__(S0=S0, E0=E0, I0=I0, R0=0, rho=rho, gamma=gamma, mu=mu, kappa=kappa, planeSize=planeSize, move_r=move_r, sigma_R=sigma_R, spread_r=spread_r, sigma_r=sigma_r,
-        days=days)
+        days=days, w0=w0, alpha=alpha)
 
         self.k, self.std = k, std
 
