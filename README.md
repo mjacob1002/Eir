@@ -8,8 +8,17 @@ One can install Eir by running the following command via the command line:
 
 ```pip install Eir ```
 
-## Documentation
+## Examples
 
-Documentation can be find within the software by doing __doc__. Additionally, documentation can be found in the docs folder. 
+If one were to model the ICU hospitalizations using the Hub Model, the code could look as follows:
+
+```python
+from Eir.DTMC.spatialModel.periodicICUV import PeriodicICUV
+
+  test = PeriodicICUV(S0=999, E0=0, I0=1, R0=0, V0=0, rho=.3, ioda=.3, gamma=.25, mu=0.007, omega=.14, phi = .42, chi=.15, kappa=.05, eta=.02, spread_r=2,          sigma_r=.25, move_R=4, sigma_R=.75, side=33, days=31, timeDelay=15)
+  test.run()
+  df = test.toDataFrame()
+  print(df)
+```
 
 
