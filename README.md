@@ -20,6 +20,6 @@ from Eir import PeriodicICUV
   test.plot()
 ```
 
-To understand the variables and their meaning, the documentation can be found in the code by doing the standard ```__doc__``` in Python. Additionally, if more detailed information about transmission chains and state histories was required, the methods from the Simul_Details class would allow the user to get a more in-depth look at the dynamics of the simulation.
+To understand the variables and their meaning, the documentation can be found in the docs folder in this repository, or looking at the docstrings in python. Additionally, if more detailed information about transmission chains and state histories was required, the methods from the Simul_Details class would allow the user to get a more in-depth look at the dynamics of the simulation.
 
 
