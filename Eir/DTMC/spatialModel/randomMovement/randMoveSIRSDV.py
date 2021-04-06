@@ -69,6 +69,9 @@ class RandMoveSIRSDV(RandMoveSIRDV):
     
     alpha: float optional
         A constant used in the _infect() method. The greater the constant, the greater the infection probability. Default is 2.0.
+    
+    timeDelay: float optional
+        Default is -1.0. After days > timeDelay, vaccinations will begin rolling out with probaiblity eta. 
 
     Attributes
     ----------
