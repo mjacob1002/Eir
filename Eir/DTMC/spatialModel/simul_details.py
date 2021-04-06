@@ -173,7 +173,7 @@ class Simul_Details():
     def _getMovementHistoryHelp(self, u:int):
         movementHistory = []
         if self.static:
-            movementHistory.append(locations[0][u])
+            movementHistory.append(self.locations[0][u])
             return movementHistory
         for day, loc in enumerate(self.locations):
             print(len(loc))
