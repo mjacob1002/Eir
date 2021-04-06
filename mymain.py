@@ -75,9 +75,16 @@ from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIRSDV import PeriodicSIRSDV
 from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIRV import PeriodicSIRV
 from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIRVS import PeriodicSIRVS
 from Eir.DTMC.spatialModel.PeriodicMovement.periodicSIS import PeriodicSIS
+from Eir.DTMC.spatialModel.PeriodicMovement.periodicICUV import PeriodicICUV
 
-# generate a fixed seed to make sure reproducible results
-np.random.seed(0)
+
+
+
+def getPeriodicICUV():
+    test = PeriodicICUV(S0=999, E0=0, I0=1, R0=0, V0=0, rho=.3, ioda=.3, gamma=.25, mu=0.007, omega=.14, phi = .42, chi=.15, kappa=.05, eta=.02, spread_r=2, sigma_r=.25, move_R=4, sigma_R=.75, side=33, days=31, timeDelay=15)
+    test.run()
+    print(test.toDataFrame())
+    test.plot()
 
 def getPeriodicSIRSD():
     S0 = 999
@@ -1160,7 +1167,8 @@ def getStrongInfSIRVD():
 
 
 if  __name__ == '__main__':
-    getHubSEIRSVD()
+    getPeriodicICUV()
+    #getHubSEIRSVD()
     #getHubSEIRS()
     #getHubSEIRV()
     #getHubSEIRD()

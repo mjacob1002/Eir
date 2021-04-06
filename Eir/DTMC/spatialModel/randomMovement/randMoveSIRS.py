@@ -123,7 +123,7 @@ class RandMoveSIRS(RandMoveSIR):
     
     def run(self, getDetails=True):
         for i in range(1, self.days+1):
-            print("Day ", i)
+            #print("Day ", i)
             #print("Location: (", self.Scollect[0].x, ",", self.Scollect[0].y, ").")
             # run the state changes
             StoI = self._StoI(i)

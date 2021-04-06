@@ -255,7 +255,7 @@ class Simul_Details():
             day 3. 
         """
         # exception handling
-        self._intCheck(u)
+        self._intCheck([u])
         self._isPersonHere(u)
 
         history = []
