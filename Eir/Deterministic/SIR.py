@@ -8,14 +8,34 @@ from multipledispatch import dispatch
 class SIR(CompartmentalModel):
     # beta is the transmission rate, gamma is the recovery rate
     # S0, I0, R0 are the starting Susceptible, infected, and removed people respectively
-    """  """
+    """ SIR Deterministic Model 
+    
+    Parameters
+    ----------
+
+    beta: float
+        Effective transmission rate of infected people, on average.
+    
+    gamma: float
+        Proportion of I that goes to R.
+    
+    S0: int
+        Initial susceptibles.
+    
+    I0: int
+        Initial infecteds.
+    
+    R0: int
+        Initial removed.
+    
+    """
     
     def __init__(self, beta: float, gamma: float, S0: int, I0: int, R0: int):
         # run error checks
         self.intCheck([S0, I0, R0])
         self.floatCheck([beta, gamma, S0, I0, R0])
         self.negValCheck([beta, gamma, S0, I0, R0])
-        self.prob([gamma])
+        self.probCheck([gamma])
         super(SIR, self).__init__(S0, I0)
         self.R0 = R0
         self.beta = beta
@@ -50,7 +70,7 @@ class SIR(CompartmentalModel):
 
     # computes the derivatives at a particular point, given the beta/gamma of object and current s and i values
     @dispatch(float, float)
-    def _deriv(self, s, i) -> tuple:
+    def _deriv(self, s, i):
         # x is the amount of leaving S compartment and entering I
         x = self.beta * s * i / self.N
         # y is the amount leaving I compartment and entering R compartment
@@ -59,7 +79,7 @@ class SIR(CompartmentalModel):
 
     # runs Euler's Method
     @dispatch(float, np.ndarray, np.ndarray, np.ndarray)
-    def _update(self, dt, S, I, R) -> tuple:
+    def _update(self, dt, S, I, R):
         # for all the days that ODE will be solved
         for i in range(1, len(S)):
             f = self._deriv(S[i - 1], I[i - 1])
@@ -70,7 +90,7 @@ class SIR(CompartmentalModel):
 
     # combines the Euler's Method with all initialization and stuff and runs full simulation
     # days is the number of days being simulated, dt is the step size for Euler's method
-    def _simulate(self, days: int, dt: float) -> tuple:
+    def _simulate(self, days: int, dt: float):
         # total number of iterations that will be run + the starting value at time 0
         size = int(days / dt + 1)
         # create the arrays to store the different values
@@ -81,7 +101,7 @@ class SIR(CompartmentalModel):
         S, I, R = self._update(dt, S, I, R)
         return S, I, R
 
-    def _includeVar(self, sx: bool, ix: bool, rx: bool) -> list:
+    def _includeVar(self, sx: bool, ix: bool, rx: bool):
         # list of the strings that will be returned and then passed into plot function
         labels = []
         # if the user wants to plot susceptible
@@ -96,6 +116,8 @@ class SIR(CompartmentalModel):
         return labels
 
     def run(self, days: int, dt: float, plot=True, Sbool=True, Ibool=True, Rbool=True):
+        self.floatCheck([days, dt])
+        self.negValCheck([days, dt])
         # creates evenly spaced array that spans day 0 to the day wanted
         t = np.linspace(0, days, int(days / dt) + 1)
         S, I, R = self._simulate(days, dt)
@@ -127,6 +149,8 @@ class SIR(CompartmentalModel):
 
     # plot an accumulation function of total cases
     def accumulate(self, days: int, dt: float, plot=True):
+        self.floatCheck([days, dt])
+        self.negValCheck([days, dt])
         t = np.linspace(0, days, int(days / dt) + 1)
         S, I, R = self._simulate(days, dt)
         # create a numpy array that will hold all of the values
@@ -157,6 +181,21 @@ class SIR(CompartmentalModel):
 
     # create everything as a percentage of the total population, given a dataframe
     def normalizeDataFrame(self, df: pd.DataFrame):
+        """ 
+        Divide all of the columns by the total population in order to get numbers as a proportion of population.
+        
+        Parameters
+        ----------
+
+        df: pd.DataFrame
+            The dataframe to be normalized
+        
+        Returns
+        -------
+
+        pd.DataFrame
+            Normalized dataframe.
+        """
         colnames = list(df.columns)
         colnames.pop(0)
         for i in colnames:
@@ -164,6 +203,19 @@ class SIR(CompartmentalModel):
         return df
 
     def normalizeRun(self, days: int, dt: float, accumulate=True):
+        """
+        Does a normalized run of the simulation.
+
+        Parameters
+        ---------
+
+        days: int
+            Number of days being simulated.
+        
+        dt: float
+            The differential used for Euler's method.
+
+        """
         df: pd.DataFrame
         if accumulate:
             df = self.accumulate(days, dt, plot=False)
@@ -180,17 +232,4 @@ class SIR(CompartmentalModel):
                 df[i] = df[i].div(self.N)
         return df
 
-    # feed in the number of runs and the distributions that will be used
-    # def monteCarlo(self, numRuns: int, beta: np.random, gamma: np.random):
-    # to be implemented
-    # pass
 
-
-# start of code just to get plot for paper
-#S0, I0, R0 = 999, 1, 0
-#beta = 1.5
-#gamma = .3
-#test = SIR(beta=beta, gamma=gamma, S0=S0, I0=I0, R0=R0)
-#test.run(days=31, dt=.1)
-#x = test.normalizeRun(days=31, dt=.1, accumulate=False)
-#print(x)
