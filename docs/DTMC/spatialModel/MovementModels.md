@@ -42,7 +42,7 @@ w0: float, optional
 There are also special parameters for the Periodic Mobility Model:
 
 k: float
-    Determines the mean of the distribution of thetas. The mean of that distribution is 2```LaTeX\pi``` /k.
+    Determines the mean of the distribution of thetas. The mean of that distribution is 2π/k.
 
 std: float
     The standard deviation of the normal distribution of thetas. 
