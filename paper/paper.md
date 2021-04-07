@@ -10,7 +10,7 @@ tags:
 authors:
   - name: Mathew Jacob
     orcid: 0000-0001-5513-432X
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
+    affiliation: "1 # (Multiple affiliations must be quoted)
 
 affiliations:
  - name: RxCovea, New York University
