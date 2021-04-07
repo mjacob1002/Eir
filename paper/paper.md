@@ -40,12 +40,12 @@ NumPy, Matplotlib, multipledispatch, pandas
 
 # Related Packages
 There are different software package that enable users to simulate epidemics in different ways. A couple of such packages are:
- 
- ### Epidemics on Networks
+
+### Epidemics on Networks
 
  Epidemics on Networks, developed by [@Miller2019], is a Python package that allows users to simulate SIS and SIR epidemics on networks. It handles many different types of simulation types, as well. More can be found by reading the documentation at https://epidemicsonnetworks.readthedocs.io/en/latest/. 
 
- ### EpiModel
+### EpiModel
 
  EpiModel [@EpiModel] is an R package that allows the user to simulate models such as SIS and SIR. The details of this model can be found at https://www.epimodel.org/. 
 
