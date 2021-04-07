@@ -13,12 +13,10 @@ In this equation, w0 is the probability that an infectious person infects someon
 In the following two models, however, the formula for a super spreader changes.
 ## Hub Model
 The Hub Model assumes that super spreaders are those who interact with more people, and therefore have a higher a spreading radius that is a scaled by a constant, allowing them to reach more people. Therefore, if we call k the scaling factor and r_0 the spreading distance for a normal spreader, the equation for a super spreader's probability of infecting a susceptible is:
-\begin{align*}
-w(r) = \begin{cases}
+
+w(r) = 
     w0(1-r/r_n)^alpha, 0 <= r <= r_n,
     0, r > r_n
-\end{cases}
-\end{align*}
 , where r_n = k*r_0. 
 
 ### Parameters
