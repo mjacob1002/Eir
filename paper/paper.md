@@ -1,3 +1,4 @@
+---
 title: 'Eir: A Python Package for Epidemic Simulation'
 tags:
   - Python
@@ -16,6 +17,7 @@ affiliations:
    index: 1
 
 date: 8 April 2021
+
 bibliography: paper.bib
 
 ---
