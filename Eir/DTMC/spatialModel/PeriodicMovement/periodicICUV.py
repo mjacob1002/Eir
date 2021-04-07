@@ -162,12 +162,16 @@ class PeriodicICUV(RandMove):
                 self.details.addLocation(0, (p.x, p.y))
             if i < S0:
                 person[0].isIncluded=True
+                self.details.addStateChange(i, "S", 0)
             elif i < S0 + E0:
                 person[1].isIncluded=True
+                self.details.addStateChange(i, "E", 0)
             elif i < S0 + E0 + I0:
                 person[2].isIncluded=True
+                self.details.addStateChange(i, "I", 0)
             else:
                 person[5].isIncluded=True
+                self.details.addStateChange(i, "R", 0)
             # add the Person objects to the collections
             self.Scollect.append(person[0])
             self.Ecollect.append(person[1])
