@@ -5,8 +5,8 @@ These static models are ones in which the randomly generated (x,y) coordinate of
 The default formula for a normal spreader's probability of infecting a susceptible is:
 
 w(r) = 
-    w0(1-r/r_0)^alpha, &0 <= r <= r_0,
-    0, &r > r_0.
+    w0(1-r/r_0)^alpha, 0 <= r <= r_0,
+    0, r > r_0.
 
 In this equation, w0 is the probability that an infectious person infects someone when they are 0 units away, alpha is a constant, r is the distance between the infectious individual and the susceptible, and r_0 is the spreading radius of the infectious individual.
 
@@ -15,8 +15,8 @@ In the following two models, however, the formula for a super spreader changes.
 The Hub Model assumes that super spreaders are those who interact with more people, and therefore have a higher a spreading radius that is a scaled by a constant, allowing them to reach more people. Therefore, if we call k the scaling factor and r_0 the spreading distance for a normal spreader, the equation for a super spreader's probability of infecting a susceptible is:
 \begin{align*}
 w(r) = \begin{cases}
-    w0(1-r/r_n)^alpha, &0 <= r <= r_n,
-    0, &r > r_n
+    w0(1-r/r_n)^alpha, 0 <= r <= r_n,
+    0, r > r_n
 \end{cases}
 \end{align*}
 , where r_n = k*r_0. 
@@ -51,8 +51,8 @@ These parameters of all Hub objects. don't include compartment-specific paramete
 The Strong Infectious Model assumes that super spreaders are intrinsically more infectious, and therefore have a fixed probability of spreading the disease over spreading radius identical to that of a normal spreader. Therefore, the formula for a super spreader's probability of propogating an infectious disease is: 
 \begin{align*}
 w(r) = \begin{cases}
-    w0, &0 <= r <= r_0,
-    0, &r > r_0.
+    w0, 0 <= r <= r_0,
+    0, r > r_0.
 \end{cases}
 \end{align*}.
 
