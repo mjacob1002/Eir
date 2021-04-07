@@ -10,7 +10,7 @@ with open(os.path.join(HERE, "README.md")) as fid:
 
 setup(
     name='Eir',
-    version='0.1.1',
+    version='0.1.5',
     license='MIT',
     description="Helps model epidemics using spatial models",
     long_description=README,
