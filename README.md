@@ -46,4 +46,8 @@ from Eir import PeriodicICUV
 
 To understand the variables and their meaning, the documentation can be found in the docs folder in this repository, or looking at the docstrings in python. Additionally, if more detailed information about transmission chains and state histories was required, the methods from the Simul_Details class would allow the user to get a more in-depth look at the dynamics of the simulation.
 
+## Contributers
+The author welcomes and encourages new contributers to help test ```python Eir``` and add new functionality. If one wishes to contact the author, they may do so by emailing mjacob1002@gmail.com. Response times may vary.
+
+
 
