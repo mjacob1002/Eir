@@ -26,5 +26,10 @@ setup(
         "matplotlib", 
         "multipledispatch"
         ],
-    packages=find_packages()
+    packages=find_packages(),
+    classifiers=[
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3.7'
+    ]
 )

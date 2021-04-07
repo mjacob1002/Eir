@@ -19,5 +19,5 @@ kappa: the probability that an individual goes from R compartment to S compartme
 eta: the probability that an individual goes from S compartment to V compartment, given that the person didn't go from S to E. Must be a value that belongs to [0,1]. Throws ```python ProbabilityException``` or ```python NotFloatException``` otherwise. 
 
 timeDelay: float
-            The number of days that vaccine rollout is delayed. If negative or 0, then there is no delay in vaccine rollout. Default value is -1. 
+    The number of days that vaccine rollout is delayed. If negative or 0, then there is no delay in vaccine rollout. Default value is -1. If not float, will throw ```python NotFloatException```. 
 
