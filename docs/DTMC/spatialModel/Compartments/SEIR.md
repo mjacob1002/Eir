@@ -1,3 +1,6 @@
+# Note
+In all compartmental models with an E compartment, it is assumed that those in E cannot propogate the disease.
+
 # Parameters
 
 S0 : the number of susceptible individuals at the start of the simulation. Must be an int. Throws ```python NotIntException``` otherwise.
