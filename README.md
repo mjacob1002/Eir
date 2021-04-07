@@ -27,6 +27,7 @@ Eir offers countless different compartmental models, including:
 - SEIRDV
 - SEIRSDV
 - ICU models. 
+
 Eir also offers these models in different spatial models, some with mobility and some static.
 
 ## Examples
