@@ -176,7 +176,6 @@ class Simul_Details():
             movementHistory.append(self.locations[0][u])
             return movementHistory
         for day, loc in enumerate(self.locations):
-            print(len(loc))
             movementHistory.append(loc[u])
         return movementHistory
 
