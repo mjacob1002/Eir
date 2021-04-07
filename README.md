@@ -4,9 +4,30 @@ Eir is an API that allows the user to conduct stochastic simulations of epidemic
 
 ## Installation
 
-One can install Eir by running the following command via the command line:
+One can install Eir via PyPI by running the following command via the command line:
 
 ```pip install Eir ```
+## Notable Features
+Eir offers countless different compartmental models, including:
+- SIS
+- SIR
+- SIRS
+- SIRD
+- SIRV
+- SIRSD
+- SIRSV
+- SIRDV
+- SIRSDV
+- SEIR
+- SEIRS
+- SEIRD
+- SEIRV
+- SEIRSD
+- SEIRSV
+- SEIRDV
+- SEIRSDV
+- ICU models. 
+Eir also offers these models in different spatial models, some with mobility and some static.
 
 ## Examples
 
