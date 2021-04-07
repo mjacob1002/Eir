@@ -16,7 +16,7 @@ affiliations:
    index: 1
 
 date: 8 April 2021
-bibliography: references.bib
+bibliography: paper.bib
 
 ---
 
