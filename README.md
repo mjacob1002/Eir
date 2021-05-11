@@ -88,6 +88,18 @@ In the above code segment:
         
         timeDelay: float
             The number of days that vaccine rollout is delayed. If negative or 0, then there is no delay in vaccine rollout. Default value is -1. 
+        
+        spread_r: the mean of the normal distribution of spreading radii that is use to generate spreading radii for each individual in the simulation.
+
+        sigma_r: the standard deviation of the normal distribution of spreading radii that is used to generate spreading raddi for each individual in the simulation.
+
+        move_R: the mean of the normal distribution of spreading radii that is use to generate movement radii for each individual's periodic movement in the simulation.
+
+        sigma_R: the standard deviation of the normal distribution of spreading radii that is use to generate movement radii for each individual's periodic movement in the simulation.
+
+        side: the length of the side of the square plane that individuals are confined to during the simulation.
+
+        days: the number of days being simulated. 
 
 
 To understand the variables and their meaning for different models, the documentation can be found in the docs folder in this repository, or looking at the docstrings in python. Additionally, if more detailed information about transmission chains and state histories was required, the methods from the Simul_Details class would allow the user to get a more in-depth look at the dynamics of the simulation.
