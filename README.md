@@ -43,8 +43,54 @@ from Eir import PeriodicICUV
   test.run()
   test.plot()
 ```
+In the above code segment:
+  S0 : int
+            The starting number of susceptible individuals in the simulation.
+        
+        E0: int
+            The starting number of exposed individuals in the simulation.
+        
+        I0: int
+            The starting number of infected individuals in the simulation.
 
-To understand the variables and their meaning, the documentation can be found in the docs folder in this repository, or looking at the docstrings in python. Additionally, if more detailed information about transmission chains and state histories was required, the methods from the Simul_Details class would allow the user to get a more in-depth look at the dynamics of the simulation.
+        R0: int
+            The starting number of recovered individuals in the simulation.
+        
+        V0: int
+            The starting number of vaccinated individuals in the simulation.
+        
+        rho: float
+            The probability of an individual leaving the E compartment.
+        
+        ioda: float
+            The probability that, given an individual is leaving the E compartment, he goes to L compartment. The probability of that person going to I compartment is (1-ioda).
+        
+        gamma: float
+            The probability of a person in I compartment going to the R compartment
+        
+        mu: float
+            The probability of going from I to D, given that the person didn't go from I to R.
+        
+        phi: float
+            The probability of going from L compartment to ICU compartment.
+        
+        chi: float
+            The probability of going from ICU compartment to R compartment.
+        
+        omega: float
+            The probability of going from ICU compartment to D compartment, given that individual didn't go from ICU compartment to R compartment.
+        
+        kappa: float
+            The probability of going from R compartment to S compartment.
+        
+        eta: float 
+            The probability of going from S compartment to V compartment, given that the individual didn't go from S compartment to E compartment. 
+        
+        timeDelay: float
+            The number of days that vaccine rollout is delayed. If negative or 0, then there is no delay in vaccine rollout. Default value is -1. 
+
+
+To understand the variables and their meaning for different models, the documentation can be found in the docs folder in this repository, or looking at the docstrings in python. Additionally, if more detailed information about transmission chains and state histories was required, the methods from the Simul_Details class would allow the user to get a more in-depth look at the dynamics of the simulation.
 
 ## Contributers
 The author welcomes and encourages new contributers to help test ``` Eir``` and add new functionality. If one wishes to contact the author, they may do so by emailing mjacob1002@gmail.com. Response times may vary.
