@@ -10,6 +10,8 @@ sim = SEIR(S0=9999999, I0=1, R0=0, beta=1.5, rho=.25, gamma=.15)
 df = sim.run(31, .1, plot=False)
 ```
 
+run() takes the number of simulated as first parameter, and the differential, or step, used for the approximation of the ODE.
+
 If a plot is wanted, simply run the following:
 
 ```python

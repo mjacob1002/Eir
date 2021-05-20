@@ -1,6 +1,6 @@
 # Examples
 
-If one wanted to get a plot of a particular SIS model:
+If one wanted to get a plot of a particular SIS model, the run function would be used. run() takes the number of simulated as first parameter, and the differential, or step, used for the Euler approximation of the ODE. A way to run it would be as follows:
 
 ```python 
 
