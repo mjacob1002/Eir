@@ -45,11 +45,11 @@ There are different software package that enable users to simulate epidemics in 
 
 ### Epidemics on Networks
 
- Epidemics on Networks, developed by [@Miller2019], is a Python package that allows users to simulate SIS and SIR epidemics on networks. It handles many different types of simulation types, as well. More can be found by reading the documentation at https://epidemicsonnetworks.readthedocs.io/en/latest/. 
+ Epidemics on Networks, developed by [@Miller2019], is a Python package that allows users to simulate SIS and SIR epidemics on networks. It handles many different types of simulation types, as well. More can be found by reading the documentation at https://epidemicsonnetworks.readthedocs.io/en/latest/. Eir allows for a wider variety of models than EoN, which only includes SIS and SIR. Additionally, another difference is that Eir allows for the movement of individuals within the simulation, while the structure in EoN does not. 
 
 ### EpiModel
 
- EpiModel [@EpiModel] is an R package that allows the user to simulate models such as SIS and SIR. The details of this model can be found at https://www.epimodel.org/. 
+ EpiModel [@EpiModel] is an R package that allows the user to simulate models such as SIS and SIR. The details of this model can be found at https://www.epimodel.org/. EpiModel offers network based transmission, which is a feature that is not included in Eir. However, similar to EoN, there is no clear way to incorporate the movement of individuals within the simulation. Additionally, Eir offers a more detailed look at the simulation through the Simul_Details object, which can include information about individual state history, transmission chains, and more. 
 
 # Acknowledgements
 The author would like to acknowledge to contributions of Xueyao Guo to the models. Additionally, the author would like to acknowledge and thank Dr. Ernest Battifarano, Dr. Jantine Broek, and Professor Shirshendu Chatterjee for their mentorship and guidance through the author's research. Finally, the author would like to thank Professor Bud Mishra and the RxCovea group for guiding the author through his research. 
