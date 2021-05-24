@@ -32,5 +32,5 @@ When printing the dataframe, the output will be the following:
 >>> 
 ```
 
-However, if plot=True in the run method, then a pyplot figure object will be returned with the dataframe in a tuple, with element 0 being the dataframe and element 1 being the figure object. A plot will also be displayed.
+However, if plot=True in the run method, then a pyplot figure object will be returned with the dataframe in a tuple, with element 0 being the dataframe and element 1 being the figure object. A plot will also be displayed that represent all of the variables within the model.
 

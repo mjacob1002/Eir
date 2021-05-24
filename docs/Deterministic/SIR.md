@@ -23,4 +23,4 @@ df, fig = sim.run(31, .1)
 
 ```
 
-This will display a plot of all variables, which can be further customized using the default boolean parameters.
+This will display a plot of all variables, which can be further customized using the default boolean parameters that represent all of the variables within the model.
