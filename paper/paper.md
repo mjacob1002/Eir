@@ -30,7 +30,7 @@ bibliography: paper.bib
 
 While not the primary focus of the Python package, `Eir` also allows for researchers to use determinstic models to simulate basic compartmental models, including SIR, SEIR, SIRV, and more. 
 
-`Eir` is currently being used for a publication involving simulating hospitalizations and studying vaccinations strategies. It is intended to be used by epidemiologists and researchers who are interested in understanding the dynamics of epidemics when operating under certain assumptions.
+`Eir` is currently being used for a publication involving simulating hospitalizations and studying vaccinations strategies. It is intended to be used by epidemiologists and researchers who are interested in understanding the dynamics of epidemics when operating under different modelling assumptions, such as periodic movement or random movement, which can be evaluated by using different models in Eir.
 
 # Statement of Need
 
