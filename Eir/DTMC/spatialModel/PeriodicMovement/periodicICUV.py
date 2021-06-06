@@ -467,7 +467,7 @@ class PeriodicICUV(RandMove):
         ax7.set_ylabel("# Vaccinated")
         ax7.plot(t, self.V, label="Vaccinated", color='indigo')
         ax7.set_xlabel("Days")
-        ax1.set_title("ICU Hub Model")
+        ax1.set_title("ICU Periodic Mobility Model")
         ax1.legend()
         ax2.legend()
         ax3.legend()
