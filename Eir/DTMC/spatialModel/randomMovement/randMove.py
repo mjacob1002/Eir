@@ -74,7 +74,7 @@ class RandMove():
         if r > inf.r0:
             return False
         # compute the probability given that r is within range
-        w = self.w0 * (1.0 - (r/inf.r0)**self.alpha)
+        w = self.w0 * (1.0 - r/inf.r0)**self.alpha
         # generate a random infection event based on the probability of infection
         inf_event = u.randEvent(w)
         # return the event
