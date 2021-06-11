@@ -56,11 +56,5 @@ The author would like to acknowledge the contributions of Xueyao Guo to the mode
 
 This project received no funding. 
 
-# How to Cite
-
-This paper is published in the [Journal of Open Source Software](https://joss.theoj.org/).
-
-[![DOI](https://joss.theoj.org/papers/10.21105/joss.03247/status.svg)](https://doi.org/10.21105/joss.03247)
-
 # References
 
