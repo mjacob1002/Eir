@@ -18,7 +18,7 @@ If a plot is wanted, simply run the following:
 
 from Eir import SIRD
 
-sim = SIRD(S0=9999999, I0=1, Ro=0, beta=1.5, gamma=.15, omega=.01)
+sim = SIRD(S0=9999999, I0=1, R0=0, beta=1.5, gamma=.15, omega=.01)
 df, fig = sim.run(31, .1)
 
 ```
