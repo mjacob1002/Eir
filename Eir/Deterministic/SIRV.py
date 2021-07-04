@@ -41,7 +41,7 @@ class SIRV(SIR):
         self.floatCheck([beta, gamma, eta])
         self.negValCheck([beta, gamma, eta, S0, I0, R0, V0])
         self.probCheck([gamma, eta])
-        super(SIRV, self).__init__(beta, gamma, S0, I0, R0)
+        super().__init__(beta, gamma, S0, I0, R0)
         self.V0 = V0
         self.eta = eta
         self.N = S0 + I0 + R0 + V0

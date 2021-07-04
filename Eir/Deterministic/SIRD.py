@@ -39,7 +39,7 @@ class SIRD(SIR):
         self.floatCheck([beta, gamma, omega, S0, I0, R0])
         self.negValCheck([beta, gamma, omega, S0, I0, R0])
         self.probCheck([gamma, omega])
-        super(SIRD, self).__init__(beta, gamma, S0, I0, R0)
+        super().__init__(beta, gamma, S0, I0, R0)
         self.omega = omega
         assert self.gamma + self.omega <= 1
 

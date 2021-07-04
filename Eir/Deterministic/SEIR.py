@@ -42,7 +42,7 @@ class SEIR(SIR):
         self.floatCheck([beta, rho, gamma, S0, E0, I0, R0])
         self.negValCheck([beta, rho, gamma, S0, E0, I0, R0])
         self.probCheck([rho, gamma])
-        super(SEIR, self).__init__(beta=beta, gamma=gamma, S0=S0, I0=I0, R0=R0)
+        super().__init__(beta=beta, gamma=gamma, S0=S0, I0=I0, R0=R0)
         # starting amount of exposed individuals
         self.E0 = E0
         # constant for going from E to I

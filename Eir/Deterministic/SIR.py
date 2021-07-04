@@ -36,7 +36,7 @@ class SIR(CompartmentalModel):
         self.floatCheck([beta, gamma, S0, I0, R0])
         self.negValCheck([beta, gamma, S0, I0, R0])
         self.probCheck([gamma])
-        super(SIR, self).__init__(S0, I0)
+        super().__init__(S0, I0)
         self.R0 = R0
         self.beta = beta
         self.gamma = gamma

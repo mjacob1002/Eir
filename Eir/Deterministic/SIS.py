@@ -34,7 +34,7 @@ class SIS(CompartmentalModel):
         self.probCheck([gamma])
         self.negValCheck([beta, gamma])
 
-        super(SIS, self).__init__(S0, I0)
+        super().__init__(S0, I0)
         # infection rate
         self.beta = beta
         # recovery rate (I -> S)
