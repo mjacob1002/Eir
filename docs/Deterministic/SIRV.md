@@ -6,7 +6,7 @@ To run the simulation with a certain number of days, you can run code like the f
 
 from Eir import SIRV
 
-sim = SIRD(S0=9999999, I0=1, R0=0, beta=1.5, gamma=.15, eta=.01)
+sim = SIRV(S0=9999999, I0=1, R0=0, V0=0, beta=1.5, gamma=.15, eta=.01)
 df = sim.run(31, .1, plot=False)
 ```
 
@@ -18,7 +18,7 @@ If a plot is wanted, simply run the following:
 
 from Eir import SIRV
 
-sim = SIRD(S0=9999999, I0=1, Ro=0, beta=1.5, gamma=.15, eta=.01)
+sim = SIRV(S0=9999999, I0=1, R0=0, V0=0, beta=1.5, gamma=.15, eta=.01)
 df, fig = sim.run(31, .1)
 
 ```
