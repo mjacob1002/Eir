@@ -127,10 +127,8 @@ class SIRS(SIR):
             "Removed": R,
             "Total Cases": cases
         }
-        # create the column labels
-        labels = ['Days', "Susceptible", "Infected", "Removed", "Total Cases"]
-        # convert to dataframe
-        df = pd.DataFrame(data=data1, columns=labels)
+        # turn into dataframe
+        df = pd.DataFrame.from_dict(data=data1)
         if plot:
             # do some plotting
             df.plot(x="Days", y=["Total Cases"])

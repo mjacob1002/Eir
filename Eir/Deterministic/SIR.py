@@ -8,28 +8,28 @@ from multipledispatch import dispatch
 class SIR(CompartmentalModel):
     # beta is the transmission rate, gamma is the recovery rate
     # S0, I0, R0 are the starting Susceptible, infected, and removed people respectively
-    """ SIR Deterministic Model 
-    
+    """SIR Deterministic Model
+
     Parameters
     ----------
 
     beta: float
         Effective transmission rate of infected people, on average.
-    
+
     gamma: float
         Proportion of I that goes to R.
-    
+
     S0: int
         Initial susceptibles.
-    
+
     I0: int
         Initial infecteds.
-    
+
     R0: int
         Initial removed.
-    
+
     """
-    
+
     def __init__(self, beta: float, gamma: float, S0: int, I0: int, R0: int):
         # run error checks
         self.intCheck([S0, I0, R0])
@@ -122,16 +122,9 @@ class SIR(CompartmentalModel):
         t = np.linspace(0, days, int(days / dt) + 1)
         S, I, R = self._simulate(days, dt)
         # makes a dictionary so that it can be easily converted to a dataframe
-        data1 = {
-            "Days": t,
-            "Susceptible": S,
-            "Infected": I,
-            "Removed": R
-        }
-        # create the labels that will be the columns of the dataframe
-        label = ["Days", "Susceptible", "Infected", "Removed"]
-        # create a dataframe
-        df = pd.DataFrame(data=data1, columns=label)
+        data1 = {"Days": t, "Susceptible": S, "Infected": I, "Removed": R}
+        # turn into dataframe
+        df = pd.DataFrame.from_dict(data=data1)
         # if the plot boolean is true aka they want a plot to be shown
         if plot:
             # determine what should be plotted
@@ -164,10 +157,10 @@ class SIR(CompartmentalModel):
             "Susceptible": S,
             "Infected": I,
             "Removed": R,
-            "Total Cases": cases
+            "Total Cases": cases,
         }
         # create the column labels
-        labels = ['Days', "Susceptible", "Infected", "Removed", "Total Cases"]
+        labels = ["Days", "Susceptible", "Infected", "Removed", "Total Cases"]
         # convert to dataframe
         df = pd.DataFrame(data=data1, columns=labels)
         if plot:
@@ -181,15 +174,15 @@ class SIR(CompartmentalModel):
 
     # create everything as a percentage of the total population, given a dataframe
     def normalizeDataFrame(self, df: pd.DataFrame):
-        """ 
+        """
         Divide all of the columns by the total population in order to get numbers as a proportion of population.
-        
+
         Parameters
         ----------
 
         df: pd.DataFrame
             The dataframe to be normalized
-        
+
         Returns
         -------
 
@@ -211,7 +204,7 @@ class SIR(CompartmentalModel):
 
         days: int
             Number of days being simulated.
-        
+
         dt: float
             The differential used for Euler's method.
 
@@ -231,5 +224,3 @@ class SIR(CompartmentalModel):
             for i in colnames:
                 df[i] = df[i].div(self.N)
         return df
-
-
