@@ -14,29 +14,32 @@ class SIRD(SIR):
 
     beta: float
         Effective transmission rate of infectious person, on average
-    
+
     gamma: float
         Proportion of people who go from I to R
-    
+
     omega: float
         Proportion of people who go from I to D.
-    
+
     S0: int
         Initial number of susceptibles
-    
+
     I0: int
         Initial number of infecteds
-    
+
     R0: int
         Initial number of removeds.
     """
+
     # omega is the amount of people that go from I to D
-    def __init__(self, beta: float, gamma: float, omega: float, S0: int, I0: int, R0: int):
+    def __init__(
+        self, beta: float, gamma: float, omega: float, S0: int, I0: int, R0: int
+    ):
         self.intCheck([S0, I0, R0])
         self.floatCheck([beta, gamma, omega, S0, I0, R0])
         self.negValCheck([beta, gamma, omega, S0, I0, R0])
         self.probCheck([gamma, omega])
-        super(SIRD, self).__init__(beta, gamma, S0, I0, R0)
+        super().__init__(beta, gamma, S0, I0, R0)
         self.omega = omega
         assert self.gamma + self.omega <= 1
 
@@ -100,22 +103,24 @@ class SIRD(SIR):
         return labels
 
     @dispatch(int, float, plot=bool, Sbool=bool, Ibool=bool, Rbool=bool, Dbool=bool)
-    def run(self, days: int, dt: float, plot=True, Sbool=True, Ibool=True, Rbool=True, Dbool=True):
+    def run(
+        self,
+        days: int,
+        dt: float,
+        plot=True,
+        Sbool=True,
+        Ibool=True,
+        Rbool=True,
+        Dbool=True,
+    ):
         # evenly space the days
         t = np.linspace(0, days, int(days / dt) + 1)
         # run a simulation to get the numpy arrays
         S, I, R, D = self._simulate(days, dt)
         # data prepared to be converted into Pandas dataframe
-        data1 = {
-            "Days": t,
-            "Susceptible": S,
-            "Infected": I,
-            "Removed": R,
-            "Deaths": D
-        }
-        # labels for the data
-        label = ["Days", "Susceptible", "Infected", "Removed", "Deaths"]
-        df = pd.DataFrame(data=data1, columns=label)
+        data1 = {"Days": t, "Susceptible": S, "Infected": I, "Removed": R, "Deaths": D}
+        # turn into dataframe
+        df = pd.DataFrame.from_dict(data=data1)
         # plotting
         if plot:
             # retrieve the list of variables that will be plotted
@@ -145,10 +150,10 @@ class SIRD(SIR):
             "Infected": I,
             "Removed": R,
             "Deaths": D,
-            "Total Cases": cases
+            "Total Cases": cases,
         }
         # create the column labels
-        labels = ['Days', "Susceptible", "Infected", "Removed", "Deaths", "Total Cases"]
+        labels = ["Days", "Susceptible", "Infected", "Removed", "Deaths", "Total Cases"]
         # convert to dataframe
         df = pd.DataFrame(data=data1, columns=labels)
         if plot:
@@ -159,6 +164,3 @@ class SIRD(SIR):
             plt.show()
         # return dataframe
         return df
-
-
-

@@ -15,25 +15,26 @@ class SIS(CompartmentalModel):
 
     beta: float
         Effective transmission rate of an infectious person, on average.
-    
-    gamma: float 
+
+    gamma: float
         Proportion of people in I who go to S.
-    
+
     S0: int
         Initial susceptibles.
-    
+
     I0: int
         Initial infecteds.
 
 
-    """ 
+    """
+
     def __init__(self, beta, gamma, S0, I0):
         self.intCheck([S0, I0])
         self.floatCheck([beta, gamma, S0, I0])
         self.probCheck([gamma])
         self.negValCheck([beta, gamma])
-        
-        super(SIS, self).__init__(S0, I0)
+
+        super().__init__(S0, I0)
         # infection rate
         self.beta = beta
         # recovery rate (I -> S)
@@ -83,15 +84,9 @@ class SIS(CompartmentalModel):
         # run a simulation and get the S and I arrays
         S, I = self._simulate(days=days, dt=dt)
         # data prepared to be turned into dataframe
-        data1 = {
-            "Days": t,
-            "Susceptible": S,
-            "Infected": I
-        }
-        # labels for the data in the dataframe
-        labels = ["Days", "Susceptible", "Infected"]
+        data1 = {"Days": t, "Susceptible": S, "Infected": I}
         # turn into dataframe
-        df = pd.DataFrame(data=data1, columns=labels)
+        df = pd.DataFrame.from_dict(data=data1)
         # plotting
         if plot:
             # retrieve the list of variables that will be plotted
@@ -112,4 +107,3 @@ class SIS(CompartmentalModel):
         for i in colnames:
             df[i] = df[i].div(popSize)
         return df
-

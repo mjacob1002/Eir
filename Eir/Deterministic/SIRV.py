@@ -16,31 +16,32 @@ class SIRV(SIR):
 
     beta: float
         Effective transmission rate of an infectious person, on average.
-    
+
     gamma: float
         Proportion of people that go from I to R.
-    
+
     eta: float
         Proportion of people that go from S to V.
-    
+
     S0: int
         Initial susceptibles at the start of the simulation.
-    
+
     I0: int
         Initial infecteds at the start of the simulation.
-    
+
     R0: int
         Initial recovereds at the start of the simulation.
-    
+
     V0: int
         Initial vaccinated at the start of the simulation.
     """
+
     def __init__(self, beta, gamma, eta, S0, I0, R0, V0):
         self.intCheck([S0, I0, R0, V0])
         self.floatCheck([beta, gamma, eta])
         self.negValCheck([beta, gamma, eta, S0, I0, R0, V0])
         self.probCheck([gamma, eta])
-        super(SIRV, self).__init__(beta, gamma, S0, I0, R0)
+        super().__init__(beta, gamma, S0, I0, R0)
         self.V0 = V0
         self.eta = eta
         self.N = S0 + I0 + R0 + V0
@@ -100,7 +101,16 @@ class SIRV(SIR):
         return labels
 
     @dispatch(int, float, plot=bool, Sbool=bool, Ibool=bool, Rbool=bool, Vbool=bool)
-    def run(self, days: int, dt: float, plot=True, Sbool=True, Ibool=True, Rbool=True, Vbool=True):
+    def run(
+        self,
+        days: int,
+        dt: float,
+        plot=True,
+        Sbool=True,
+        Ibool=True,
+        Rbool=True,
+        Vbool=True,
+    ):
         # evenly space the days
         t = np.linspace(0, days, int(days / dt) + 1)
         # run a simulation and get the numpy arrays
@@ -111,11 +121,10 @@ class SIRV(SIR):
             "Susceptible": S,
             "Infected": I,
             "Removed": R,
-            "Vaccinated": V
+            "Vaccinated": V,
         }
-        # labels for the data
-        label = ["Days", "Susceptible", "Infected", "Removed", "Vaccinated"]
-        df = pd.DataFrame(data=data1, columns=label)
+        # turn into dataframe
+        df = pd.DataFrame.from_dict(data=data1)
         # plotting
         if plot:
             # retrieve the list of variables that will be plotted
@@ -144,10 +153,17 @@ class SIRV(SIR):
             "Infected": I,
             "Removed": R,
             "Vaccinated": V,
-            "Total Cases": cases
+            "Total Cases": cases,
         }
         # create the column labels
-        labels = ['Days', "Susceptible", "Infected", "Removed", "Vaccinated", "Total Cases"]
+        labels = [
+            "Days",
+            "Susceptible",
+            "Infected",
+            "Removed",
+            "Vaccinated",
+            "Total Cases",
+        ]
         # convert to dataframe
         df = pd.DataFrame(data=data1, columns=labels)
         if plot:

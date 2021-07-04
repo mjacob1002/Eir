@@ -14,30 +14,31 @@ class SIRS(SIR):
 
     beta: float
         Effective transmission rate of an infectious person, on average.
-    
+
     gamma: float
         Proportion of people that go from I to R.
-    
+
     kappa: float
         Proportion of people that go from R to S
-    
+
     S0: int
         Initial susceptibles at the start of the simulation.
-    
+
     I0: int
         Initial infecteds at the start of the simulation.
-    
+
     R0: int
         Initial recovereds at the start of the simulation.
     """
+
     def __init__(self, beta: float, gamma: float, kappa: float, S0, I0, R0):
-        # error checking 
+        # error checking
         self.intCheck([S0, I0, R0])
         self.floatCheck([beta, gamma, kappa, S0, I0, R0])
         self.negValCheck([beta, gamma, kappa, S0, I0, R0])
         self.probCheck([gamma, kappa])
         # call the superclass constructor
-        super(SIRS, self).__init__(beta, gamma, S0, I0, R0)
+        super().__init__(beta, gamma, S0, I0, R0)
         # map kappa to a class variable
         self.kappa = kappa
 
@@ -125,12 +126,10 @@ class SIRS(SIR):
             "Susceptible": S,
             "Infected": I,
             "Removed": R,
-            "Total Cases": cases
+            "Total Cases": cases,
         }
-        # create the column labels
-        labels = ['Days', "Susceptible", "Infected", "Removed", "Total Cases"]
-        # convert to dataframe
-        df = pd.DataFrame(data=data1, columns=labels)
+        # turn into dataframe
+        df = pd.DataFrame.from_dict(data=data1)
         if plot:
             # do some plotting
             df.plot(x="Days", y=["Total Cases"])
@@ -141,6 +140,6 @@ class SIRS(SIR):
         return df
 
 
-#test = SIRS(beta=1.5, gamma=.3, kappa=.05, S0=99999, I0=1, R0=0)
-#x = test.accumulate(31, .1)
-#print(x)
+# test = SIRS(beta=1.5, gamma=.3, kappa=.05, S0=99999, I0=1, R0=0)
+# x = test.accumulate(31, .1)
+# print(x)

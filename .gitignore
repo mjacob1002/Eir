@@ -3,3 +3,4 @@
 .whl
 mymain.py
 mymain2.py
+*__pycache__*
