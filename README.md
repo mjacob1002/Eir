@@ -113,7 +113,7 @@ To understand the variables and their meaning for different models, the document
 The author welcomes and encourages new contributors to help test ``` Eir``` and add new functionality. If one wishes to contact the author, they may do so by emailing mjacob1002@gmail.com. Response times may vary.
 
 ## How to Cite
-
+```
 BibTex:
 @article{Jacob2021,
   doi = {10.21105/joss.03247},
@@ -127,7 +127,10 @@ BibTex:
   title = {Eir: A Python Package for Epidemic Simulation},
   journal = {Journal of Open Source Software}
 }
-
-Citation String: Jacob, M., (2021). Eir: A Python Package for Epidemic Simulation. Journal of Open Source Software, 6(62), 3247, https://doi.org/10.21105/joss.03247
+```
+Citation String: 
+```
+Jacob, M., (2021). Eir: A Python Package for Epidemic Simulation. Journal of Open Source Software, 6(62), 3247, https://doi.org/10.21105/joss.03247
+```
 
 
